@@ -1,7 +1,36 @@
-<mat-slider min="0" max="10" step="1">
-  <input matSliderThumb value="5" />
-</mat-slider>
-<mat-slider min="0" max="10" step="1">
-  <input matSliderThumb value="5" />
-</mat-slider>
-<router-outlet />
+<div class="container">
+  <!-- Texte -->
+  <div class="text">
+    <h1 *ngIf="text; else defaultText">salut {{ text }}</h1>
+    <ng-template #defaultText>
+      <h1>Bienvenue sur votre page</h1>
+    </ng-template>
+  </div>
+
+  <!-- Image -->
+  <div class="image">
+    <img
+      *ngIf="imageUrl; else defaultImage"
+      [src]="imageUrl"
+      alt="Image chargée depuis le backend"
+    />
+    <ng-template #defaultImage>
+      <p>Aucune image disponible.</p>
+    </ng-template>
+  </div>
+
+  <!-- Sliders -->
+  <div class="sliders">
+    <mat-slider min="0" max="10" step="1">
+      <input matSliderThumb value="5" />
+    </mat-slider>
+    <mat-slider min="0" max="10" step="1">
+      <input matSliderThumb value="5" />
+    </mat-slider>
+  </div>
+
+  <!-- Bouton Submit -->
+  <div class="submit">
+    <button mat-raised-button color="primary">Submit</button>
+  </div>
+</div>
