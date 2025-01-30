@@ -1,29 +1,18 @@
 import { Component, OnInit } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
-import { MatSliderModule } from "@angular/material/slider";
-import { DataService } from "./data.service";
+import { SliderComponent } from "./component/slider/slider.component";
+import { SubmitComponent } from "./component/submit/submit.component";
 
 @Component({
   selector: "app-root",
-  imports: [RouterOutlet, MatSliderModule],
+  imports: [SliderComponent, SubmitComponent],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
 export class AppComponent implements OnInit {
-  text: string = "";
-  imageUrl: string = "";
-
-  constructor(private dataService: DataService) {}
+  sliderValue1: number = 5; // Stocke la valeur du slider 1
+  sliderValue2: number = 5; // Stocke la valeur du slider 2
 
   ngOnInit(): void {
-    this.dataService.getTextAndImage().subscribe(
-      (data) => {
-        this.text = data.text;
-        this.imageUrl = data.imageUrl;
-      },
-      (error) => {
-        console.error("Erreur lors du chargement des données", error);
-      }
-    );
+    console.log("AppComponent initialized");
   }
 }

@@ -1,0 +1,19 @@
+<label for="slider1">Valeur 1 : {{ value1 }}</label>
+<input
+  type="range"
+  id="slider1"
+  min="1"
+  max="10"
+  [ngModel]="value1"
+  (ngModelChange)="onValue1Change($event)"
+/>
+
+<label for="slider2">Valeur 2 : {{ value2 }}</label>
+<input
+  type="range"
+  id="slider2"
+  min="1"
+  max="10"
+  [ngModel]="value2"
+  (ngModelChange)="onValue2Change($event)"
+/>
