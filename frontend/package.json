@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@angular/core": "^19.1.4",
+    "@angular/forms": "^19.1.4",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^5.1.5"
+  }
+}
