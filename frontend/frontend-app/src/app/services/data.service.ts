@@ -16,7 +16,7 @@ export class DataService {
   }
 
   getRandomDoc(): Observable<any> {
-    return this.http.get('/api/random-text');
+    return this.http.get(this.apiUrl + '/random-text');
   }
 
 
