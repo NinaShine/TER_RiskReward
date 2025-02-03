@@ -10,8 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const randomTextRoutes = require("./routes/randomText");
-app.use("/api", randomTextRoutes);
+app.use("/api", route);
 const port = process.env.PORT || 3000;
 
 app.use("/", route);
