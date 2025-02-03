@@ -1,43 +1,52 @@
 {
-  "hash": "30a54093",
-  "configHash": "7868f4fe",
-  "lockfileHash": "57726bfc",
-  "browserHash": "988eda86",
+  "hash": "b0013738",
+  "configHash": "851fd63c",
+  "lockfileHash": "11f98182",
+  "browserHash": "98a5eada",
   "optimized": {
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "07727fb9",
+      "fileHash": "ed7ccfa8",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "468357fd",
+      "fileHash": "d85b2801",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "fe9d3a77",
+      "fileHash": "f018b512",
       "needsInterop": false
     },
     "@angular/platform-browser/animations/async": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/animations/async.mjs",
       "file": "@angular_platform-browser_animations_async.js",
-      "fileHash": "6766b58a",
+      "fileHash": "cf4d3b95",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "ff1d9266",
+      "fileHash": "222b7349",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "f7bfcaad",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-3UYWRQGA": {
-      "file": "chunk-3UYWRQGA.js"
+    "chunk-EZ23W6OK": {
+      "file": "chunk-EZ23W6OK.js"
+    },
+    "chunk-NXHUE3EJ": {
+      "file": "chunk-NXHUE3EJ.js"
     },
     "browser-5MQTLNYW": {
       "file": "browser-5MQTLNYW.js"

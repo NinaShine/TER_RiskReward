@@ -57,4 +57,17 @@ router.get("/random-text", async (req, res) => {
   }
 });
 
+
+router.post("/submit",async(req,res)=>{ //Cette route devra push les données dans la bdd
+                                        //Il faut aussi rajouter plus de contexte à la fonction si on veut éviter d'avoir à faire jongler les infos.
+  console.log("Route appelé");
+  try{
+    const body = req.body;
+    res.json({
+      content:body
+    });
+  }catch (error){
+    res.status(500).json({message:"Erreur serveur",error});
+  }
+});
 module.exports = router;
