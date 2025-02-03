@@ -6,19 +6,23 @@ import { DataService } from '../../services/data.service';
   templateUrl: './img-text.component.html',
   styleUrls: ['./img-text.component.css']
 })
+
 export class ImgTextComponent implements OnInit {
-  content: string = 'Ceci est un texte';
+  content: string = '';
   imageUrl: string = '';
 
   constructor(private dataService: DataService) {}
+  
 
   ngOnInit(): void {
     console.log("ImgTextComponent initialized");
     this.dataService.getRandomDoc().subscribe(data => {
       this.content = data.content;
-      this.imageUrl = data.imageUrl;
+      this.imageUrl = "http://localhost:4200/public/btc.png ";
       console.log("Voici les données du back", data);
     });
   }
+
+  
 
 }
