@@ -2,10 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { SliderComponent } from "./component/slider/slider.component";
 import { ImgTextComponent } from "./component/img-text/img-text.component";
 import { SubmitComponent } from "./component/submit/submit.component";
+import { StickmanComponent } from "./component/stickman/stickman.component";
 
 @Component({
   selector: "app-root",
-  imports: [SliderComponent, SubmitComponent, ImgTextComponent],
+  imports: [SliderComponent, SubmitComponent, ImgTextComponent, StickmanComponent],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
