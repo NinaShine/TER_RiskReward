@@ -3,7 +3,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatToolbarModule } from "@angular/material/toolbar";
-
 import { AppComponent } from "./app.component";
 import { SliderComponent } from "./component/slider/slider.component";
 import { FormsModule } from "@angular/forms";
