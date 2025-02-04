@@ -18,7 +18,7 @@ export class ImgTextComponent implements OnInit {
     console.log("ImgTextComponent initialized");
     this.dataService.getRandomDoc().subscribe(data => {
       this.content = data.content;
-      this.imageUrl = "http://localhost:4200/public/btc.png ";
+      this.imageUrl = data.imageUrl; //il faut mettre les images dans assets
       console.log("Voici les données du back", data);
     });
   }
