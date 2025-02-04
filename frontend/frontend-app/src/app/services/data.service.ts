@@ -6,11 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'http://localhost:3000/api/data';
+
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
   getData(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
+
+  getRandomDoc(): Observable<any> {
+    return this.http.get(this.apiUrl + '/random-text');
+  }
+
+
 }
+
+
