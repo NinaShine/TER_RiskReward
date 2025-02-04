@@ -30,7 +30,7 @@ export class SubmitComponent {
       }
     }
     console.log("Body : ",body);
-    this.http.post("http://127.0.0.1:3000/submit",body)
+    this.http.post("https://ter-riskreward.onrender.com/submit",body)
       .subscribe({
         next: response=> console.log("Caca : ",response),
         complete : () => console.log("Requête terminé")
