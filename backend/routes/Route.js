@@ -68,9 +68,11 @@ router.get("/init", async (req,res)=>{
     textId:scenario.id,
     text:scenario.content,
     image:scenario.imageUrl,
+    association:scenario.toObject().associationType,
     individuA:individus.a,
     individuB:individus.b
   }
+  console.log("Création de la session");
   req.session.save(err=>{
     if (err){
       console.error("Erreur de save de la session : ",err);
@@ -90,20 +92,30 @@ router.post("/submit",async(req,res)=>{ //Cette route devra push les données da
   }
   try{
     const body = req.body;
-    res.json({
-      content:body
-    });
     const {sliderValue1, sliderValue2} = req.body;
     console.log("Récup des slides : ",sliderValue1," - ",sliderValue2);
     if (!req.session.scenario) {
       return res.status(400).json({ message: "Session invalide ou expirée." });
     }
-    const newResponse = Response.create({
-      textId:scenario.id,
+    console.log("Début des créations");
+    const firstResponse = await Response.create({
+      textId:scenario.textId,
       valueOne:sliderValue1.first,
-      valueTwo:sliderValue1.second,
-    })
+      valueTwo:sliderValue2.first,
+      associationType:scenario.association,
+      personType:scenario.individuA
+    });
+    console.log("Premier create fait");
+    const secondResponse = await Response.create({
+      textId:scenario.textId,
+      valueOne:sliderValue1.second,
+      valueTwo:sliderValue2.second,
+      associationType:scenario.association,
+      personType:scenario.individuB
+    });
+    console.log("Réponse Enregistré");
   }catch (error){
+    console.error(error);
     res.status(500).json({message:"Erreur serveur",error});
   }
 });
