@@ -98,6 +98,11 @@ router.post("/submit",async(req,res)=>{ //Cette route devra push les données da
     if (!req.session.scenario) {
       return res.status(400).json({ message: "Session invalide ou expirée." });
     }
+    const newResponse = Response.create({
+      textId:scenario.id,
+      valueOne:sliderValue1.first,
+      valueTwo:sliderValue1.second,
+    })
   }catch (error){
     res.status(500).json({message:"Erreur serveur",error});
   }
