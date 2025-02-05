@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StickmanComponent } from './stickman.component';
+import { StickmanComponent } from './stickman1.component';
 
 describe('StickmanComponent', () => {
   let component: StickmanComponent;

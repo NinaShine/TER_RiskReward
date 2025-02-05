@@ -1,8 +1,36 @@
 .container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row; /* Change from column to row */
   align-items: center; /* Centre horizontalement */
   justify-content: center; /* Centre verticalement */
   min-height: 100vh; /* Prend toute la hauteur de l'écran */
   gap: 2rem; /* Espace entre les éléments */
 }
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid black; /* Ajoute une bordure */
+  padding: 1rem; /* Ajoute un peu d'espace autour */
+  border-radius: 10px; /* Arrondit légèrement les bords */
+}
+
+.character-label {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+
+.slider-submit {
+  display: flex;
+  flex-direction: column; /* Empile les éléments verticalement */
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+
