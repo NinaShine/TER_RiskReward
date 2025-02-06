@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const session = require("express-session");
 require("dotenv").config();
 require("./config/db_conn.js");
 
@@ -14,6 +15,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 app.use(session({
   secret: 'secret-key', // Clé en attendant pour tester

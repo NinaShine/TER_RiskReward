@@ -1,18 +1,23 @@
 .submit-button {
-  padding: 12px 24px;
+  padding: 12px 28px;
   font-size: 1rem;
-  background-color: #4caf50; /* Vert */
-  color: white;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(135deg, #44be1f, #29b324);
+  opacity: 100%;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #45a049; /* Vert plus foncé */
+  background: linear-gradient(135deg, #43a047, #5cb85c);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .submit-button:active {
-  transform: scale(0.98); /* Effet de clic */
+  transform: translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

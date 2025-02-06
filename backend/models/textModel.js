@@ -10,13 +10,10 @@ const textSchema = new mongoose.Schema({
     required: true,
   },
   associationType: {
-    type: String, 
-    required: true, 
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now, // Date de création par défaut
+    type: String,
+    enum: ["risk-reward", "risk-effort", "effort-reward"], // Types définis
+    required: true,
+
   },
 });
-
 module.exports = mongoose.model("Text", textSchema);

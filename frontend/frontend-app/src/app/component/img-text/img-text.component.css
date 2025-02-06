@@ -1,0 +1,17 @@
+.img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000; /* Bordure du cadre */
+  padding: 10px;
+  max-width: 300px; /* Ajuste la largeur du conteneur */
+  overflow: hidden; /* Empêche tout débordement */
+}
+
+.img {
+  max-width: 100%; /* L'image ne dépasse pas la largeur du conteneur */
+  height: auto; /* Garde le ratio d'aspect */
+  object-fit: contain; /* Assure que l'image reste entière dans le cadre */
+  border-radius: 5px; /* Coins légèrement arrondis */
+}
