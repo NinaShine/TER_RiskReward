@@ -10,15 +10,13 @@ export class DataService {
   private apiUrl = 'http://localhost:3000';
 
   private urls: string[] = [
-    'assets/stickman.png',
-    'assets/stickman.png',
-    'assets/stickman.png',
-    'assets/stickman.png',
-    'assets/stickman.png',
-    'assets/stickman.png',
-    'assets/stickman.png',
-    'assets/stickman.png',
-    'assets/stickman.png'
+    'assets/stickmanH.png',
+    'assets/stickmanHp.png',
+    'assets/stickmanF.png',
+    'assets/stickmanFp.png',
+    'assets/stickmanV.png',
+    'assets/stickmanE.png',
+    'assets/stickmanR.png'
   ];
 
   constructor(private http: HttpClient) {}
