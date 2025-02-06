@@ -6,22 +6,30 @@ require("./config/db_conn.js");
 
 const app = express();
 const route = require("./routes/Route");
+const session = require('express-session');
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:4200',
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configuration d'express-session (à mettre ici pour toute l'application)
-app.use(
-  session({
-    secret: "votre-secret", // Changez cette valeur pour une clé sécurisée
-    resave: false,
-    saveUninitialized: true,
-  })
-);
 
-// Utiliser vos routes avec un préfixe /api
-app.use("/api", route);
+app.use(session({
+  secret: 'secret-key', // Clé en attendant pour tester
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false, httpOnly:true, sameSite:"lax" } // Passe à true si HTTPS
+}));
+
+app.use((req, res, next) => {
+  console.log("📝 Cookies reçus :", req.headers.cookie);
+  next();
+});
+
+app.use("/", route);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
