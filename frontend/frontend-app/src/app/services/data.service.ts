@@ -7,9 +7,24 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'https://ter-riskreward.onrender.com';
+
+  private urls: string[] = [
+    'assets/stickmanH.png',
+    'assets/stickmanHp.png',
+    'assets/stickmanF.png',
+    'assets/stickmanFp.png',
+    'assets/stickmanV.png',
+    'assets/stickmanE.png',
+    'assets/stickmanR.png'
+  ];
 
   constructor(private http: HttpClient) {}
+
+  getRandomStick(): { url1: string, url2: string } {
+    const shuffled = this.urls.sort(() => 0.5 - Math.random());
+    return { url1: shuffled[0], url2: shuffled[1] };
+  }
 
   getData(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
@@ -21,5 +36,3 @@ export class DataService {
 
 
 }
-
-

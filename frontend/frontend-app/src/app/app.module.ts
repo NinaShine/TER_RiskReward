@@ -9,9 +9,11 @@ import { FormsModule } from "@angular/forms";
 import { ImgTextComponent } from "./component/img-text/img-text.component";
 import { MatSliderModule } from "@angular/material/slider";
 import { MatButtonModule } from "@angular/material/button";
+import { Stickman1Component } from "./component/stickman1/stickman1.component";
+import { Stickman2Component } from "./component/stickman2/stickman2.component";
 
 @NgModule({
-  declarations: [AppComponent, SliderComponent, ImgTextComponent],
+  declarations: [AppComponent, SliderComponent, ImgTextComponent, Stickman1Component, Stickman2Component],
   imports: [
     BrowserModule,
     FormsModule,

@@ -1,8 +1,9 @@
 {
-  "hash": "b0013738",
-  "configHash": "851fd63c",
+  "hash": "c600222f",
+  "configHash": "ec50835b",
   "lockfileHash": "11f98182",
   "browserHash": "6bd0b442",
+
   "optimized": {
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",

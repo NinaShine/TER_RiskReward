@@ -11,9 +11,8 @@ const textSchema = new mongoose.Schema({
   },
   associationType: {
     type: String,
-    enum: ["risk-reward", "risk-effort", "effort-reward"], // Types définis
+    enum: ["risk-reward", "risk-effort", "effort-reward"],
     required: true,
-
   },
 });
 module.exports = mongoose.model("Text", textSchema);
