@@ -20,6 +20,9 @@ export class SubmitComponent {
 
   constructor(private http: HttpClient) {}
 
+
+  //La logique métier est pas au bon endroit, faut la déplacer dans un parent, c'est pas à ce bouton de faire ce taff.
+  //Mais sinon c'est la bonne logique.
   ngOnInit():void{
     this.http.get<{text:string;image:string ;individuA: string; individuB: string}>("http://localhost:3000/init ", { withCredentials: true })
     .subscribe(data => {

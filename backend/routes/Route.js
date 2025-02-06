@@ -3,32 +3,10 @@ const router = express.Router();
 const Text = require("../models/textModel");
 const Response = require("../models/responseModel");
 
-// Route pour ajouter un texte
-router.post("/text", async (req, res) => {
-  try {
-    const newText = new Text(req.body);
-    const savedText = await newText.save();
-    res.status(201).json(savedText);
-  } catch (err) {
-    res
-      .status(400)
-      .json({ message: "Erreur lors de l'ajout du texte", error: err.message });
-  }
-});
+//L'idée globale du changement c'est de merge la route /init et /random-text
+//Modifier getIndividus pour l'adapter aux URL d'image pour Etienne
 
-// Route pour récupérer tous les textes
-router.get("/text", async (req, res) => {
-  try {
-    const texts = await Text.find();
-    res.status(200).json(texts);
-  } catch (err) {
-    res.status(500).json({
-      message: "Erreur lors de la récupération des textes",
-      error: err.message,
-    });
-  }
-});
-
+//Rajouter le routing de page d'accueil et surtout la route de la répartition des forces qui sera stocké en session et ne sera pas temporaire.
 
 // Fonction pour récupérer un texte et une image aléatoire
 async function getRandomText() {
@@ -63,6 +41,7 @@ router.get("/random-text", async (req, res) => {
     }
 
     // Vérifier si la liste est vide (ne pas réinitialiser si c'est le cas)
+    // Note : A partir d'ici, rajouter la logique métier de /init pour qu'elle créée un contexte complet
     if (req.session.randomTexts.length === 0) {
       return res
         .status(200)
@@ -145,6 +124,7 @@ router.post("/submit",async(req,res)=>{ //Cette route devra push les données da
 module.exports = router;
 
 async function getIndividus(){
+  //Modifier tab pour en faire un objet permettant de stocker l'url de l'img de l'individu
   const tab = [
     "vieux pas genré",
     "enfant pas genré",

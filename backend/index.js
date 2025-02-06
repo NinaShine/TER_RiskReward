@@ -6,7 +6,6 @@ require("./config/db_conn.js");
 
 const app = express();
 const route = require("./routes/Route");
-const session = require('express-session');
 
 app.use(cors({
   origin: 'http://localhost:4200',
