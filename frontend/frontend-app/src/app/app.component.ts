@@ -2,10 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { SliderComponent } from "./component/slider/slider.component";
 import { ImgTextComponent } from "./component/img-text/img-text.component";
 import { SubmitComponent } from "./component/submit/submit.component";
+import { Stickman1Component } from "./component/stickman1/stickman1.component";
+import { Stickman2Component } from "./component/stickman2/stickman2.component";
 
 @Component({
   selector: "app-root",
-  imports: [SliderComponent, SubmitComponent, ImgTextComponent],
+  imports: [SliderComponent, SubmitComponent, ImgTextComponent, Stickman1Component, Stickman2Component],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
@@ -18,6 +20,4 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     console.log("AppComponent initialized");
   }
-
-  
 }
