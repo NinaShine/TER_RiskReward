@@ -9,9 +9,10 @@ const textSchema = new mongoose.Schema({
     type: String, // URL de l'image
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now, // Date de création par défaut
+  associationType: {
+    type: String,
+    enum: ["risk-reward", "risk-effort", "effort-reward"],
+    required: true,
   },
 });
 
