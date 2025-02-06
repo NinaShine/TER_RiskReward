@@ -15,5 +15,4 @@ const textSchema = new mongoose.Schema({
     required: true,
   },
 });
-
 module.exports = mongoose.model("Text", textSchema);
