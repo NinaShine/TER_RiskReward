@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-submit",
@@ -7,11 +7,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ["./submit.component.css"],
 })
 export class SubmitComponent {
-  scenario: string | null = null;
   individu1: string | null = null;
   individu2: string | null = null;
   @Input() sliderValue1: number = 0; // Reçoit la valeur du slider 1
   @Input() sliderValue2: number = 0; // Reçoit la valeur du slider 2
+  @Input() scenario: any;
 
   logValues() {
     console.log("Valeur du slider 1 :", this.sliderValue1);
@@ -20,38 +20,28 @@ export class SubmitComponent {
 
   constructor(private http: HttpClient) {}
 
-
   //La logique métier est pas au bon endroit, faut la déplacer dans un parent, c'est pas à ce bouton de faire ce taff.
   //Mais sinon c'est la bonne logique.
-  ngOnInit():void{
-    this.http.get<{text:string;image:string ;individuA: string; individuB: string}>("http://localhost:3000/init ", { withCredentials: true })
-    .subscribe(data => {
-      this.scenario = data.text;
-      this.individu1 = data.individuA;
-      this.individu2 = data.individuB;
-      console.log(this.scenario);
-    });
-  }
 
-  submitResponse(){
-    console.log("Submit !")
+  submitResponse() {
+    console.log("Submit !");
     const body = {
-      sliderValue1:{
-        first:this.sliderValue1,
-        second:10-this.sliderValue1
+      sliderValue1: {
+        first: this.sliderValue1,
+        second: 10 - this.sliderValue1,
       },
-      sliderValue2:{
-        first:this.sliderValue2,
-        second:10-this.sliderValue2
-      }
-    }
-    console.log("Body : ",body);
+      sliderValue2: {
+        first: this.sliderValue2,
+        second: 10 - this.sliderValue2,
+      },
+    };
+    console.log("Body : ", body);
 
-    this.http.post("http://localhost:3000/submit",body, {withCredentials:true})
+    this.http
+      .post("http://localhost:3000/submit", body, { withCredentials: true })
       .subscribe({
-        next: response=> console.log("Test : ",response),
-        complete : () => console.log("Requête terminé")
+        next: (response) => console.log("Test : ", response),
+        complete: () => console.log("Requête terminé"),
       });
   }
-
 }

@@ -1,6 +1,9 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { AppComponent } from "./app.component";
@@ -11,9 +14,17 @@ import { MatSliderModule } from "@angular/material/slider";
 import { MatButtonModule } from "@angular/material/button";
 import { Stickman1Component } from "./component/stickman1/stickman1.component";
 import { Stickman2Component } from "./component/stickman2/stickman2.component";
+import { SubmitComponent } from "./component/submit/submit.component";
 
 @NgModule({
-  declarations: [AppComponent, SliderComponent, ImgTextComponent, Stickman1Component, Stickman2Component],
+  declarations: [
+    AppComponent,
+    SliderComponent,
+    ImgTextComponent,
+    Stickman1Component,
+    Stickman2Component,
+    SubmitComponent,
+  ],
   imports: [
     BrowserModule,
     FormsModule,
