@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 })
 export class DataService {
   private apiUrl = "https://ter-riskreward.onrender.com";
-  private initURL = "https://localhost:3000/init";
+  private initURL = "http://localhost:3000/init";
   private urls: string[] = [
     "assets/stickmanH.png",
     "assets/stickmanHp.png",
@@ -26,7 +26,7 @@ export class DataService {
   }
 
   getScenario(): Observable<any> {
-    return this.http.get<any>(this.initURL);
+    return this.http.get<any>(this.initURL, { withCredentials: true });
   }
 
   getData(): Observable<any> {
