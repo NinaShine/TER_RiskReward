@@ -1,5 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { CommonModule } from "@angular/common";
+
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -30,6 +32,7 @@ import { SubmitComponent } from "./component/submit/submit.component";
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    CommonModule,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],

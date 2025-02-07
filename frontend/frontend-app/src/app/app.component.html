@@ -4,7 +4,10 @@
     <div class="character-label">Personnage A</div>
   </div>
   <div class="center">
-    <app-img-text></app-img-text>
+    <app-img-text
+      [content]="scenario.text"
+      [imageUrl]="scenario.image"
+    ></app-img-text>
   </div>
   <div class="right">
     <app-stickman2></app-stickman2>
