@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   content: string = "Ceci est un texte"; // Stocke le contenu de l'image et du texte
   imageUrl: string = "https://picsum.photos/200"; // Stocke l'url de l'image
 
-  scenario: any;
+  scenario: any = {}; // Initialisation de la variable scenario
 
   constructor(private dataService: DataService) {}
 

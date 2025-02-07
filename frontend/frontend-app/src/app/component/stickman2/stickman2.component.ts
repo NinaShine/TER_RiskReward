@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -7,12 +7,13 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./stickman2.component.css']
 })
 export class Stickman2Component implements OnInit {
+  @Input() scenario: any;
   url2: string = '';
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    const data = this.dataService.getRandomStick();
-this.url2 = data.url2;
+    this.url2 = this.scenario.individuB;
+    console.log('Stickman2Component reçoit les data:', this.scenario);
   }
 }

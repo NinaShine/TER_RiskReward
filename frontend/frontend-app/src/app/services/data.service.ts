@@ -20,11 +20,6 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  getRandomStick(): { url1: string; url2: string } {
-    const shuffled = this.urls.sort(() => 0.5 - Math.random());
-    return { url1: shuffled[0], url2: shuffled[1] };
-  }
-
   getScenario(): Observable<any> {
     return this.http.get<any>(this.initURL, { withCredentials: true });
   }
