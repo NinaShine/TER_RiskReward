@@ -2,11 +2,16 @@
 <app-header></app-header>
 
 <div class="container">
+  <div class="main-card">
+    
+    <div class="img-container">
   <div class="left">
     <app-stickman1></app-stickman1>
     <div class="character-label">Personnage A</div>
   </div>
+  
   <div class="center">
+    
     <app-img-text></app-img-text>
   </div>
   <div class="right">
@@ -15,8 +20,16 @@
   </div>
 </div>
 
-<div class="slider-submit">
-  <app-slider [(value1)]="sliderValue1" [(value2)]="sliderValue2"> </app-slider>
+<div className="sliders-section">
+  <div className="slider-container">
+    <div className="slider-header">
+      <app-slider [(value1)]="sliderValue1" [(value2)]="sliderValue2"> </app-slider>
+    </div>
+  </div>
+  <div className="slider-container">
+   <div className="slider-header">
+      <app-submit [sliderValue1]="sliderValue1" [sliderValue2]="sliderValue2"></app-submit>
+  </div>
 
-  <app-submit [sliderValue1]="sliderValue1" [sliderValue2]="sliderValue2"></app-submit>
+
 </div>

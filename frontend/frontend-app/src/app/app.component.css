@@ -1,13 +1,79 @@
+body {
+  background: linear-gradient(to right, #c084fc, #4f46e5); /* Dégradé du fond global */
+  display: flex;
+  justify-content: center; /* Centre la carte horizontalement */
+  align-items: center; /* Centre la carte verticalement */
+  height: 100vh;
+  margin: 0;
+}
+
 .container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  flex-direction: row; /* Change from column to row */
-  align-items: center; /* Centre horizontalement */
-  justify-content: center; /* Centre verticalement */
-  min-height: 100vh; /* Prend toute la hauteur de l'écran */
-  gap: 2rem; /* Espace entre les éléments */
+  justify-content: center;
+  gap: 2rem;
 }
+
+.main-card {
+  background-color: rgba(31, 41, 55, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid #374151;
+  width: 40%;
+  height: 40%;
+  position: relative;
+  z-index: 1; /* Permet de garder la carte au-dessus des décorations */
+}
+
+/* Optionnel : si tu veux des décorations sur les côtés dans l'espace extérieur */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  background: linear-gradient(to bottom, #c084fc, rgba(31, 41, 55, 0.5)); /* Dégradé violet et sombre */
+  z-index: 0; /* Derrière la carte */
+}
+
+body::before {
+  left: 0; /* Décoration côté gauche */
+}
+
+body::after {
+  right: 0; /* Décoration côté droit */
+}
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid black; /* Ajoute une bordure */
+  padding: 1rem; /* Ajoute un peu d'espace autour */
+  border-radius: 10px; /* Arrondit légèrement les bords */
+}
+
+.character-label {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+
+.slider-submit {
+  display: flex;
+  flex-direction: column; /* Empile les éléments verticalement */
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+
+
 
 .left, .right {
   display: flex;

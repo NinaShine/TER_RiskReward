@@ -1,17 +1,48 @@
-.img-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #000; /* Bordure du cadre */
-  padding: 10px;
-  max-width: 300px; /* Ajuste la largeur du conteneur */
-  overflow: hidden; /* Empêche tout débordement */
+.image-section {
+  position: relative;
+  margin: 3rem auto; /* Ajoute un espace en haut et centre horizontalement */
+  border-radius: 0.75rem;
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px; /* Réduit la largeur de l’image */
+  text-align: center; /* Centre l’image */
 }
 
-.img {
-  max-width: 100%; /* L'image ne dépasse pas la largeur du conteneur */
-  height: auto; /* Garde le ratio d'aspect */
-  object-fit: contain; /* Assure que l'image reste entière dans le cadre */
-  border-radius: 5px; /* Coins légèrement arrondis */
+.image-section img {
+  width: 100%; /* L’image s’adapte au conteneur */
+  max-height: 400px; /* Limite la hauteur pour éviter qu’elle prenne tout l’écran */
+  object-fit: contain; /* Assure que toute l’image est visible */
+  transition: transform 0.7s ease-in-out;
 }
+
+.image-section img:hover {
+  transform: scale(1.05);
+}
+
+.description-box {
+  background-color: rgba(17, 24, 39, 0.5);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid #374151;
+  text-align: center; /* Centre le texte */
+  max-width: 600px; /* Même largeur que l'image */
+  margin: 1.5rem auto 0 auto; /* Ajoute un espace entre l'image et la description */
+}
+
+.description-text {
+  color: #d1d5db;
+  line-height: 1.625;
+}
+
+/* Centrage vertical des stickmans */
+.img-box {
+  display: flex;
+  position: relative; /* Positionner les éléments absolus dans ce conteneur */
+  justify-content: space-between; /* Espacement entre les stickmans à gauche et à droite */
+  align-items: center; /* Centre verticalement les stickmans */
+  width: 100%; /* Prend toute la largeur de l'image */
+}
+
+
+
+
