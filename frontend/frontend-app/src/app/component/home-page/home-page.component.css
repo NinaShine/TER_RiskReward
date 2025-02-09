@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: url('/assets/fond.png') no-repeat center center fixed;
+    background: #2d2e55; /* Dégradé du fond global */
     background-size: cover;
     color: white;
     display: flex;
