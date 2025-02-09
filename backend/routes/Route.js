@@ -9,13 +9,13 @@ const Response = require("../models/responseModel");
 //Rajouter le routing de page d'accueil et surtout la route de la répartition des forces qui sera stocké en session et ne sera pas temporaire.
 
 // Fonction pour récupérer un texte et une image aléatoire
-async function getRandomText() {
+/*async function getRandomText() {
   const count = await Text.countDocuments();
   if (count === 0) return null;
   const randomIndex = Math.floor(Math.random() * count);
   return Text.findOne().skip(randomIndex);
 }
-
+*/
 // Route qui retourne un texte et une image aléatoire
 router.get("/init", async (req, res) => {
   try {
@@ -63,6 +63,9 @@ router.get("/init", async (req, res) => {
     res.status(500).json({ message: "Erreur serveur", error });
   }
 });
+/*
+
+viellie fonction devenue obsolète
 
 router.get("/init2", async (req, res) => {
   console.log("Session actuelle :", req.session);
@@ -89,6 +92,7 @@ router.get("/init2", async (req, res) => {
   });
   res.json(req.session.scenario);
 });
+*/
 
 router.post("/submit", async (req, res) => {
   //Cette route devra push les données dans la bdd
