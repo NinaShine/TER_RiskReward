@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 @Component({
@@ -12,6 +12,11 @@ export class SubmitComponent {
   @Input() sliderValue1: number = 0; // Reçoit la valeur du slider 1
   @Input() sliderValue2: number = 0; // Reçoit la valeur du slider 2
   @Input() scenario: any;
+  @Output() refreshRequested = new EventEmitter<void>(); // Event for parent
+
+  refreshScenario() {
+    this.refreshRequested.emit(); // Emit event when button is clicked
+  }
 
   logValues() {
     console.log("Valeur du slider 1 :", this.sliderValue1);

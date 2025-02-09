@@ -19,27 +19,60 @@ import { DataService } from "./services/data.service";
   styleUrl: "./app.component.css",
 })
 export class AppComponent implements OnInit {
-  sliderValue1: number = 5; // Stocke la valeur du slider 1
-  sliderValue2: number = 5; // Stocke la valeur du slider 2
-  content: string = "Ceci est un texte"; // Stocke le contenu de l'image et du texte
-  imageUrl: string = "https://picsum.photos/200"; // Stocke l'url de l'image
+  sliderValue1: number = 5;
+  sliderValue2: number = 5;
+  content: string = "Ceci est un texte";
+  imageUrl: string = "https://picsum.photos/200";
 
-  scenario: any = {}; // Initialisation de la variable scenario
+  scenario: any = {};
 
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.fetchScenario();
+    this.loadScenario(); // 🔥 Empêche le rechargement de scénario après un `F5`
   }
 
+  /**
+   * Charge le scénario depuis `sessionStorage` ou appelle l'API une seule fois
+   */
+  loadScenario() {
+    const storedScenario = sessionStorage.getItem("scenario");
+
+    if (storedScenario) {
+      try {
+        this.scenario = JSON.parse(storedScenario);
+        console.log(
+          "✅ Scenario chargé depuis sessionStorage :",
+          this.scenario
+        );
+      } catch (error) {
+        console.error("❌ Erreur de parsing JSON :", error);
+        this.fetchScenario(); // Si JSON invalide, recharger un scénario
+      }
+    } else {
+      this.fetchScenario(); // Aucun scénario en mémoire, premier appel à l'API
+    }
+  }
+
+  /**
+   * Récupère un nouveau scénario depuis l'API et le stocke dans `sessionStorage`
+   */
   fetchScenario() {
     this.dataService.getScenario().subscribe(
       (data) => {
-        this.scenario = data;
-        console.log("Scenario received:", this.scenario);
+        if (data && data.textId) {
+          // Vérifie si les données sont valides
+          this.scenario = data;
+          console.log("✅ Scenario reçu :", this.scenario);
+
+          // Sauvegarde dans `sessionStorage` pour éviter les appels répétés
+          sessionStorage.setItem("scenario", JSON.stringify(data));
+        } else {
+          console.error("❌ Scenario invalide :", data);
+        }
       },
       (error) => {
-        console.error("Error fetching scenario:", error);
+        console.error("❌ Erreur API :", error);
       }
     );
   }
