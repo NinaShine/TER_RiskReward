@@ -17,7 +17,7 @@ async function getRandomText() {
 }
 
 // Route qui retourne un texte et une image aléatoire
-router.get("/random-text", async (req, res) => {
+router.get("/init", async (req, res) => {
   try {
     // Initialiser la liste une seule fois par utilisateur
     if (!req.session.randomTexts) {
@@ -49,17 +49,22 @@ router.get("/random-text", async (req, res) => {
     }
 
     // Extraire et retourner le prochain élément avec shift()
+    const individus = await getIndividus();
     const randomText = req.session.randomTexts.shift();
     res.json({
-      content: randomText.content,
-      imageUrl: randomText.imageUrl,
+      textId: randomText.id,
+      text: randomText.content,
+      image: randomText.imageUrl,
+      association: randomText.associationType,
+      individuA: individus.a,
+      individuB: individus.b,
     });
   } catch (error) {
     res.status(500).json({ message: "Erreur serveur", error });
   }
 });
 
-router.get("/init", async (req, res) => {
+router.get("/init2", async (req, res) => {
   console.log("Session actuelle :", req.session);
   const scenario = await getRandomText();
   const individus = await getIndividus();
