@@ -51,13 +51,28 @@ router.get("/init", async (req, res) => {
     // Extraire et retourner le prochain élément avec shift()
     const individus = await getIndividus();
     const randomText = req.session.randomTexts.shift();
-    res.json({
-      textId: randomText.id,
+    console.log(" Texte sélectionné :", randomText);
+
+    req.session.scenario = {
+      textId: randomText._id,
       text: randomText.content,
       image: randomText.imageUrl,
       association: randomText.associationType,
       individuA: individus.a,
       individuB: individus.b,
+    };
+
+    console.log("✅ Scenario sauvegardé :", req.session.scenario);
+
+    req.session.save((err) => {
+      if (err) {
+        console.error("❌ Erreur lors de la sauvegarde de la session :", err);
+        return res
+          .status(500)
+          .json({ error: "Erreur de sauvegarde de la session." });
+      }
+
+      res.json(req.session.scenario);
     });
   } catch (error) {
     res.status(500).json({ message: "Erreur serveur", error });

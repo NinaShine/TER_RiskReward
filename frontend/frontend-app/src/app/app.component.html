@@ -1,7 +1,7 @@
 <div class="container">
   <div class="left">
-<app-stickman1 [scenario]="scenario"></app-stickman1>
-<div class="character-label">Personnage A</div>
+    <app-stickman1 [scenario]="scenario"></app-stickman1>
+    <div class="character-label">Personnage A</div>
   </div>
   <div class="center">
     <app-img-text
@@ -10,8 +10,8 @@
     ></app-img-text>
   </div>
   <div class="right">
-<app-stickman2 [scenario]="scenario"></app-stickman2>
-<div class="character-label">Personnage B</div>
+    <app-stickman2 [scenario]="scenario"></app-stickman2>
+    <div class="character-label">Personnage B</div>
   </div>
 </div>
 
@@ -19,6 +19,7 @@
   <app-slider [(value1)]="sliderValue1" [(value2)]="sliderValue2"> </app-slider>
 
   <app-submit
+    (refreshRequested)="fetchScenario()"
     [sliderValue1]="sliderValue1"
     [sliderValue2]="sliderValue2"
     [scenario]="scenario"
