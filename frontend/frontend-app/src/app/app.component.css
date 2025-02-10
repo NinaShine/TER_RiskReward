@@ -22,10 +22,10 @@ body {
   padding: 2rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   border: 1px solid #374151;
-  width: 40%;
+  width: 40%; /* Augmente la largeur de la carte principale */
   height: 40%;
   position: relative;
-  z-index: 1; /* Permet de garder la carte au-dessus des décorations */
+  z-index: 1;
 }
 
 /* Optionnel : si tu veux des décorations sur les côtés dans l'espace extérieur */
@@ -52,10 +52,16 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid black; /* Ajoute une bordure */
-  padding: 1rem; /* Ajoute un peu d'espace autour */
-  border-radius: 10px; /* Arrondit légèrement les bords */
+  justify-content: center;
+  border: 2px solid black;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 200px;
+  height: 150px;
+  margin-top: 120px; /* Décale vers le haut */
 }
+
+
 
 .character-label {
   margin-top: 0.5rem;
@@ -63,40 +69,36 @@ body::after {
 }
 
 
-.slider-submit {
+
+
+
+
+
+
+
+
+
+
+
+
+
+.img-container {
   display: flex;
-  flex-direction: column; /* Empile les éléments verticalement */
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  align-items: flex-start; /* Place les éléments vers le haut */
+  gap: 2rem;
+  height: 100%;
 }
 
-
-
-
-
-.left, .right {
+.submit-section {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 2px solid black; /* Ajoute une bordure */
-  padding: 1rem; /* Ajoute un peu d'espace autour */
-  border-radius: 10px; /* Arrondit légèrement les bords */
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;     /* Centre verticalement */
+  width: 100%;             /* Assure que la section prend toute la largeur */
+}
+.slider-section{
+  margin-top: 40px;
 }
 
-.character-label {
-  margin-top: 0.5rem;
-  font-weight: bold;
-}
-
-
-.slider-submit {
-  display: flex;
-  flex-direction: column; /* Empile les éléments verticalement */
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
 
 
 

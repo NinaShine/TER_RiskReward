@@ -4,8 +4,9 @@
   border-radius: 0.75rem;
   overflow: hidden;
   width: 100%;
-  max-width: 600px; /* Réduit la largeur de l’image */
-  text-align: center; /* Centre l’image */
+  max-width: 80%; /* Augmente la taille tout en restant responsive */
+  text-align: center;
+  padding-bottom: 2rem; /* Ajoute un peu d'espace en bas */
 }
 
 .image-section img {
@@ -18,6 +19,7 @@
 .image-section img:hover {
   transform: scale(1.05);
 }
+
 
 .description-box {
   background-color: rgba(17, 24, 39, 0.5);
