@@ -1,16 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { SliderComponent } from "./component/slider/slider.component";
-import { ImgTextComponent } from "./component/img-text/img-text.component";
-import { SubmitComponent } from "./component/submit/submit.component";
-import { Stickman1Component } from "./component/stickman1/stickman1.component";
-import { Stickman2Component } from "./component/stickman2/stickman2.component";
-import { HomePageComponent } from "./component/home-page/home-page.component";
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet,SliderComponent, SubmitComponent, ImgTextComponent, Stickman1Component, Stickman2Component, HomePageComponent],
+  imports: [RouterOutlet],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css", 
 })
