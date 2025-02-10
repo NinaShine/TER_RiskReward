@@ -14,8 +14,8 @@ export class SubmitComponent {
   @Input() scenario: any;
   @Output() refreshRequested = new EventEmitter<void>(); // Event for parent
 
-  refreshScenario() {
-    this.refreshRequested.emit(); // Emit event when button is clicked
+  onButtonClick() {
+    this.refreshRequested.emit(); // Émet l'événement vers le parent
   }
 
   logValues() {

@@ -62,7 +62,7 @@ router.get("/init", async (req, res) => {
       individuB: individus.b,
     };
 
-    console.log("✅ Scenario sauvegardé :", req.session.scenario);
+    //console.log("✅ Scenario sauvegardé :", req.session.scenario);
 
     req.session.save((err) => {
       if (err) {
@@ -113,7 +113,7 @@ router.post("/submit", async (req, res) => {
   //Cette route devra push les données dans la bdd
   //Il faut aussi rajouter plus de contexte à la fonction si on veut éviter d'avoir à faire jongler les infos.
   const scenario = req.session.scenario;
-  console.log("Récupération de la session : ", scenario);
+  //console.log("Récupération de la session : ", scenario);
   if (!req.session.scenario) {
     console.error("Aucune session trouvée !");
     return res.status(400).json({
