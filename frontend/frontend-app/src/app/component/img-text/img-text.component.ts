@@ -18,7 +18,7 @@ export class ImgTextComponent implements OnInit {
   content: string = '';
   imageUrl: string = '';
 
-  // 🛠️ Ajout des propriétés manquantes
+  // maintenant on a les valeurs des sliders ici
   sliderValue1: number = 5;
   sliderValue2: number = 5;
 
