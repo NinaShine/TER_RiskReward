@@ -26,6 +26,14 @@ app.use(
   })
 );
 
+const http = require("http");
+const https = require("https");
+
+http.globalAgent.keepAlive = false; // 🔥 Désactive Keep-Alive pour HTTP
+https.globalAgent.keepAlive = false; // 🔥 Désactive Keep-Alive pour HTTPS
+
+console.log("🚀 Keep-Alive désactivé pour HTTP et HTTPS");
+
 app.use((req, res, next) => {
   console.log(
     `📡 [${new Date().toISOString()}] Requête reçue : ${req.method} ${req.url}`
@@ -35,6 +43,11 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   console.log(`📡 Requête reçue : ${req.method} ${req.url}`);
+  next();
+});
+
+app.use((req, res, next) => {
+  res.setHeader("Connection", "close"); // 🔥 Force la fermeture de la connexion après chaque requête
   next();
 });
 

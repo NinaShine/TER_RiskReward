@@ -24,6 +24,7 @@ export class DataService {
     return this.http.get<any>(this.initURL, {
       withCredentials: true,
       headers: new HttpHeaders({
+        connection: "close",
         "Cache-Control": "no-cache",
         Pragma: "no-cache",
       }),
