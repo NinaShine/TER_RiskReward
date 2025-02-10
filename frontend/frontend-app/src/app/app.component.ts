@@ -58,6 +58,7 @@ export class AppComponent implements OnInit {
    * Récupère un nouveau scénario depuis l'API et le stocke dans `sessionStorage`
    */
   fetchScenario() {
+    console.log("🔄 Fetching new scenario...");
     this.dataService.getScenario().subscribe(
       (data) => {
         if (data && data.textId) {

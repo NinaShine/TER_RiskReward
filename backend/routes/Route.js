@@ -18,6 +18,7 @@ const Response = require("../models/responseModel");
 */
 // Route qui retourne un texte et une image aléatoire
 router.get("/init", async (req, res) => {
+  console.log("requête init");
   try {
     // Initialiser la liste une seule fois par utilisateur
     if (!req.session.randomTexts) {
@@ -50,6 +51,11 @@ router.get("/init", async (req, res) => {
 
     // Extraire et retourner le prochain élément avec shift()
     const individus = await getIndividus();
+    console.log(
+      "📋 Liste des textes restants :",
+      req.session.randomTexts.length
+    );
+
     const randomText = req.session.randomTexts.shift();
     console.log(" Texte sélectionné :", randomText);
 
