@@ -2,10 +2,6 @@
 <div class="container">
     <div class="main-card">
       <div class="img-container">
-        <div class="left">
-          <app-stickman1></app-stickman1>
-          <div class="character-label">Personnage A</div>
-        </div>
         
         <div class="center">
             <div class="image-section">
@@ -20,17 +16,23 @@
             </div>
         </div>
         
-        <div class="right">
-          <app-stickman2></app-stickman2>
-          <div class="character-label">Personnage B</div>
-        </div>
       </div>
   
       <div class="sliders-section">
         <div class="slider-container">
-          <div class="slider-header">
+          <div class="left">
+            <app-stickman1></app-stickman1>
+            <div class="character-label">Personnage A</div>
+        </div>
+        
+        <div class="slider-header">
             <app-slider [(value1)]="sliderValue1" [(value2)]="sliderValue2"></app-slider>
-          </div>
+        </div>
+
+        <div class="right">
+            <app-stickman2></app-stickman2>
+            <div class="character-label">Personnage B</div>
+        </div>
         </div>
       </div>
   

@@ -7,6 +7,7 @@
   max-width: 80%; /* Augmente la taille tout en restant responsive */
   text-align: center;
   padding-bottom: 2rem; /* Ajoute un peu d'espace en bas */
+  margin-left: 5rem;
 }
 
 .image-section img {
@@ -29,6 +30,7 @@
   text-align: center; /* Centre le texte */
   max-width: 600px; /* Même largeur que l'image */
   margin: 1.5rem auto 0 auto; /* Ajoute un espace entre l'image et la description */
+  margin-left: 2.5rem;
 }
 
 .description-text {
@@ -96,19 +98,6 @@ body::after {
   right: 0; /* Décoration côté droit */
 }
 
-.left, .right {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid black;
-  padding: 1rem;
-  border-radius: 10px;
-  width: 200px;
-  height: 150px;
-  margin-top: 120px; /* Décale vers le haut */
-}
-
 
 
 .character-label {
@@ -133,9 +122,42 @@ body::after {
   align-items: center;     /* Centre verticalement */
   width: 100%;             /* Assure que la section prend toute la largeur */
 }
-.slider-section{
+
+
+
+.sliders-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 40px;
 }
+
+.slider-container {
+  display: flex;
+  align-items: center; /* Centre verticalement les éléments */
+  gap: 4rem; /* Espacement entre les éléments */
+}
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 120px;
+  height: 120px;
+  margin: 0;
+  text-align: center;
+}
+
+.slider-header {
+  width: 250px; /* Augmente la largeur du slider */
+  height: 180px; /* Augmente la hauteur si nécessaire */
+}
+
+
 
 
 
