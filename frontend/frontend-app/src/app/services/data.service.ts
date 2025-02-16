@@ -10,13 +10,13 @@ export class DataService {
   private apiUrl = 'https://ter-riskreward.onrender.com';
 
   private urls: string[] = [
-    'assets/stickmanH.png',
+    'assets/hommegt.png',
     'assets/stickmanHp.png',
-    'assets/stickmanF.png',
+    'assets/femmegt.png',
     'assets/stickmanFp.png',
     'assets/stickmanV.png',
-    'assets/stickmanE.png',
-    'assets/stickmanR.png'
+    'assets/enfant.png',
+    'assets/robot.png'
   ];
 
   constructor(private http: HttpClient) {}
