@@ -46,5 +46,112 @@
 }
 
 
+body {
+  background: linear-gradient(to right, #c084fc, #4f46e5); /* Dégradé du fond global */
+  display: flex;
+  justify-content: center; /* Centre la carte horizontalement */
+  align-items: center; /* Centre la carte verticalement */
+  height: 100vh;
+  margin: 0;
+}
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.main-card {
+  background-color: rgba(31, 41, 55, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid #374151;
+  width: 40%; /* Augmente la largeur de la carte principale */
+  height: 40%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Optionnel : si tu veux des décorations sur les côtés dans l'espace extérieur */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  background: linear-gradient(to bottom, #c084fc, rgba(31, 41, 55, 0.5)); /* Dégradé violet et sombre */
+  z-index: 0; /* Derrière la carte */
+}
+
+body::before {
+  left: 0; /* Décoration côté gauche */
+}
+
+body::after {
+  right: 0; /* Décoration côté droit */
+}
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 200px;
+  height: 150px;
+  margin-top: 120px; /* Décale vers le haut */
+}
+
+
+
+.character-label {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+
+
+
+
+.img-container {
+  display: flex;
+  align-items: flex-start; /* Place les éléments vers le haut */
+  gap: 2rem;
+  height: 100%;
+}
+
+.submit-section {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;     /* Centre verticalement */
+  width: 100%;             /* Assure que la section prend toute la largeur */
+}
+.slider-section{
+  margin-top: 40px;
+}
+
+
+
+.top-right-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #ee2c2c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.top-right-button:hover {
+  background-color: #0056b3;
+}
 

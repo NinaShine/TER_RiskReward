@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { SliderComponent } from '../slider/slider.component';
+import { Stickman1Component } from '../stickman1/stickman1.component';
+import { Stickman2Component } from '../stickman2/stickman2.component';
+import { RouterLink } from '@angular/router';
+import { SubmitComponent } from '../submit/submit.component';
+
 
 @Component({
   selector: 'app-img-text',
+  imports: [RouterLink, SliderComponent, Stickman1Component, Stickman2Component, SubmitComponent],
   templateUrl: './img-text.component.html',
   styleUrls: ['./img-text.component.css']
 })
@@ -10,6 +17,10 @@ import { DataService } from '../../services/data.service';
 export class ImgTextComponent implements OnInit {
   content: string = '';
   imageUrl: string = '';
+
+  // maintenant on a les valeurs des sliders ici
+  sliderValue1: number = 5;
+  sliderValue2: number = 5;
 
   constructor(private dataService: DataService) {}
   
