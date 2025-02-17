@@ -9,21 +9,21 @@ export class DataService {
 
   private apiUrl = 'https://ter-riskreward.onrender.com';
 
-  private urls: string[] = [
-    'assets/hommegt.png',
-    'assets/stickmanHp.png',
-    'assets/femmegt.png',
-    'assets/stickmanFp.png',
-    'assets/stickmanV.png',
-    'assets/enfant.png',
-    'assets/robot.png'
+  private characters = [
+    { image: 'assets/hommegt.png', name: 'Homme' },
+    { image: 'assets/stickmanHp.png', name: 'Homme Petit' },
+    { image: 'assets/femmegt.png', name: 'Femme' },
+    { image: 'assets/stickmanFp.png', name: 'Femme Petite' },
+    { image: 'assets/stickmanV.png', name: 'Personne Vieille' },
+    { image: 'assets/enfant.png', name: 'Enfant' },
+    { image: 'assets/robot.png', name: 'Robot' }
   ];
 
   constructor(private http: HttpClient) {}
 
-  getRandomStick(): { url1: string, url2: string } {
-    const shuffled = this.urls.sort(() => 0.5 - Math.random());
-    return { url1: shuffled[0], url2: shuffled[1] };
+  getRandomStick(): { url: string, name: string }[] {
+    const shuffled = this.characters.sort(() => 0.5 - Math.random());
+    return [{ url: shuffled[0].image, name: shuffled[0].name }, { url: shuffled[1].image, name: shuffled[1].name }];
   }
 
   getData(): Observable<any> {
@@ -31,7 +31,9 @@ export class DataService {
   }
 
   getRandomDoc(): Observable<any> {
-    return this.http.get(this.apiUrl + '/random-text');
+    //return this.http.get(this.apiUrl + '/random-text-clean');
+    //return this.http.get(this.apiUrl + '/random-text');
+    return this.http.get("http://localhost:3000/random-text-clean");
   }
 
 

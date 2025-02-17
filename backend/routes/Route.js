@@ -16,6 +16,88 @@ async function getRandomText() {
   return Text.findOne().skip(randomIndex);
 }
 
+// Nouvelle route améliorée qui stocke les textes en session
+router.get("/random-text-clean", async (req, res) => {
+  try {
+    // Si la session n'a pas encore de liste de textes aléatoires
+    if (!req.session.randomTexts || req.session.randomTexts.length === 0) {
+      const allTexts = await Text.find().lean();
+      
+      if (!allTexts.length) {
+        return res.status(404).json({ message: "Aucun texte trouvé en base de données." });
+      }
+
+      // Mélanger le tableau avec Fisher-Yates
+      for (let i = allTexts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allTexts[i], allTexts[j]] = [allTexts[j], allTexts[i]];
+      }
+
+      // Stocker la liste en session
+      req.session.randomTexts = allTexts;
+    }
+
+    // Extraire le prochain élément
+    const randomText = req.session.randomTexts.shift();
+
+    // Vérification des données récupérées
+    console.log("Texte sélectionné :", randomText);
+
+    // Vérifier si associationType est bien présent
+    if (!randomText.associationType) {
+      console.warn("⚠️ associationType manquant :", randomText);
+    }
+
+    // Retourner les données correctement formatées
+    res.json({
+      content: randomText.content,
+      imageUrl: randomText.imageUrl,
+      associationType: randomText.associationType || "MISSING",
+    });
+
+  } catch (error) {
+    console.error("Erreur dans /random-text-clean :", error);
+    res.status(500).json({ message: "Erreur serveur", error });
+  }
+});
+
+/*
+// Nouvelle route propre qui retourne un texte aléatoire
+router.get("/random-text-clean", async (req, res) => {
+  try {
+    // Récupérer un document aléatoire depuis MongoDB
+    const count = await Text.countDocuments();
+    if (count === 0) {
+      return res.status(404).json({ message: "Aucun texte trouvé en base de données." });
+    }
+
+    const randomIndex = Math.floor(Math.random() * count);
+    const randomText = await Text.findOne().skip(randomIndex).lean();
+
+    if (!randomText) {
+      return res.status(404).json({ message: "Impossible de récupérer un texte aléatoire." });
+    }
+
+    // Vérification des données récupérées
+    console.log("Données récupérées depuis MongoDB :", randomText);
+
+    // Vérifier que associationType est bien présent
+    if (!randomText.associationType) {
+      console.warn("⚠️ Attention : associationType est manquant pour ce document :", randomText);
+    }
+
+    // Retourner les données correctement formatées
+    res.json({
+      content: randomText.content,
+      imageUrl: randomText.imageUrl,
+      associationType: randomText.associationType || "MISSING", // Si undefined, on met "MISSING"
+    });
+  } catch (error) {
+    console.error("Erreur dans /random-text-clean :", error);
+    res.status(500).json({ message: "Erreur serveur", error });
+  }
+});*/
+
 // Route qui retourne un texte et une image aléatoire
 router.get("/random-text", async (req, res) => {
   try {
@@ -53,6 +135,7 @@ router.get("/random-text", async (req, res) => {
     res.json({
       content: randomText.content,
       imageUrl: randomText.imageUrl,
+      associationType: randomText.association
     });
   } catch (error) {
     res.status(500).json({ message: "Erreur serveur", error });
@@ -70,7 +153,7 @@ router.get("/init", async (req,res)=>{
     textId:scenario.id,
     text:scenario.content,
     image:scenario.imageUrl,
-    association:scenario.toObject().associationType,
+    association:scenario.associationType, //toObject().associationType,
     individuA:individus.a,
     individuB:individus.b
   }
