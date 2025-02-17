@@ -8,11 +8,13 @@ import { DataService } from '../../services/data.service';
 })
 export class Stickman2Component implements OnInit {
   url2: string = '';
+  name2: string = '';
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    const data = this.dataService.getRandomStick();
-this.url2 = data.url2;
+    const [stickman1, _] = this.dataService.getRandomStick(); // Prend le second élément
+    this.url2 = stickman1.url;
+    this.name2 = stickman1.name;
   }
 }

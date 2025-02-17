@@ -26,7 +26,11 @@
         </div>
         
         <div class="slider-header">
-            <app-slider [(value1)]="sliderValue1" [(value2)]="sliderValue2"></app-slider>
+            <app-slider
+             [(value1)]="sliderValue1" 
+             [(value2)]="sliderValue2"
+             [associationType]="associationType">
+            </app-slider>
         </div>
 
         <div class="right">

@@ -153,7 +153,7 @@ body::after {
 }
 
 .slider-header {
-  width: 250px; /* Augmente la largeur du slider */
+  width: 280px; /* Augmente la largeur du slider */
   height: 180px; /* Augmente la hauteur si nécessaire */
 }
 

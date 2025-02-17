@@ -1,24 +1,44 @@
 .sliders-section {
   margin-bottom: 2rem;
-  margin-top: 20px;
-}
-
-.slider-container {
-  margin-bottom: 2rem;
+  margin-top: -1.7rem;
 }
 
 .slider-header {
+  flex-grow: 1; /* Pour que le slider occupe l'espace restant */
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 0.5rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  gap: 0.7rem; /* ✅ Augmente l'espace entre label et slider */
+
 }
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espacement entre les éléments */
+  width: 100%;
+  max-width: 400px; /* Ajuste selon ton design */
+  gap: 1rem; /* Espacement entre les valeurs et le slider */
+  margin-top:2rem;
+}
+
+.slider-value-left,
+.slider-value-right {
+  font-weight: bold;
+  width: 20px; /* Taille fixe pour aligner */
+  text-align: center; /* Centrage du texte */
+  margin-top: 1.3rem; /* Ajoute de l’espace au-dessus de la valeur */
+}
+
 
 .slider-label {
   color: #d8b4fe;
   font-weight: 500;
   display: flex;
   align-items: center;
+  margin-bottom: 0.5rem; /* Ajoute de l’espace sous le label */
 }
 
 .slider-label svg {

@@ -17,6 +17,7 @@ import { SubmitComponent } from '../submit/submit.component';
 export class ImgTextComponent implements OnInit {
   content: string = '';
   imageUrl: string = '';
+  associationType: string = ''; 
 
   // maintenant on a les valeurs des sliders ici
   sliderValue1: number = 5;
@@ -30,12 +31,8 @@ export class ImgTextComponent implements OnInit {
     this.dataService.getRandomDoc().subscribe(data => {
       this.content = data.content;
       this.imageUrl = data.imageUrl; //il faut mettre les images dans assets
+      this.associationType = data.associationType;
       console.log("Voici les données du back", data);
     });
-  }
-
-  
-
-  
-
+  }  
 }
