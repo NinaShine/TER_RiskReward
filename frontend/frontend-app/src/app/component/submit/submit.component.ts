@@ -27,9 +27,10 @@ export class SubmitComponent {
 
   //La logique métier est pas au bon endroit, faut la déplacer dans un parent, c'est pas à ce bouton de faire ce taff.
   //Mais sinon c'est la bonne logique.
-
   submitResponse() {
     console.log("Submit !");
+    const forces = JSON.parse(sessionStorage.getItem("list_forces") || "[]");
+
     const body = {
       sliderValue1: {
         first: this.sliderValue1,
@@ -39,14 +40,16 @@ export class SubmitComponent {
         first: this.sliderValue2,
         second: 10 - this.sliderValue2,
       },
+      forces: forces,
     };
+
     console.log("Body : ", body);
 
     this.http
       .post("http://localhost:3000/submit", body, { withCredentials: true })
       .subscribe({
-        next: (response) => console.log("Test : ", response),
-        complete: () => console.log("Requête terminé"),
+        next: (response) => console.log("Réponse serveur : ", response),
+        complete: () => console.log("Requête terminée"),
       });
   }
 }

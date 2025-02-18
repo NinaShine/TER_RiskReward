@@ -114,49 +114,62 @@ router.get("/init2", async (req, res) => {
   res.json(req.session.scenario);
 });
 */
-
 router.post("/submit", async (req, res) => {
-  //Cette route devra push les données dans la bdd
-  //Il faut aussi rajouter plus de contexte à la fonction si on veut éviter d'avoir à faire jongler les infos.
   const scenario = req.session.scenario;
-  //console.log("Récupération de la session : ", scenario);
-  if (!req.session.scenario) {
+  if (!scenario) {
     console.error("Aucune session trouvée !");
     return res.status(400).json({
       error: "Session non trouvée. Avez-vous bien appelé /init avant ?",
     });
   }
   try {
-    const body = req.body;
-    const { sliderValue1, sliderValue2 } = req.body;
-    console.log("Récup des slides : ", sliderValue1, " - ", sliderValue2);
-    if (!req.session.scenario) {
-      return res.status(400).json({ message: "Session invalide ou expirée." });
+    const { sliderValue1, sliderValue2, forces } = req.body;
+    console.log("Slides reçues :", sliderValue1, sliderValue2);
+
+    if (!forces) {
+      return res
+        .status(400)
+        .json({ message: "Forces manquantes dans le body" });
     }
-    console.log("Début des créations");
-    const firstResponse = await Response.create({
+
+    // Rechercher dans forces les valeurs correspondant aux individus
+    const forceAObj = forces.find((f) => f.desc === scenario.individuA);
+    const forceBObj = forces.find((f) => f.desc === scenario.individuB);
+
+    if (!forceAObj || !forceBObj) {
+      return res
+        .status(400)
+        .json({ message: "Force non trouvée pour l'un des individus" });
+    }
+
+    // Créer un document unique regroupant toutes les infos
+    const newResponse = await Response.create({
       textId: scenario.textId,
-      valueOne: sliderValue1.first,
-      valueTwo: sliderValue2.first,
       associationType: scenario.association,
-      personType: scenario.individuA,
+      // Personne A
+      personAType: scenario.individuA,
+      valueOneA: sliderValue1.first,
+      valueTwoA: sliderValue2.first,
+      forceA: forceAObj.value,
+      // Personne B
+      personBType: scenario.individuB,
+      valueOneB: sliderValue1.second,
+      valueTwoB: sliderValue2.second,
+      forceB: forceBObj.value,
     });
-    console.log("Premier create fait");
-    const secondResponse = await Response.create({
-      textId: scenario.textId,
-      valueOne: sliderValue1.second,
-      valueTwo: sliderValue2.second,
-      associationType: scenario.association,
-      personType: scenario.individuB,
-    });
-    console.log("Réponse Enregistré");
-    req.session.randomTexts = [...req.session.randomTexts]; // Force la mise à jour
+
+    console.log("Réponse enregistrée :", newResponse);
+    req.session.randomTexts = [...req.session.randomTexts]; // Mise à jour forcée
     await req.session.save();
+    res
+      .status(200)
+      .json({ message: "Réponse enregistrée", response: newResponse });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Erreur serveur", error });
   }
 });
+
 module.exports = router;
 
 async function getIndividus() {

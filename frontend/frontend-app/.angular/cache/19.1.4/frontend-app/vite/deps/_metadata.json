@@ -1,49 +1,49 @@
 {
-  "hash": "47b081d4",
-  "configHash": "3b771f82",
-  "lockfileHash": "11f98182",
-  "browserHash": "63b3976c",
+  "hash": "243f9d75",
+  "configHash": "250e7ddb",
+  "lockfileHash": "57726bfc",
+  "browserHash": "b39ff7c1",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "1e25da95",
+      "fileHash": "68b832fb",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "488e7895",
+      "fileHash": "dc207501",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "17a0ebbf",
+      "fileHash": "25f707b9",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "45c72457",
+      "fileHash": "e7b47212",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "b60c0d5d",
+      "fileHash": "9b6e7acd",
       "needsInterop": false
     },
     "@angular/platform-browser/animations/async": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/animations/async.mjs",
       "file": "@angular_platform-browser_animations_async.js",
-      "fileHash": "b714f450",
+      "fileHash": "42fd5caf",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "9b612954",
+      "fileHash": "ad8900d7",
       "needsInterop": false
     }
   },

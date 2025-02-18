@@ -1,44 +1,33 @@
-import { Component } from '@angular/core';
-import { SliderComponent } from '../slider/slider.component';
-import { CommonModule } from '@angular/common';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { SliderComponent } from "../slider/slider.component";
 
-@Component({
-  selector: 'app-forces-page',
-  imports: [SliderComponent, CommonModule],
-  templateUrl: './forces-page.component.html',
-  styleUrl: './forces-page.component.css'
-})
-export class ForcesPageComponent {
-  images: string[] = [
-    'assets/enfant.png',
-    'assets/femmegt.png',
-    'assets/hommegt.png',
-    'assets/femmegt.png',
-    'assets/hommegt.png',
-    'assets/vieux.png',
-    'assets/robot.png',
-    
-  ];
-  values: number[] = [1,1,1,1,1,1,1]; 
-
-  descs: string[] = [
-    "Enfant d'environ 10 ans",
-    'Femme de petite corpulence',
-    'Homme de petite corpulence',
-    'Femme de grande corpulence',
-    'Homme de grande corpulence',
-    'Personne âgée',
-    'Robot à taille humaine'
-  ]
-
-
-   submit(){
-      let forces: number[] = new Array();
-      for (let i = 0; i < this.values.length; i++) {
-        forces.push(this.values[i]);
-      }
-      sessionStorage.setItem('list_forces', JSON.stringify(forces));
-    }
+interface Force {
+  image: string;
+  desc: string;
+  value: number;
 }
 
+@Component({
+  selector: "app-forces-page",
+  imports: [SliderComponent, CommonModule],
+  templateUrl: "./forces-page.component.html",
+  styleUrls: ["./forces-page.component.css"],
+})
+export class ForcesPageComponent {
+  forces: Force[] = [
+    { image: "assets/vieux.png", desc: "vieux pas genré", value: 1 },
+    { image: "assets/enfant.png", desc: "enfant pas genré", value: 1 },
+    { image: "assets/robot.png", desc: "robot", value: 1 },
+    { image: "assets/hommegt.png", desc: "homme petite taille", value: 1 },
+    { image: "assets/femmegt.png", desc: "femme petite taille", value: 1 },
+    { image: "assets/hommegt.png", desc: "homme grande taille", value: 1 },
+    { image: "assets/femmegt.png", desc: "femme grande taille", value: 1 },
+  ];
 
+  submit() {
+    sessionStorage.setItem("list_forces", JSON.stringify(this.forces));
+    const forces = JSON.parse(sessionStorage.getItem("list_forces") || "[]");
+    console.table(forces);
+  }
+}
