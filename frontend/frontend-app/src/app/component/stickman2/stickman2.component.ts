@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -9,12 +9,41 @@ import { DataService } from '../../services/data.service';
 export class Stickman2Component implements OnInit {
   url2: string = '';
   name2: string = '';
+  @Input() individuB: string='';
 
   constructor(private dataService: DataService) {}
-
+/*
   ngOnInit(): void {
-    const [stickman1, _] = this.dataService.getRandomStick(); // Prend le second élément
-    this.url2 = stickman1.url;
-    this.name2 = stickman1.name;
-  }
+    const [_, stickman2] = this.dataService.getRandomStick(); // Prend le second élément
+    this.url2 = stickman2.url;
+    this.name2 = stickman2.name;
+  }*/
+
+    ngOnInit(): void {
+      console.log(this.individuB);
+      switch (this.individuB) {
+        case 'homme grande taille':
+          this.url2 = '../assets/hommegt.png';
+          break;
+        case 'femme grande taille':
+          this.url2 = '../assets/femmegt.png';
+          break;
+        case 'enfant pas genré':
+          this.url2 = '../assets/enfant.png';
+          break;
+        case 'vieux pas genré':
+          this.url2 = '../assets/vieux.png';
+          break;
+        case 'homme petite taille':
+          this.url2 = '../assets/hommepetit.png';
+          break;
+        case 'femme petite taille':
+          this.url2 = '../assets/femmepetit.png';
+          break;
+        case 'robot':
+          this.url2 = '../assets/robot.png';
+          break;
+      }
+      //console.log('Stickman1Component reçoit les data:', this.scenario);
+    }
 }

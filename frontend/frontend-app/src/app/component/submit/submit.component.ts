@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -7,11 +7,17 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ["./submit.component.css"],
 })
 export class SubmitComponent {
-  scenario: string | null = null;
   individu1: string | null = null;
   individu2: string | null = null;
   @Input() sliderValue1: number = 0; // Reçoit la valeur du slider 1
   @Input() sliderValue2: number = 0; // Reçoit la valeur du slider 2
+  @Input() scenario: any;
+  @Output() refreshRequested = new EventEmitter<void>(); // Event for parent
+
+  onButtonClick() {
+    this.refreshRequested.emit(); // Émet l'événement vers le parent
+  }
+
 
   logValues() {
     console.log("Valeur du slider 1 :", this.sliderValue1);
@@ -52,6 +58,15 @@ export class SubmitComponent {
         next: response=> console.log("Test : ",response),
         complete : () => console.log("Requête terminé")
       });
+  }
+
+  incrementTurn(){
+    let turn = sessionStorage.getItem("turn");
+    if(turn){
+      let turnObj = JSON.parse(turn);
+      turnObj++;
+      sessionStorage.setItem("turn",JSON.stringify(turnObj));
+    }
   }
 
 }

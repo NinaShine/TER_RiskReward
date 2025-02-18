@@ -39,6 +39,9 @@ router.get("/init", async (req, res) => {
         [texts[i], texts[j]] = [texts[j], texts[i]];
       }
       req.session.randomTexts = texts;
+      req.session.turn=1;
+    }else{
+      req.session.turn++;
     }
 
     // Vérifier si la liste est vide (ne pas réinitialiser si c'est le cas)
@@ -78,7 +81,10 @@ router.get("/init", async (req, res) => {
           .json({ error: "Erreur de sauvegarde de la session." });
       }
 
-      res.json(req.session.scenario);
+      res.json({
+        scenario: req.session.scenario,
+        turn: req.session.turn
+      });
     });
   } catch (error) {
     res.status(500).json({ message: "Erreur serveur", error });
@@ -150,8 +156,6 @@ router.post("/submit", async (req, res) => {
       personType: scenario.individuB,
     });
     console.log("Réponse Enregistré");
-    req.session.randomTexts = [...req.session.randomTexts]; // Force la mise à jour
-    await req.session.save();
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Erreur serveur", error });

@@ -6,13 +6,13 @@
         <div class="center">
             <div class="image-section">
                 <div class="img-box">
-                    <img [src]="imageUrl" alt="Image" class="img" >
+                    <img [src]="scenario.image" alt="Image" class="img" >
             
                 </div>
                 
             </div>
             <div class="description-box">
-                <p class="description-text">{{ content }}</p>
+                <p class="description-text">{{ scenario.text }}</p>
             </div>
         </div>
         
@@ -21,28 +21,32 @@
       <div class="sliders-section">
         <div class="slider-container">
           <div class="left">
-            <app-stickman1></app-stickman1>
-            <div class="character-label">Personnage A</div>
+            <app-stickman1 [individuA] = "scenario.individuA"> </app-stickman1>
+            <div class="character-label">{{scenario.individuA}}</div>
         </div>
         
         <div class="slider-header">
             <app-slider
              [(value1)]="sliderValue1" 
              [(value2)]="sliderValue2"
-             [associationType]="associationType">
+             [associationType]="scenario.association">
             </app-slider>
         </div>
 
         <div class="right">
-            <app-stickman2></app-stickman2>
-            <div class="character-label">Personnage B</div>
+            <app-stickman2 [individuB] = "scenario.individuB"></app-stickman2>
+            <div class="character-label">{{scenario.individuB}}</div>
         </div>
         </div>
       </div>
   
       <div class="submit-section">
-        <app-submit [sliderValue1]="sliderValue1" [sliderValue2]="sliderValue2"></app-submit>
-      </div>
+        <app-submit
+        (refreshRequested)="fetchScenario()"
+        [sliderValue1]="sliderValue1"
+        [sliderValue2]="sliderValue2"
+        [scenario]="scenario"
+      ></app-submit>      </div>
     </div>
   </div>
   
