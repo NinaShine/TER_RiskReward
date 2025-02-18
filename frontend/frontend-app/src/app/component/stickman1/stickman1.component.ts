@@ -25,16 +25,16 @@ export class Stickman1Component implements OnInit {
         this.url1 = '../assets/femmegt.png';
         break;
       case 'enfant pas genré':
-        this.url1 = '../assets/enfant.png';
+        this.url1 = '../assets/garçons.png';
         break;
       case 'vieux pas genré':
         this.url1 = '../assets/vieux.png';
         break;
       case 'homme petite taille':
-        this.url1 = '../assets/hommepetit.png';
+        this.url1 = '../assets/homme_petit.png';
         break;
       case 'femme petite taille':
-        this.url1 = '../assets/femmepetit.png';
+        this.url1 = '../assets/femme_petite.png';
         break;
       case 'robot':
         this.url1 = '../assets/robot.png';
@@ -54,16 +54,16 @@ export class Stickman1Component implements OnInit {
         this.url1 = '../assets/femmegt.png';
         break;
       case 'enfant pas genré':
-        this.url1 = '../assets/enfant.png';
+        this.url1 = '../assets/garçons.png';
         break;
       case 'vieux pas genré':
         this.url1 = '../assets/vieux.png';
         break;
       case 'homme petite taille':
-        this.url1 = '../assets/hommepetit.png';
+        this.url1 = '../assets/homme_petit.png';
         break;
       case 'femme petite taille':
-        this.url1 = '../assets/femmepetit.png';
+        this.url1 = '../assets/femme_petite.png';
         break;
       case 'robot':
         this.url1 = '../assets/robot.png';

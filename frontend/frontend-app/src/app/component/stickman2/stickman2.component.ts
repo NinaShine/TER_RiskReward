@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input , OnChanges} from '@angular/core';
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -29,16 +29,44 @@ export class Stickman2Component implements OnInit {
           this.url2 = '../assets/femmegt.png';
           break;
         case 'enfant pas genré':
-          this.url2 = '../assets/enfant.png';
+          this.url2 = '../assets/garçons.png';
           break;
         case 'vieux pas genré':
           this.url2 = '../assets/vieux.png';
           break;
         case 'homme petite taille':
-          this.url2 = '../assets/hommepetit.png';
+          this.url2 = '../assets/homme_petit.png';
           break;
         case 'femme petite taille':
-          this.url2 = '../assets/femmepetit.png';
+          this.url2 = '../assets/femme_petite.png';
+          break;
+        case 'robot':
+          this.url2 = '../assets/robot.png';
+          break;
+      }
+      //console.log('Stickman1Component reçoit les data:', this.scenario);
+    }
+
+    ngOnChanges(): void {
+      console.log(this.individuB);
+      switch (this.individuB) {
+        case 'homme grande taille':
+          this.url2 = '../assets/hommegt.png';
+          break;
+        case 'femme grande taille':
+          this.url2 = '../assets/femmegt.png';
+          break;
+        case 'enfant pas genré':
+          this.url2 = '../assets/garçons.png';
+          break;
+        case 'vieux pas genré':
+          this.url2 = '../assets/vieux.png';
+          break;
+        case 'homme petite taille':
+          this.url2 = '../assets/homme_petit.png';
+          break;
+        case 'femme petite taille':
+          this.url2 = '../assets/femme_petite.png';
           break;
         case 'robot':
           this.url2 = '../assets/robot.png';

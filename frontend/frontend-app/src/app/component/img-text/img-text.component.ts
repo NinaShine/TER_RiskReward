@@ -94,7 +94,7 @@ export class ImgTextComponent implements OnInit {
     let turn = sessionStorage.getItem("turn");
     if(turn){
       let turnObj = JSON.parse(turn);
-      if(turnObj%5==0){
+      if(turnObj%4==0){
         window.location.reload();
       }
     }
