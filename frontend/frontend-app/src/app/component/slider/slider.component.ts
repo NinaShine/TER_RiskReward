@@ -10,6 +10,7 @@ import { FormsModule } from "@angular/forms"; // Import FormsModule
 export class SliderComponent {
   @Input() value1: number = 5; // ✅ Déclaré comme @Input()
   @Input() value2: number = 5; // Valeur par défaut
+  @Input() singleSliderFlag = false;
 
   @Output() value1Change = new EventEmitter<number>(); //emitter for value1
   @Output() value2Change = new EventEmitter<number>(); //emitter for value2

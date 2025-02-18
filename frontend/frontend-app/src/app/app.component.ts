@@ -5,6 +5,8 @@ import { SubmitComponent } from "./component/submit/submit.component";
 import { Stickman1Component } from "./component/stickman1/stickman1.component";
 import { Stickman2Component } from "./component/stickman2/stickman2.component";
 import { DataService } from "./services/data.service";
+import { ForcesPageComponent } from "./component/forces-page/forces-page.component";
+
 
 @Component({
   selector: "app-root",
@@ -14,6 +16,8 @@ import { DataService } from "./services/data.service";
     ImgTextComponent,
     Stickman1Component,
     Stickman2Component,
+    ForcesPageComponent
+  
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",

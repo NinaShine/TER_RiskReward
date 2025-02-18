@@ -17,6 +17,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { Stickman1Component } from "./component/stickman1/stickman1.component";
 import { Stickman2Component } from "./component/stickman2/stickman2.component";
 import { SubmitComponent } from "./component/submit/submit.component";
+import { ForcesPageComponent } from "./component/forces-page/forces-page.component";
 
 @NgModule({
   declarations: [
@@ -26,13 +27,14 @@ import { SubmitComponent } from "./component/submit/submit.component";
     Stickman1Component,
     Stickman2Component,
     SubmitComponent,
+    ForcesPageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    CommonModule,
+    CommonModule
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],
