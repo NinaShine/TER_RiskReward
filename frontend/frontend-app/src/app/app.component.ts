@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
    */
   loadScenario() {
     const storedScenario = sessionStorage.getItem("scenario");
-
+    console.log(sessionStorage.length);
     if (storedScenario) {
       try {
         this.scenario = JSON.parse(storedScenario);

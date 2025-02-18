@@ -150,6 +150,8 @@ router.post("/submit", async (req, res) => {
       personType: scenario.individuB,
     });
     console.log("Réponse Enregistré");
+    req.session.randomTexts = [...req.session.randomTexts]; // Force la mise à jour
+    await req.session.save();
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Erreur serveur", error });
