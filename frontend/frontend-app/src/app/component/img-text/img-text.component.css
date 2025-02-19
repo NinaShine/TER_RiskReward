@@ -25,12 +25,14 @@
 .description-box {
   background-color: rgba(17, 24, 39, 0.5);
   border-radius: 0.75rem;
+  height: auto;
   padding: 1.5rem;
   border: 1px solid #374151;
   text-align: center; /* Centre le texte */
-  max-width: 600px; /* Même largeur que l'image */
+  max-width: 650rem; /* Même largeur que l'image */
   margin: 1.5rem auto 0 auto; /* Ajoute un espace entre l'image et la description */
   margin-left: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .description-text {
@@ -72,7 +74,7 @@ body {
   padding: 2rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   border: 1px solid #374151;
-  width: 40%; /* Augmente la largeur de la carte principale */
+  width: 50%; /* Augmente la largeur de la carte principale */
   height: 40%;
   position: relative;
   z-index: 1;
@@ -104,9 +106,6 @@ body::after {
   margin-top: 0.5rem;
   font-weight: bold;
 }
-
-
-
 
 
 .img-container {
@@ -144,7 +143,7 @@ body::after {
   align-items: center;
   justify-content: center;
   border: 2px solid black;
-  padding: 1rem;
+  padding: 2.5rem;
   border-radius: 10px;
   width: 120px;
   height: 120px;

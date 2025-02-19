@@ -9,13 +9,35 @@ import { DataService } from '../../services/data.service';
 export class Stickman1Component implements OnInit {
   url1: string = '';
   name1: string = '';
+  force1: string = '';
+  item: any;
   //@Input() scenario: any;
   @Input() individuA: string='';
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    console.log(this.individuA);
+    this.item = sessionStorage.getItem("list_forces");
+    console.log("item de session:", this.item);
+
+    if (this.item != null) {
+      let itemsArray = JSON.parse(this.item); // Conversion en tableau d'objets
+
+      let selectedItem = itemsArray.find((obj: { desc: string; }) => obj.desc === this.individuA);
+
+      if (selectedItem){
+        this.url1 = selectedItem.image;
+        this.name1 = selectedItem.desc;
+        this.force1 = selectedItem.value;
+        console.log("S1 url1:", this.url1);
+      }else{
+        console.log("Aucun objet trouvé avec la description:", this.individuA);
+      }
+    } else {
+      console.log("erreur, var de session incorrecte");
+    }
+
+    /*console.log(this.individuA);
     console.log(this.url1,"donne moi l'url")
     switch (this.individuA) {
       case 'homme grande taille':
@@ -38,13 +60,33 @@ export class Stickman1Component implements OnInit {
         break;
       case 'robot':
         this.url1 = '../assets/robot.png';
-        break;
+        break;*/
     }
     //console.log('Stickman1Component reçoit les data:', this.scenario);
-  }
 
   ngOnChanges(): void {
-    console.log(this.individuA);
+    this.item = sessionStorage.getItem("list_forces");
+    console.log("item de session:", this.item);
+
+    if (this.item) {
+      let itemsArray = JSON.parse(this.item); // Conversion en tableau d'objets
+
+      console.log("S2 itemsArray", itemsArray);
+      console.log("S1 individu A:", this.individuA)
+      let selectedItem = itemsArray.find((obj: { desc: string; }) => obj.desc === this.individuA);
+
+      if (selectedItem){
+        this.url1 = selectedItem.image;
+        this.name1 = selectedItem.desc;
+        this.force1 = selectedItem.value;
+      }else{
+        console.log("S1 Aucun objet trouvé avec la description:", this.individuA);
+      }
+    } else {
+      console.log("S1 erreur, var de session incorrecte");
+    }
+
+    /*console.log(this.individuA);
     console.log(this.url1,"donne moi l'url:changes")
     switch (this.individuA) {
       case 'homme grande taille':
@@ -67,14 +109,7 @@ export class Stickman1Component implements OnInit {
         break;
       case 'robot':
         this.url1 = '../assets/robot.png';
-        break;
+        break;*/
     }
     //console.log('Stickman1Component reçoit les data:', this.scenario);
   }
-/*
-  ngOnInit(): void {
-    const [stickman1, _] = this.dataService.getRandomStick(); // Prend le second élément
-    this.url1 = stickman1.url;
-    this.name1 = stickman1.name;
-  }*/
-}

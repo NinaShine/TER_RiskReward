@@ -45,9 +45,9 @@ export class SliderComponent implements OnChanges {
 
   setLabels() {
     const labelMapping: { [key: string]: { label1: string; label2: string } } = {
-      "effort-reward": { label1: "Effort", label2: "Reward" },
-      "risk-reward": { label1: "Risk", label2: "Reward" },
-      "risk-effort": { label1: "Risk", label2: "Effort" }
+      "effort-reward": { label1: "Effort", label2: "Récompense" },
+      "risk-reward": { label1: "Risque", label2: "Récompense" },
+      "risk-effort": { label1: "Risque", label2: "Effort" }
     };
 
     if (this.associationType in labelMapping) {
