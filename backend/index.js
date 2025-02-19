@@ -7,12 +7,7 @@ require("./config/db_conn.js");
 const app = express();
 const route = require("./routes/Route");
 
-app.use(
-  cors({
-    origin: "https://choicesite.vercel.app/",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
