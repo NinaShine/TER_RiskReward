@@ -21,7 +21,7 @@ const corsOptions = {
     }
   },
   methods: 'GET,POST,PUT,DELETE,OPTIONS',
-  allowedHeaders: 'Content-Type,Authorization',
+  allowedHeaders: 'Content-Type,Authorization,Cache-Control', // ✅ Ajouter Cache-Control  
   credentials: true // Autoriser les cookies et l'authentification
 };
 app.use(express.json());
