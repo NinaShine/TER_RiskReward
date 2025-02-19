@@ -14,12 +14,12 @@
   width: 100%; /* L’image s’adapte au conteneur */
   max-height: 400px; /* Limite la hauteur pour éviter qu’elle prenne tout l’écran */
   object-fit: contain; /* Assure que toute l’image est visible */
-  /*transition: transform 0.7s ease-in-out;*/
+  transition: transform 0.7s ease-in-out;
 }
-/*
+
 .image-section img:hover {
   transform: scale(1.05);
-}*/
+}
 
 
 .description-box {

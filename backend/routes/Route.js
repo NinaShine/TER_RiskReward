@@ -49,7 +49,10 @@ router.get("/init", async (req, res) => {
     if (req.session.randomTexts.length === 0) {
       return res
         .status(200)
-        .json({ message: "Toutes les ressources ont été affichées." });
+        .json({ 
+          message: "Toutes les ressources ont été affichées.",
+          allRessourcesDisplayed: true
+         });
     }
 
     // Extraire et retourner le prochain élément avec shift()

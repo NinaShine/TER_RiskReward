@@ -71,6 +71,12 @@ export class ImgTextComponent implements OnInit {
     console.log("🔄 Fetching new scenario...");
     this.dataService.getScenario().subscribe(
       (data) => {
+        if (data?.allRessourcesDisplayed) {
+          // Stocke cette info dans sessionStorage
+          sessionStorage.setItem("allRessourcesDisplayed", "true");
+        } else {
+          sessionStorage.removeItem("allRessourcesDisplayed");
+        }
         if (data && data.scenario.textId) {
           // Vérifie si les données sont valides
           this.scenario = data.scenario;
