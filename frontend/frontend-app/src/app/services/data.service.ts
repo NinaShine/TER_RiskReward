@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-  private apiUrl = 'https://ter-riskreward.onrender.com';
+  private apiUrl = 'https://choice.onrender.com';
   private initURL = "http://localhost:3000/init";
 
   private characters = [

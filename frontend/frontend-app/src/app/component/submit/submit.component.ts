@@ -91,7 +91,7 @@ export class SubmitComponent {
       console.log("Body : ", body);
   
       this.http
-        .post("http://localhost:3000/submit", body, { withCredentials: true })
+        .post("https://choice.onrender.com/submit", body, { withCredentials: true })
         .subscribe({
           next: (response) =>{ console.log("Réponse serveur : ", response);this.refreshScenario(); },
           complete: () => console.log("Requête terminée"),
@@ -101,7 +101,7 @@ export class SubmitComponent {
 
     refreshScenario() {
       this.http.get<{ text: string; image: string; individuA: string; individuB: string }>(
-        "http://localhost:3000/init", 
+        "https://choice.onrender.com/init", 
         { withCredentials: true }
       ).subscribe(data => {
         this.scenario = data.text;
