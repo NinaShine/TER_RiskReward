@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-  private apiUrl = 'https://choice.onrender.com';
+  private apiUrl = 'https://choice-quizz.onrender.com';
   private initURL = "http://localhost:3000/init";
 
   private characters = [

@@ -91,7 +91,7 @@ export class SubmitComponent {
       console.log("Body : ", body);
   
       this.http
-        .post("https://choice.onrender.com/submit", body, { withCredentials: true })
+        .post("https://choice-quizz.onrender.com/submit", body, { withCredentials: true })
         .subscribe({
           next: (response) =>{ console.log("Réponse serveur : ", response);this.refreshScenario(); },
           complete: () => console.log("Requête terminée"),
