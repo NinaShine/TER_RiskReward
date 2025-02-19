@@ -9,7 +9,7 @@ const route = require("./routes/Route");
 
 app.use(
   cors({
-    origin: "https://choice-quizz.onrender.com/",
+    origin: "https://choicesite.vercel.app/",
     credentials: true,
   })
 );
