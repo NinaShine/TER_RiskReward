@@ -9,7 +9,7 @@ const route = require("./routes/Route");
 
 app.use(
   cors({
-    origin: "http://localhost:4200",
+    origin: "https://choicesite.vercel.app/",
     credentials: true,
   })
 );
