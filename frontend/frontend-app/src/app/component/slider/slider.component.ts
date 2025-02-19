@@ -12,6 +12,8 @@ export class SliderComponent implements OnChanges {
   @Input() value1: number = 5; // Déclaré comme @Input()
   @Input() value2: number = 5; // Valeur par défaut
   @Input() associationType!: string; // Ajout de l'input pour associationType
+  @Input() singleSliderFlag = false;
+
 
   label1: string = "Mesure A"; // Label par défaut
   label2: string = "Mesure B"; // Label par défaut

@@ -1,0 +1,10 @@
+<div class="force-card">
+    <div *ngFor="let force of forces; let i = index">
+      <img [src]="force.image" alt="Image {{ i + 1 }}" />
+      <p class="desc_stick">{{ force.desc }}</p>
+      <app-slider [singleSliderFlag]="true" [(value1)]="force.value"></app-slider>
+    </div>
+    <div class="button-submit">
+      <button routerLink="/img-text" (click)="submit()">Submit</button>
+    </div>
+  </div>

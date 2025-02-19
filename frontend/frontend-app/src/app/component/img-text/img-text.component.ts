@@ -41,8 +41,6 @@ export class ImgTextComponent implements OnInit {
     this.loadScenario(); // 🔥 Empêche le rechargement de scénario après un `F5`
   }
 
-  
-
   /**
    * Charge le scénario depuis `sessionStorage` ou appelle l'API une seule fois
    */
