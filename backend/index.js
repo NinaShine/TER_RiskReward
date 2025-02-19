@@ -7,8 +7,23 @@ require("./config/db_conn.js");
 const app = express();
 const route = require("./routes/Route");
 
-app.use(cors());
+const allowedOrigins = [
+  'https://choicesite.vercel.app', // Ton site Vercel
+  'http://localhost:4200' // Pour les tests en local
+];
 
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type,Authorization',
+  credentials: true // Autoriser les cookies et l'authentification
+};
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
