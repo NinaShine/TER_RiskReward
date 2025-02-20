@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 
-
-
 @Component({
   selector: 'app-final-page',
   imports: [],
@@ -14,7 +12,7 @@ export class FinalPageComponent {
   constructor(private router: Router) {}
 
   quitter() {
-    this.router.navigate(['/']); // 🏠 Retour à l'accueil
+    this.router.navigate(['/']);
   }
 
 }
