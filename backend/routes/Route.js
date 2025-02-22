@@ -139,6 +139,32 @@ router.post("/submit", async (req, res) => {
   }
 });
 
+router.post("/reset-session", (req, res) => {
+  console.log("🔄 Réinitialisation de la session...");
+  
+  if (req.session) {
+    // Sauvegarder uniquement les informations utilisateur
+    const userData = req.session.user; 
+
+    // Détruire la session
+    req.session.regenerate((err) => {
+      if (err) {
+        console.error("Erreur lors de la réinitialisation de la session :", err);
+        return res.status(500).json({ message: "Erreur serveur lors de la réinitialisation" });
+      }
+
+      // Restaurer les données utilisateur
+      req.session.user = userData;
+      
+      console.log("✅ Session réinitialisée, utilisateur conservé :", req.session.user);
+      res.status(200).json({ message: "Session réinitialisée" });
+    });
+  } else {
+    res.status(400).json({ message: "Aucune session active" });
+  }
+});
+
+
 module.exports = router;
 
 async function getIndividus() {

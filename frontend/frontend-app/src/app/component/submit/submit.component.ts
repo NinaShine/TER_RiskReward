@@ -110,4 +110,15 @@ export class SubmitComponent {
         this.checkResourcesStatus();
       });
     }
+
+    goToFinalPage() {
+      this.http.post("http://localhost:3000/reset-session", {}, { withCredentials: true }).subscribe({
+        next: (response) => {
+          console.log("✅ Session réinitialisée :", response);
+          sessionStorage.clear(); // Nettoyer toutes les données côté front
+        },
+        error: (error) => console.error("❌ Erreur lors de la réinitialisation :", error),
+      });
+    }
+    
 }
