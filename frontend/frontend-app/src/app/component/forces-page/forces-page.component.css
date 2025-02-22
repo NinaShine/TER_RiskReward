@@ -12,6 +12,7 @@
     letter-spacing: 2px;
     background: linear-gradient(90deg, #ff8c00, #ff0080, #8a2be2);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 10px rgba(255, 140, 0, 0.8), 
                  0 0 20px rgba(255, 0, 128, 0.8), 
