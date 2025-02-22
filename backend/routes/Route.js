@@ -226,13 +226,13 @@ module.exports = router;
 async function getIndividus() {
   //Modifier tab pour en faire un objet permettant de stocker l'url de l'img de l'individu
   const tab = [
-    "vieux pas genré",
-    "enfant pas genré",
-    "robot",
-    "homme petite taille",
-    "femme petite taille",
-    "homme grande taille",
-    "femme grande taille",
+    "Vieux pas genré",
+    "Enfant pas genré",
+    "Robot",
+    "Homme petite taille",
+    "Femme petite taille",
+    "Homme grande taille",
+    "Femme grande taille",
   ];
   const indexa = Math.floor(Math.random() * tab.length);
   let j = Math.floor(Math.random() * tab.length);
