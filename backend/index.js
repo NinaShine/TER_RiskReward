@@ -9,7 +9,7 @@ const route = require("./routes/Route");
 
 app.use(
   cors({
-    origin: ["http://localhost:4200", "https://choice-quizz.vercel.app.vercel.app"], // Ajoute ton frontend en prod
+    origin: ["http://localhost:4200", "https://choice-quizz.vercel.app"], // Ajoute ton frontend en prod
     credentials: true,
   })
 );
