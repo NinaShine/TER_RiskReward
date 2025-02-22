@@ -75,7 +75,7 @@ export class SubmitComponent {
       console.log("Body : ", body);
   
       this.http
-        .post("http://localhost:3000/submit", body, { withCredentials: true })
+        .post("http://choice-quizz.onrender.com/submit", body, { withCredentials: true })
         .subscribe({
           next: (response) =>{
             console.log("Réponse serveur : ", response);
@@ -98,7 +98,7 @@ export class SubmitComponent {
     }
 */
     refreshScenario() {
-      this.http.get("http://localhost:3000/init", { withCredentials: true }).subscribe((data: any) => {
+      this.http.get("http://choice-quizz.onrender.com/init", { withCredentials: true }).subscribe((data: any) => {
         if (data?.allRessourcesDisplayed) {
           sessionStorage.setItem("allRessourcesDisplayed", "true");
         } else {

@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-  private apiUrl = 'https://ter-riskreward.onrender.com';
-  private initURL = "http://localhost:3000/init";
+  private apiUrl = 'https://choice-quizz.onrender.com';
+  private initURL = "http://choice-quizz.onrender.com/init";
 
   private characters = [
     { image: 'assets/hommegt.png', name: 'Homme' },
