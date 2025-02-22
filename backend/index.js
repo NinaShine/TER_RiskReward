@@ -15,7 +15,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://ter-eight.vercel.app");
+    res.header("Access-Control-Allow-Origin", "https://choice-quizz.vercel.app");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     next();
