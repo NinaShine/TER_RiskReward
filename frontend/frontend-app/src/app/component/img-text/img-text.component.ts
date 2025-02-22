@@ -1,23 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service';
-import { SliderComponent } from '../slider/slider.component';
-import { Stickman1Component } from '../stickman1/stickman1.component';
-import { Stickman2Component } from '../stickman2/stickman2.component';
-import { RouterLink } from '@angular/router';
-import { SubmitComponent } from '../submit/submit.component';
-
+import { Component, OnInit } from "@angular/core";
+import { DataService } from "../../services/data.service";
+import { SliderComponent } from "../slider/slider.component";
+import { Stickman1Component } from "../stickman1/stickman1.component";
+import { RouterLink } from "@angular/router";
+import { SubmitComponent } from "../submit/submit.component";
 
 @Component({
-  selector: 'app-img-text',
-  imports: [RouterLink, SliderComponent, Stickman1Component, Stickman2Component, SubmitComponent],
-  templateUrl: './img-text.component.html',
-  styleUrls: ['./img-text.component.css']
+  selector: "app-img-text",
+  imports: [RouterLink, SliderComponent, Stickman1Component, SubmitComponent],
+  templateUrl: "./img-text.component.html",
+  styleUrls: ["./img-text.component.css"],
 })
-
 export class ImgTextComponent implements OnInit {
-  content: string = '';
-  imageUrl: string = '';
-  associationType: string = ''; 
+  content: string = "";
+  imageUrl: string = "";
+  associationType: string = "";
   scenario: any = {};
 
   // maintenant on a les valeurs des sliders ici
@@ -25,8 +22,8 @@ export class ImgTextComponent implements OnInit {
   sliderValue2: number = 5;
 
   constructor(private dataService: DataService) {}
-  
-/*
+
+  /*
   ngOnInit(): void {
     console.log("ImgTextComponent initialized");
     this.dataService.getRandomDoc().subscribe(data => {
@@ -35,7 +32,7 @@ export class ImgTextComponent implements OnInit {
       this.associationType = data.associationType;
       console.log("Voici les données du back", data);
     });
-  } */ 
+  } */
 
   ngOnInit() {
     this.loadScenario(); // 🔥 Empêche le rechargement de scénario après un `F5`
@@ -84,7 +81,7 @@ export class ImgTextComponent implements OnInit {
 
           // Sauvegarde dans `sessionStorage` pour éviter les appels répétés
           sessionStorage.setItem("scenario", JSON.stringify(data.scenario));
-          sessionStorage.setItem("turn",JSON.stringify(data.turn));
+          sessionStorage.setItem("turn", JSON.stringify(data.turn));
         } else {
           console.error("❌ Scenario invalide :", data);
         }
@@ -94,11 +91,11 @@ export class ImgTextComponent implements OnInit {
       }
     );
   }
-  checkTurn(){
+  checkTurn() {
     let turn = sessionStorage.getItem("turn");
-    if(turn){
+    if (turn) {
       let turnObj = JSON.parse(turn);
-      if(turnObj%4==0){
+      if (turnObj % 4 == 0) {
         window.location.reload();
       }
     }

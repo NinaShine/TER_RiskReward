@@ -1,50 +1,64 @@
-<button routerLink="/" class="top-right-button"> Revenir à l'accueil </button>
-<div class="container">
-    <div class="main-card">
-      <div class="img-container">
-        
-        <div class="center">
-            <div class="image-section">
-                <div class="img-box">
-                    <img [src]="scenario.image" alt="Image" class="img" >
-            
-                </div>
-                
-            </div>
-            <div class="description-box">
-                <p class="description-text">{{ scenario.text }}</p>
-            </div>
-        </div>
-        
-      </div>
-  
-      <div class="sliders-section">
-        <div class="slider-container">
-          <div class="left">
-            <app-stickman1 [individuA] = "scenario.individuA"> </app-stickman1>
-        </div>
-        
-        <div class="slider-header">
-            <app-slider
-             [(value1)]="sliderValue1" 
-             [(value2)]="sliderValue2"
-             [associationType]="scenario.association">
-            </app-slider>
+<button
+  routerLink="/"
+  class="absolute top-5 right-5 py-2 px-4 bg-[#ee2c2c] text-white rounded transition-colors duration-300 hover:bg-[#0056b3]"
+>
+  Revenir à l'accueil
+</button>
+
+<div
+  class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#c084fc] to-[#4f46e5]"
+>
+  <!-- Passage de max-w-xl à max-w-3xl pour une carte plus large -->
+  <div
+    class="bg-[rgba(31,41,55,0.5)] backdrop-blur-sm rounded-xl p-6 shadow-lg border border-[#374151] w-full max-w-3xl mx-4"
+  >
+    <!-- Section image -->
+    <div
+      class="relative mt-4 mx-auto rounded-lg overflow-hidden w-full text-center pb-4"
+    >
+      <img
+        [src]="scenario.image"
+        alt="Image"
+        class="w-full max-h-[300px] object-contain transition-transform duration-500 ease-in-out hover:scale-105"
+      />
+    </div>
+
+    <!-- Section description avec texte plus étalé -->
+    <div
+      class="bg-[rgba(17,24,39,0.5)] rounded-lg p-4 border border-[#374151] text-center mt-4 mb-6"
+    >
+      <p class="text-gray-300 leading-relaxed">
+        {{ scenario.text }}
+      </p>
+    </div>
+
+    <!-- Ligne du slider avec stickmans de part et d'autre -->
+    <div class="flex flex-col items-center mt-4">
+      <div class="flex items-center justify-center gap-4 w-full">
+        <!-- Stickman gauche -->
+        <app-stickman1 [individuA]="scenario.individuA"></app-stickman1>
+
+        <!-- Slider centré -->
+        <div class="w-[300px] h-[180px]">
+          <app-slider
+            [(value1)]="sliderValue1"
+            [(value2)]="sliderValue2"
+            [associationType]="scenario.association"
+          ></app-slider>
         </div>
 
-        <div class="right">
-            <app-stickman2 [individuB] = "scenario.individuB"></app-stickman2>
-        </div>
-        </div>
+        <!-- Stickman droit -->
+        <app-stickman1 [individuA]="scenario.individuB"></app-stickman1>
       </div>
-  
-      <div class="submit-section">
+
+      <!-- Section des boutons en dessous du slider -->
+      <div class="mt-4 w-full flex justify-center">
         <app-submit
-        (refreshRequested)="fetchScenario()"
-        [sliderValue1]="sliderValue1"
-        [sliderValue2]="sliderValue2"
-      ></app-submit>      
+          (refreshRequested)="fetchScenario()"
+          [sliderValue1]="sliderValue1"
+          [sliderValue2]="sliderValue2"
+        ></app-submit>
       </div>
     </div>
   </div>
-  
+</div>
