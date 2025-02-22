@@ -3,19 +3,8 @@ const router = express.Router();
 const Text = require("../models/textModel");
 const Response = require("../models/responseModel");
 
-//L'idée globale du changement c'est de merge la route /init et /random-text
-//Modifier getIndividus pour l'adapter aux URL d'image pour Etienne
-
 //Rajouter le routing de page d'accueil et surtout la route de la répartition des forces qui sera stocké en session et ne sera pas temporaire.
 
-// Fonction pour récupérer un texte et une image aléatoire
-/*async function getRandomText() {
-  const count = await Text.countDocuments();
-  if (count === 0) return null;
-  const randomIndex = Math.floor(Math.random() * count);
-  return Text.findOne().skip(randomIndex);
-}
-*/
 // Route qui retourne un texte et une image aléatoire
 router.get("/init", async (req, res) => {
   console.log("requête init");
@@ -93,77 +82,6 @@ router.get("/init", async (req, res) => {
     res.status(500).json({ message: "Erreur serveur", error });
   }
 });
-/*
-
-viellie fonction devenue obsolète
-
-router.get("/init2", async (req, res) => {
-  console.log("Session actuelle :", req.session);
-  const scenario = await getRandomText();
-  const individus = await getIndividus();
-  //console.log(scenario);
-  //console.log(individus);
-  req.session.scenario = {
-    textId: scenario.id,
-    text: scenario.content,
-    image: scenario.imageUrl,
-    association: scenario.toObject().associationType,
-    individuA: individus.a,
-    individuB: individus.b,
-  };
-  console.log("Création de la session");
-  console.log("Session après création:", req.session); // ✅ Affiche la session après ajout du scénario
-
-  req.session.save((err) => {
-    if (err) {
-      console.error("Erreur de save de la session : ", err);
-      return res.status(500).json({ error: "Internal Server Error" });
-    }
-  });
-  res.json(req.session.scenario);
-});
-*/
-/*
-router.post("/submit", async (req, res) => {
-  //Cette route devra push les données dans la bdd
-  //Il faut aussi rajouter plus de contexte à la fonction si on veut éviter d'avoir à faire jongler les infos.
-  const scenario = req.session.scenario;
-  //console.log("Récupération de la session : ", scenario);
-  if (!req.session.scenario) {
-    console.error("Aucune session trouvée !");
-    return res.status(400).json({
-      error: "Session non trouvée. Avez-vous bien appelé /init avant ?",
-    });
-  }
-  try {
-    const body = req.body;
-    const { sliderValue1, sliderValue2 } = req.body;
-    console.log("Récup des slides : ", sliderValue1, " - ", sliderValue2);
-    if (!req.session.scenario) {
-      return res.status(400).json({ message: "Session invalide ou expirée." });
-    }
-    console.log("Début des créations");
-    const firstResponse = await Response.create({
-      textId: scenario.textId,
-      valueOne: sliderValue1.first,
-      valueTwo: sliderValue2.first,
-      associationType: scenario.association,
-      personType: scenario.individuA,
-    });
-    console.log("Premier create fait");
-    const secondResponse = await Response.create({
-      textId: scenario.textId,
-      valueOne: sliderValue1.second,
-      valueTwo: sliderValue2.second,
-      associationType: scenario.association,
-      personType: scenario.individuB,
-    });
-    console.log("Réponse Enregistré");
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Erreur serveur", error });
-  }
-});*/
 
 router.post("/submit", async (req, res) => {
   const scenario = req.session.scenario;
