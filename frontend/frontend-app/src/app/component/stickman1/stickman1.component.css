@@ -1,6 +1,17 @@
 img {
-  width: 50%;
+  width: 80%;
   height: auto;
+}
+
+@media (max-width: 800px) {
+  .img-container {
+    width: 100%;
+    padding: 1rem;
+  }
+  .force-box {
+    width: 100%;
+    padding: 0.5rem;
+  }
 }
 
 .img-container {
