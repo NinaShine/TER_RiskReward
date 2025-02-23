@@ -22,8 +22,8 @@ export class ForcesPageComponent {
     { image: "assets/vieux.png", desc: "Vieux pas genré", value: 1 },
     { image: "assets/garçons.png", desc: "Enfant pas genré", value: 1 },
     { image: "assets/robot.png", desc: "Robot", value: 1 },
-    { image: "assets/homme_petit.png", desc: "Homme petite taille", value: 1 },
-    { image: "assets/femme_petite.png", desc: "Femme petite taille", value: 1 },
+    { image: "assets/homme-etoile.png", desc: "Homme petite taille", value: 1 },
+    { image: "assets/femme-etoile.png", desc: "Femme petite taille", value: 1 },
     { image: "assets/hommegt.png", desc: "Homme grande taille", value: 1 },
     { image: "assets/femmegt.png", desc: "Femme grande taille", value: 1 },
   ];
