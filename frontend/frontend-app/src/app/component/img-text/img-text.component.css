@@ -10,6 +10,18 @@
   margin-left: 5rem;
 }
 
+@media (max-width: 600px) {
+  .image-section {
+    max-width: 100%;
+    margin-left: 0;
+  }
+  .description-box {
+    max-width: 100%;
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+}
+
 .image-section img {
   width: 100%; /* L’image s’adapte au conteneur */
   max-height: 400px; /* Limite la hauteur pour éviter qu’elle prenne tout l’écran */
@@ -157,9 +169,6 @@ body::after {
 }
 
 
-
-
-
 .top-right-button {
   position: absolute;
   top: 20px;
@@ -175,4 +184,3 @@ body::after {
 .top-right-button:hover {
   background-color: #0056b3;
 }
-

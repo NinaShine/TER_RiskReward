@@ -15,6 +15,13 @@
   transform: scale(1);
 }
 
+@media (max-width: 600px) {
+  .submit-button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+}
+
 .submit-button:hover {
   background-color: #7e22ce;
   transform: scale(1.05);

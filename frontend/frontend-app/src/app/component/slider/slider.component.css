@@ -24,6 +24,12 @@
   margin-top:2rem;
 }
 
+@media (max-width: 600px) {
+  .slider-container {
+    max-width: 100%;
+  }
+}
+
 .slider-value-left,
 .slider-value-right {
   font-weight: bold;
