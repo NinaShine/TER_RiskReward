@@ -34,7 +34,12 @@ app.use(
     secret: "secret-key", // Clé en attendant pour tester
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: true, httpOnly: true, sameSite: "none" }, // Passe à true si HTTPS
+    cookie: {
+      secure: true,
+      httpOnly: true, 
+      sameSite: "none",
+      domain: "ter-riskreward-tmap.onrender.com", // Spécifiez le domaine
+    }, // Passe à true si HTTPS
   })
 );
 
