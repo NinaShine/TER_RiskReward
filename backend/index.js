@@ -17,7 +17,8 @@ app.use(
 
 const corsOptions = {
   origin: 'https://choice-risk-reward.vercel.app',
-  optionsSuccessStatus: 200 // Pour les navigateurs anciens
+  optionsSuccessStatus: 200, // Pour les navigateurs anciens
+  credentials: true
 };
 
 app.use(cors(corsOptions));
