@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: mon-backend
+    env: node
+    plan: free
+    region: oregon  # Choisir une région proche de ton public (ex: frankfurt pour l'Europe)
+    buildCommand: npm install
+    startCommand: node index.js
+    autoDeploy: true  # Déploiement automatique à chaque push sur GitHub
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000  # Render assigne un port automatique, donc ça aide
