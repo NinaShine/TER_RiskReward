@@ -34,7 +34,7 @@ app.use(
     cookie: {
     secure: true,  
     httpOnly: true,
-    sameSite: "None"}
+    sameSite: "None"})
 );
 
 app.use((req, res, next) => {
