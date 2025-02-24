@@ -65,9 +65,9 @@ router.get("/init", async (req, res) => {
 
     //console.log("✅ Scenario sauvegardé :", req.session.scenario);
 
-    req.session.randomTexts = [...req.session.randomTexts]; // Forcer l'enregistrement de la liste modifiée
+    //req.session.randomTexts = [...req.session.randomTexts]; // Forcer l'enregistrement de la liste modifiée
 
-    await req.session.save((err) => {
+    req.session.save((err) => {
       if (err) {
         console.error("❌ Erreur lors de la sauvegarde de la session :", err);
         return res
