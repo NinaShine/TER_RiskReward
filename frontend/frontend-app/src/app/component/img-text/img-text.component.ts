@@ -7,7 +7,7 @@ import { SubmitComponent } from "../submit/submit.component";
 
 @Component({
   selector: "app-img-text",
-  imports: [RouterLink, SliderComponent, Stickman1Component, SubmitComponent],
+  imports: [SliderComponent, Stickman1Component, SubmitComponent],
   templateUrl: "./img-text.component.html",
   styleUrls: ["./img-text.component.css"],
 })
