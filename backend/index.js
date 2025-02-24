@@ -6,13 +6,21 @@ require("./config/db_conn.js");
 
 const app = express();
 const route = require("./routes/Route");
-
+/*
 app.use(
   cors({
     origin: "http://localhost:4200",
     credentials: true,
   })
-);
+);*/
+
+
+const corsOptions = {
+  origin: 'https://choice-risk-reward.vercel.app',
+  optionsSuccessStatus: 200 // Pour les navigateurs anciens
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
