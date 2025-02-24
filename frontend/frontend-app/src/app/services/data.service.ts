@@ -7,8 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-  private apiUrl = 'https://ter-riskreward.onrender.com';
-  private initURL = "http://localhost:3000/init";
+  private apiUrl = 'https://ter-riskreward-tmap.onrender.com';
+  private initURL = `${this.apiUrl}/init`;
+
 
   private characters = [
     { image: 'assets/hommegt.png', name: 'Homme' },
@@ -77,7 +78,7 @@ private selectedStickmen: { url: string; name: string }[] | null = null;
   }*/
 
   getScenario(): Observable<any> {
-    return this.http.get<any>(this.initURL, {
+    return this.http.get<any>(`${this.apiUrl}/init`, {
       withCredentials: true,
       headers: new HttpHeaders({
         connection: "close",
