@@ -1,21 +1,17 @@
 const mongoose = require("mongoose");
 const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "../.env") });
 
-// Charger les variables d'environnement en local (Render gère les variables autrement)
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config({ path: path.join(__dirname, "../.env") });
-}
+const mongo_username = process.env.MONGO_USERNAME;
+const mongo_password = process.env.MONGO_PASSWORD;
+const mongo_cluster = process.env.MONGO_CLUSTER;
+const mongo_database = process.env.MONGO_DBNAME;
 
-const mongoURI = process.env.MONGO_URI || `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority&appName=Cluster0`;
-
-console.log("🔗 Tentative de connexion à MongoDB...");
+const mongoURI = `mongodb+srv://${mongo_username}:${mongo_password}@${mongo_cluster}/${mongo_database}?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log(`✅ Connecté à MongoDB: ${mongoose.connection.name}`))
-  .catch((err) => console.error("❌ Erreur de connexion MongoDB :", err));
+  .connect(mongoURI)
+  .then(() => console.log(`Connected to: ${mongoose.connection.name}`))
+  .catch((err) => console.log("Database connection error:", err));
 
 module.exports = mongoose;

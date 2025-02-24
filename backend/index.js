@@ -26,6 +26,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// IMPORTANT : faire confiance au proxy pour les cookies sécurisés
+app.set('trust proxy', 1);
+
 app.use(
   session({
     secret: "secret-key", // Clé en attendant pour tester
