@@ -141,7 +141,7 @@ router.post("/submit", async (req, res) => {
   }
 });
 
-router.post("/reset-session", (req, res) => {
+router.post("/resset-session", (req, res) => {
   console.log("🔄 Réinitialisation de la session...");
   
   if (req.session) {
