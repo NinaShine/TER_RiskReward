@@ -78,7 +78,7 @@ private selectedStickmen: { url: string; name: string }[] | null = null;
   }*/
 
   getScenario(): Observable<any> {
-    return this.http.get<any>('init', {
+    return this.http.get<any>('/init', {
       withCredentials: true,
       headers: new HttpHeaders({
         connection: "close",
