@@ -14,11 +14,12 @@ app.use(
   })
 );*/
 
-
 const corsOptions = {
-  origin: 'https://choice-risk-reward.vercel.app',
+  origin: ["http://localhost:4200", "https://choice-risk-reward.vercel.app"],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   optionsSuccessStatus: 200, // Pour les navigateurs anciens
-  credentials: true
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -27,7 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // IMPORTANT : faire confiance au proxy pour les cookies sécurisés
-app.set('trust proxy', 1);
+app.set("trust proxy", 1);
 
 app.use(
   session({
@@ -37,7 +38,7 @@ app.use(
     proxy: true,
     cookie: {
       secure: true,
-      httpOnly: true, 
+      httpOnly: true,
       sameSite: "none",
       domain: "ter-riskreward-tmap.onrender.com", // Spécifiez le domaine
     }, // Passe à true si HTTPS
