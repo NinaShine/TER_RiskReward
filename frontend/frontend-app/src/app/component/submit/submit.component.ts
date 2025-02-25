@@ -75,7 +75,7 @@ export class SubmitComponent {
       console.log("Body : ", body);
   
       this.http
-        .post("https://ter-riskreward-tmap.onrender.com/submit", body, { withCredentials: true })
+        .post("/submit", body, { withCredentials: true })
         .subscribe({
           next: (response) =>{
             console.log("Réponse serveur : ", response);
@@ -98,7 +98,7 @@ export class SubmitComponent {
     }
 */
     refreshScenario() {
-      this.http.get("https://ter-riskreward-tmap.onrender.com/init", { withCredentials: true }).subscribe((data: any) => {
+      this.http.get("/init", { withCredentials: true }).subscribe((data: any) => {
         if (data?.allRessourcesDisplayed) {
           sessionStorage.setItem("allRessourcesDisplayed", "true");
         } else {
@@ -112,7 +112,7 @@ export class SubmitComponent {
     }
 
     goToFinalPage() {
-      this.http.post("https://ter-riskreward-tmap.onrender.com/resset-session", {}, { withCredentials: true }).subscribe({
+      this.http.post("/resset-session", {}, { withCredentials: true }).subscribe({
         next: (response) => {
           console.log("✅ Session réinitialisée :", response);
           sessionStorage.clear(); // Nettoyer toutes les données côté front
