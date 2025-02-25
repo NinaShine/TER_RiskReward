@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 import { RouterLink } from "@angular/router";
 import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-submit",
-  imports : [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule],
   templateUrl: "./submit.component.html",
   styleUrls: ["./submit.component.css"],
 })
@@ -23,14 +23,12 @@ export class SubmitComponent {
     this.refreshRequested.emit(); // Émet l'événement vers le parent
   }
 
-
   logValues() {
     console.log("Valeur du slider 1 :", this.sliderValue1);
     console.log("Valeur du slider 2 :", this.sliderValue2);
   }
 
   constructor(private http: HttpClient) {}
-
 
   //La logique métier est pas au bon endroit, faut la déplacer dans un parent, c'est pas à ce bouton de faire ce taff.
   //Mais sinon c'est la bonne logique.
@@ -44,47 +42,49 @@ export class SubmitComponent {
   }
 
   checkResourcesStatus() {
-    this.allRessourcesDisplayed = sessionStorage.getItem("allRessourcesDisplayed") === "true";
+    this.allRessourcesDisplayed =
+      sessionStorage.getItem("allRessourcesDisplayed") === "true";
   }
 
-  incrementTurn(){
+  incrementTurn() {
     let turn = sessionStorage.getItem("turn");
-    if(turn){
+    if (turn) {
       let turnObj = JSON.parse(turn);
       turnObj++;
-      sessionStorage.setItem("turn",JSON.stringify(turnObj));
+      sessionStorage.setItem("turn", JSON.stringify(turnObj));
     }
   }
 
-    submitResponse() {
-      console.log("Submit !");
-      const forces = JSON.parse(sessionStorage.getItem("list_forces") || "[]");
-  
-      const body = {
-        sliderValue1: {
-          first: this.sliderValue1,
-          second: 10 - this.sliderValue1,
-        },
-        sliderValue2: {
-          first: this.sliderValue2,
-          second: 10 - this.sliderValue2,
-        },
-        forces: forces,
-      };
-  
-      console.log("Body : ", body);
-  
-      this.http
-        .post("http://localhost:3000/submit", body, { withCredentials: true })
-        .subscribe({
-          next: (response) =>{
-            console.log("Réponse serveur : ", response);
-            this.refreshScenario(); },
-          complete: () => console.log("Requête terminée"),
-        });
-    }
+  submitResponse() {
+    console.log("Submit !");
+    const forces = JSON.parse(sessionStorage.getItem("list_forces") || "[]");
 
-/*
+    const body = {
+      sliderValue1: {
+        first: this.sliderValue1,
+        second: 10 - this.sliderValue1,
+      },
+      sliderValue2: {
+        first: this.sliderValue2,
+        second: 10 - this.sliderValue2,
+      },
+      forces: forces,
+    };
+
+    console.log("Body : ", body);
+
+    this.http
+      .post("http://localhost:3000/submit", body, { withCredentials: true })
+      .subscribe({
+        next: (response) => {
+          console.log("Réponse serveur : ", response);
+          this.refreshScenario();
+        },
+        complete: () => console.log("Requête terminée"),
+      });
+  }
+
+  /*
     refreshScenario() {
       this.http.get<{ text: string; image: string; individuA: string; individuB: string }>(
         "http://localhost:3000/init", 
@@ -97,28 +97,42 @@ export class SubmitComponent {
       });
     }
 */
-    refreshScenario() {
-      this.http.get("http://localhost:3000/init", { withCredentials: true }).subscribe((data: any) => {
+  refreshScenario() {
+    this.http
+      .get("http://localhost:3000/init", { withCredentials: true })
+      .subscribe((data: any) => {
         if (data?.allRessourcesDisplayed) {
           sessionStorage.setItem("allRessourcesDisplayed", "true");
         } else {
           sessionStorage.removeItem("allRessourcesDisplayed");
         }
-  
+
         this.scenario = data.scenario;
         console.log("Nouveau scénario chargé :", this.scenario);
+
+        this.scenario = data.scenario;
+
+        // Sauvegarde dans `sessionStorage` pour éviter les appels répétés
+        sessionStorage.setItem("scenario", JSON.stringify(data.scenario));
+        sessionStorage.setItem("turn", JSON.stringify(data.turn));
         this.checkResourcesStatus();
       });
-    }
+  }
 
-    goToFinalPage() {
-      this.http.post("http://localhost:3000/reset-session", {}, { withCredentials: true }).subscribe({
+  goToFinalPage() {
+    this.http
+      .post(
+        "http://localhost:3000/reset-session",
+        {},
+        { withCredentials: true }
+      )
+      .subscribe({
         next: (response) => {
           console.log("✅ Session réinitialisée :", response);
           sessionStorage.clear(); // Nettoyer toutes les données côté front
         },
-        error: (error) => console.error("❌ Erreur lors de la réinitialisation :", error),
+        error: (error) =>
+          console.error("❌ Erreur lors de la réinitialisation :", error),
       });
-    }
-    
+  }
 }
