@@ -84,19 +84,6 @@ export class SubmitComponent {
         });
     }
 
-/*
-    refreshScenario() {
-      this.http.get<{ text: string; image: string; individuA: string; individuB: string }>(
-        "http://localhost:3000/init", 
-        { withCredentials: true }
-      ).subscribe(data => {
-        this.scenario = data.text;
-        this.individu1 = data.individuA;
-        this.individu2 = data.individuB;
-        console.log("Nouveau scénario chargé :", this.scenario);
-      });
-    }
-*/
     refreshScenario() {
       this.http.get("/api/init", { withCredentials: true }).subscribe((data: any) => {
         if (data?.allRessourcesDisplayed) {
@@ -107,6 +94,9 @@ export class SubmitComponent {
   
         this.scenario = data.scenario;
         console.log("Nouveau scénario chargé :", this.scenario);
+        // Sauvegarde dans `sessionStorage` pour éviter les appels répétés
+        sessionStorage.setItem("scenario", JSON.stringify(data.scenario));
+        sessionStorage.setItem("turn", JSON.stringify(data.turn));
         this.checkResourcesStatus();
       });
     }
