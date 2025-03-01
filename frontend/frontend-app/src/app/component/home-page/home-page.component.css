@@ -45,6 +45,7 @@ h1 {
     /*background: linear-gradient(90deg, #ff8c00, #ff0080, #8a2be2);*/
     background: linear-gradient(90deg, #0099ff, #00fff2, #2be253);
     background-size: 300% 300%;
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradientAnimation 5s infinite linear;
