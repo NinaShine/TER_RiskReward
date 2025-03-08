@@ -17,7 +17,7 @@ body {
     display: flex;
     flex-wrap: wrap; /* Permet aux blocs de passer en colonne sur petit écran */
     gap: 20px;
-    max-width: 95%;
+    max-width: 55%;
     justify-content: center; /* Centre les containers */
     margin-top: 20px;
 
