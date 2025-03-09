@@ -50,40 +50,40 @@ export class SliderComponent implements OnChanges {
     const labelMapping: { [key: string]: { label1: string; label2: string } } =
       {
         "assets/perles.png": {
-          label1: "Perles ramassées",
-          label2: "Temps écoulé",
+          label1: "Perles à ramasser",
+          label2: "Perles à distribuer",
         },
         "assets/pont-croc.jpg": {
-          label1: "Diamants collectés",
-          label2: "distance parcourue",
+          label1: "Diamants à collecter",
+          label2: "Diamants à distribuer",
         },
         "assets/pont-10000.png": {
-          label1: "heure de travail",
-          label2: "milliers d'euros",
+          label1: "Heures de travail",
+          label2: "Milliers d'euros à distribuer",
         },
         "assets/pains.webp": {
-          label1: "Rochers déplacés",
-          label2: "Pains obtenus",
+          label1: "Rochers à déplacer",
+          label2: "Pains obtenus à distribuer",
         },
         "assets/serrures.png": {
-          label1: "profondeurs du cadenats",
-          label2: "Coffre obtenu",
+          label1: "Numéro du cadenas à ouvrir",
+          label2: "Pièces d'or à distribuer",
         },
         "assets/coffre.png": {
-          label1: "Marques creusées",
-          label2: "Trésor découvert",
+          label1: "Marques à creuser",
+          label2: "Trésors découverts à distribuer",
         },
         "assets/eboulement.png": {
-          label1: "Rochers instables",
-          label2: "Rochers Lourd",
+          label1: "Rochers instables à déplacer",
+          label2: "Rochers lourds à déplacer",
         },
         "assets/feu.webp": {
-          label1: "Seaux d’eau portés",
-          label2: "Seaux jetés",
+          label1: "Seaux d’eau à porter",
+          label2: "Seaux d'eau à jeter",
         },
         "assets/vase.png": {
-          label1: "Vases fabriqués",
-          label2: "Vases transportés",
+          label1: "Vases à fabriquer",
+          label2: "Vases à transporter",
         },
       };
 
