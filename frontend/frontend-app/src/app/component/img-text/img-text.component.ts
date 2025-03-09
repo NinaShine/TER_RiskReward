@@ -2,12 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "../../services/data.service";
 import { SliderComponent } from "../slider/slider.component";
 import { Stickman1Component } from "../stickman1/stickman1.component";
-import { RouterLink } from "@angular/router";
 import { SubmitComponent } from "../submit/submit.component";
 
 @Component({
   selector: "app-img-text",
-  imports: [RouterLink, SliderComponent, Stickman1Component, SubmitComponent],
+  imports: [SliderComponent, Stickman1Component, SubmitComponent],
   templateUrl: "./img-text.component.html",
   styleUrls: ["./img-text.component.css"],
 })
