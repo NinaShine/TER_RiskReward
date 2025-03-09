@@ -1,4 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+} from "@angular/core";
 import { FormsModule } from "@angular/forms"; // Import FormsModule
 
 @Component({
@@ -6,18 +13,16 @@ import { FormsModule } from "@angular/forms"; // Import FormsModule
   imports: [FormsModule], // Add FormsModule to the imports array
   templateUrl: "./slider.component.html",
   styleUrl: "./slider.component.css",
-
 })
 export class SliderComponent implements OnChanges {
   @Input() value1: number = 5; // Déclaré comme @Input()
   @Input() value2: number = 5; // Valeur par défaut
   @Input() associationType!: string; // Ajout de l'input pour associationType
   @Input() singleSliderFlag = false;
-
+  @Input() image: string = "";
 
   label1: string = "Mesure A"; // Label par défaut
   label2: string = "Mesure B"; // Label par défaut
-
 
   @Output() value1Change = new EventEmitter<number>(); //emitter for value1
   @Output() value2Change = new EventEmitter<number>(); //emitter for value2
@@ -31,10 +36,9 @@ export class SliderComponent implements OnChanges {
     this.value2 = newValue;
     this.value2Change.emit(newValue); // Émet la nouvelle valeur du slider 2
   }
-
   ngOnChanges(changes: SimpleChanges) {
-    if (changes["associationType"]) {
-      console.log("associationType changé :", this.associationType);
+    if (changes["image"]) {
+      console.log("Image changée :", this.image);
       this.setLabels();
     }
   }
@@ -42,17 +46,53 @@ export class SliderComponent implements OnChanges {
   ngOnInit() {
     this.setLabels();
   }
-
   setLabels() {
-    const labelMapping: { [key: string]: { label1: string; label2: string } } = {
-      "effort-reward": { label1: "Effort", label2: "Récompense" },
-      "risk-reward": { label1: "Risque", label2: "Récompense" },
-      "risk-effort": { label1: "Risque", label2: "Effort" }
-    };
+    const labelMapping: { [key: string]: { label1: string; label2: string } } =
+      {
+        "assets/perles.png": {
+          label1: "Perles ramassées",
+          label2: "Temps écoulé",
+        },
+        "assets/pont-croc.jpg": {
+          label1: "Diamants collectés",
+          label2: "Risque encouru",
+        },
+        "assets/pont-10000.png": {
+          label1: "Travail effectué",
+          label2: "Récompense gagnée",
+        },
+        "assets/pains.webp": {
+          label1: "Rochers déplacés",
+          label2: "Pains obtenus",
+        },
+        "assets/serrures.png": {
+          label1: "Cadenas ouverts",
+          label2: "Coffre obtenu",
+        },
+        "assets/coffre.png": {
+          label1: "Marques creusées",
+          label2: "Trésor découvert",
+        },
+        "assets/eboulement.png": {
+          label1: "Rochers enlevés",
+          label2: "Fatigue accumulée",
+        },
+        "assets/feu.webp": {
+          label1: "Seaux d’eau portés",
+          label2: "Seaux jetés",
+        },
+        "assets/vase.png": {
+          label1: "Vases fabriqués",
+          label2: "Vases transportés",
+        },
+      };
 
-    if (this.associationType in labelMapping) {
-      this.label1 = labelMapping[this.associationType].label1;
-      this.label2 = labelMapping[this.associationType].label2;
+    if (this.image in labelMapping) {
+      this.label1 = labelMapping[this.image].label1;
+      this.label2 = labelMapping[this.image].label2;
+    } else {
+      this.label1 = "Valeur inconnue";
+      this.label2 = "Valeur inconnue";
     }
   }
 }
