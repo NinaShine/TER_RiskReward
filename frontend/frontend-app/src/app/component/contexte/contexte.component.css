@@ -5,7 +5,7 @@
     max-height: 80vh; /* Ne dépasse pas 80% de la hauteur de l'écran */
     overflow-y: auto; /* Active le scroll interne si nécessaire */
     padding: 30px;
-    background: linear-gradient(45deg, #4facfe 0%, hsl(286, 95%, 74%) 100%);
+    background: linear-gradient(45deg, #4f86fe 0%, hsl(286, 92%, 59%) 100%);
     border-radius: 15px;
     box-shadow: 0px 0px 100px 10px rgba(79, 172, 254, 0.5);
     display: flex;
@@ -32,7 +32,6 @@
     overflow: hidden;
     justify-content: center;
     display: flex;
-    gap: 20px;
     flex-wrap: wrap; /* Permet aux blocs de passer en colonne sur petit écran */
 
 }
