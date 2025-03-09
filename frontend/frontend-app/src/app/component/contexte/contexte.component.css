@@ -1,0 +1,110 @@
+
+.container {
+    width: 80vw; /* Largeur maximale */
+    max-width: 1000px; /* Largeur dynamique */
+    max-height: 80vh; /* Ne dépasse pas 80% de la hauteur de l'écran */
+    overflow-y: auto; /* Active le scroll interne si nécessaire */
+    padding: 30px;
+    background: linear-gradient(45deg, #4facfe 0%, hsl(286, 95%, 74%) 100%);
+    border-radius: 15px;
+    box-shadow: 0px 0px 100px 10px rgba(79, 172, 254, 0.5);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+
+/* Pour centrer le pop-up */
+.popup-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 84vw;
+    max-width: 1040px;
+    max-height: 80vh;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Permet aux blocs de passer en colonne sur petit écran */
+
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-family: Apple Chancery;
+    text-align: center
+}
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    text-align: justify; /* Amélioration de la lecture sur mobile */
+
+}
+a {
+    color: #f8ed8e;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Espacement par rapport au texte */
+}
+
+
+.btn-close {
+    background-color: #1a55f7; /* Rouge élégant */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+}
+
+.btn-close:hover {
+    background-color: #c9302c; /* Rouge un peu plus foncé */
+    transform: scale(1.05);
+}
+
+.btn-close:active {
+    background-color: #a12824;
+    transform: scale(0.95);
+}
+
+
+
+
+/* 📱 Media Query pour mobiles */
+@media (max-width: 768px) {
+
+    .container {
+        width: 74vw; /* Prend presque toute la largeur sur mobile */
+        max-width: none; /* Supprime la limite pour un affichage plus fluide */
+        padding: 20px;
+    }
+
+    p {
+        font-size: 1em; /* Réduction de la taille des textes */
+        text-align: left; /* Alignement à gauche */
+    }
+}
