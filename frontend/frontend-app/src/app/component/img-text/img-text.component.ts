@@ -15,11 +15,13 @@ export class ImgTextComponent implements OnInit {
   imageUrl: string = "";
   associationType: string = "";
   scenario: any = {};
+  currentTurn: number = 1;
+  maxTurn: number = 0;
 
   // maintenant on a les valeurs des sliders ici
   sliderValue1: number = 5;
   sliderValue2: number = 5;
-
+  
   constructor(private dataService: DataService) {}
 
   /*
@@ -94,6 +96,7 @@ export class ImgTextComponent implements OnInit {
     let turn = sessionStorage.getItem("turn");
     if (turn) {
       let turnObj = JSON.parse(turn);
+      this.currentTurn = turnObj;
       if (turnObj % 4 == 0) {
         window.location.reload();
       }
