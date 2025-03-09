@@ -55,18 +55,18 @@ export class SliderComponent implements OnChanges {
         },
         "assets/pont-croc.jpg": {
           label1: "Diamants collectés",
-          label2: "Risque encouru",
+          label2: "distance parcourue",
         },
         "assets/pont-10000.png": {
-          label1: "Travail effectué",
-          label2: "Récompense gagnée",
+          label1: "heure de travail",
+          label2: "milliers d'euros",
         },
         "assets/pains.webp": {
           label1: "Rochers déplacés",
           label2: "Pains obtenus",
         },
         "assets/serrures.png": {
-          label1: "Cadenas ouverts",
+          label1: "profondeurs du cadenats",
           label2: "Coffre obtenu",
         },
         "assets/coffre.png": {
@@ -74,8 +74,8 @@ export class SliderComponent implements OnChanges {
           label2: "Trésor découvert",
         },
         "assets/eboulement.png": {
-          label1: "Rochers enlevés",
-          label2: "Fatigue accumulée",
+          label1: "Rochers instables",
+          label2: "Rochers Lourd",
         },
         "assets/feu.webp": {
           label1: "Seaux d’eau portés",
