@@ -43,7 +43,7 @@ export class ImgTextComponent implements OnInit {
    * Charge le scénario depuis `sessionStorage` ou appelle l'API une seule fois
    */
   loadScenario() {
-    this.currentTurn = parseInt(sessionStorage.getItem("turn") || "0", 10);
+    this.currentTurn = parseInt(sessionStorage.getItem("turn") || "2", 10);
 
     const storedScenario = sessionStorage.getItem("scenario");
     console.log(sessionStorage.length);

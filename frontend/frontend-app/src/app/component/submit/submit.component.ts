@@ -18,14 +18,16 @@ export class SubmitComponent {
   @Input() sliderValue2: number = 0; // Reçoit la valeur du slider 2
   @Input() scenario: any;
   @Output() refreshRequested = new EventEmitter<void>(); // Event for parent
+  @Output() resetSlidersEvent = new EventEmitter<void>();
 
   onButtonClick() {
     // Récupère la valeur actuelle ou 0 si elle n'existe pas
-    let currentTurn = parseInt(sessionStorage.getItem("turn") || "2");
+    let currentTurn = parseInt(sessionStorage.getItem("turn") || "1");
     currentTurn += 1;
     sessionStorage.setItem("turn", currentTurn.toString());
 
     this.refreshRequested.emit(); // Émet l'événement vers le parent
+    this.resetSlidersEvent.emit();
   }
 
   logValues() {
