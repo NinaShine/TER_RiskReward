@@ -96,7 +96,7 @@ a:hover {
     color: white;
     background: #f07c59;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     cursor: pointer;
     text-decoration: none;
 }
@@ -113,12 +113,29 @@ a:hover {
         letter-spacing: 2px;
         padding: 8px 15px;    }
 
+    .container-wrapper {
+        display: flex;
+        flex-wrap: wrap; /* Permet aux blocs de passer en colonne sur petit écran */
+        gap: 20px;
+        max-width: 100%;
+        justify-content: center; /* Centre les containers */
+        margin-top: 20px;
+    
+    }
+
     .container {
-        min-width: 100%; /* Les conteneurs prennent toute la largeur */
+        width: 100vw; /* Prend toute la largeur de l'écran */
+        max-width: 100%; /* Assure qu'il ne soit pas limité */
+        box-sizing: border-box; /* Empêche les bordures/marges de dépasser */
+        padding: 20px; /* Ajuste le padding pour ne pas trop compresser le contenu */
     }
 
     p {
         font-size: 1em; /* Réduction de la taille des textes */
         text-align: left; /* Alignement à gauche */
+    }
+
+    .btn{
+        font-size: 1em;
     }
 }
