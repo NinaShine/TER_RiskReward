@@ -20,6 +20,11 @@ export class SubmitComponent {
   @Output() refreshRequested = new EventEmitter<void>(); // Event for parent
 
   onButtonClick() {
+    // Récupère la valeur actuelle ou 0 si elle n'existe pas
+    let currentTurn = parseInt(sessionStorage.getItem("turn") || "2");
+    currentTurn += 1;
+    sessionStorage.setItem("turn", currentTurn.toString());
+
     this.refreshRequested.emit(); // Émet l'événement vers le parent
   }
 
@@ -44,15 +49,6 @@ export class SubmitComponent {
   checkResourcesStatus() {
     this.allRessourcesDisplayed =
       sessionStorage.getItem("allRessourcesDisplayed") === "true";
-  }
-
-  incrementTurn() {
-    let turn = sessionStorage.getItem("turn");
-    if (turn) {
-      let turnObj = JSON.parse(turn);
-      turnObj++;
-      sessionStorage.setItem("turn", JSON.stringify(turnObj));
-    }
   }
 
   submitResponse() {
