@@ -53,6 +53,7 @@
       <div class="mt-20 md:mt-2 w-full flex justify-center">
         <app-submit
           (refreshRequested)="loadScenario()"
+          (resetSlidersEvent)="resetSliders()"
           [sliderValue1]="sliderValue1"
           [sliderValue2]="sliderValue2"
         ></app-submit>

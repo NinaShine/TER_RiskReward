@@ -93,4 +93,9 @@ export class ImgTextComponent implements OnInit {
       }
     );
   }
+
+  resetSliders() {
+    this.sliderValue1 = 5;
+    this.sliderValue2 = 5;
+  }
 }
