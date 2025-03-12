@@ -1,4 +1,3 @@
-
 <div
   class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#c084fc] to-[#4f46e5]"
 >
@@ -7,18 +6,24 @@
     class="bg-[rgba(31,41,55,0.5)] backdrop-blur-sm rounded-xl p-6 shadow-lg border border-[#374151] w-full max-w-3xl mx-4"
   >
     <!-- Section image -->
-<div class="relative mt-4 mx-auto rounded-lg overflow-hidden w-full text-center pb-4">
-  <img
-    [src]="scenario.image"
-    alt="Image"
-    class="w-full max-w-xs mx-auto object-contain transition-transform duration-500 ease-in-out hover:scale-105"
-  />
-</div>
+    <div
+      class="relative mt-4 mx-auto rounded-lg overflow-hidden w-full text-center pb-4"
+    >
+      <img
+        [src]="scenario.image"
+        alt="Image"
+        class="w-full max-w-xs mx-auto object-contain transition-transform duration-500 ease-in-out hover:scale-105"
+      />
+    </div>
 
     <!-- Section description avec texte plus étalé -->
     <div
       class="bg-[rgba(17,24,39,0.5)] rounded-lg p-4 border border-[#374151] text-center mt-4 mb-6"
     >
+      <p class="text-gray-300 leading-relaxed">
+        Scénario n°{{ currentTurn - 1 }} / 18
+      </p>
+      <br />
       <p class="text-gray-300 leading-relaxed">
         {{ scenario.text }}
       </p>
@@ -36,6 +41,7 @@
             [(value1)]="sliderValue1"
             [(value2)]="sliderValue2"
             [associationType]="scenario.association"
+            [image]="scenario.image"
           ></app-slider>
         </div>
 
@@ -44,9 +50,10 @@
       </div>
 
       <!-- Section des boutons en dessous du slider -->
-      <div class="mt-4 w-full flex justify-center">
+      <div class="mt-20 md:mt-2 w-full flex justify-center">
         <app-submit
           (refreshRequested)="loadScenario()"
+          (resetSlidersEvent)="resetSliders()"
           [sliderValue1]="sliderValue1"
           [sliderValue2]="sliderValue2"
         ></app-submit>

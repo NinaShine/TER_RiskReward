@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { DataService } from "../../services/data.service";
 import { SliderComponent } from "../slider/slider.component";
 import { Stickman1Component } from "../stickman1/stickman1.component";
-import { RouterLink } from "@angular/router";
 import { SubmitComponent } from "../submit/submit.component";
 
 @Component({
@@ -16,6 +15,8 @@ export class ImgTextComponent implements OnInit {
   imageUrl: string = "";
   associationType: string = "";
   scenario: any = {};
+  currentTurn: number = 1;
+  maxTurn: number = 1;
 
   // maintenant on a les valeurs des sliders ici
   sliderValue1: number = 5;
@@ -42,6 +43,8 @@ export class ImgTextComponent implements OnInit {
    * Charge le scénario depuis `sessionStorage` ou appelle l'API une seule fois
    */
   loadScenario() {
+    this.currentTurn = parseInt(sessionStorage.getItem("turn") || "2", 10);
+
     const storedScenario = sessionStorage.getItem("scenario");
     console.log(sessionStorage.length);
     if (storedScenario) {
@@ -64,7 +67,6 @@ export class ImgTextComponent implements OnInit {
    * Récupère un nouveau scénario depuis l'API et le stocke dans `sessionStorage`
    */
   fetchScenario() {
-    this.checkTurn();
     console.log("🔄 Fetching new scenario...");
     this.dataService.getScenario().subscribe(
       (data) => {
@@ -91,13 +93,9 @@ export class ImgTextComponent implements OnInit {
       }
     );
   }
-  checkTurn() {
-    let turn = sessionStorage.getItem("turn");
-    if (turn) {
-      let turnObj = JSON.parse(turn);
-      if (turnObj % 4 == 0) {
-        window.location.reload();
-      }
-    }
+
+  resetSliders() {
+    this.sliderValue1 = 5;
+    this.sliderValue2 = 5;
   }
 }
