@@ -9,6 +9,4 @@ export const routes: Routes = [
     {path : 'img-text', component : ImgTextComponent},
     {path : 'forces', component : ForcesPageComponent},
     {path : 'pageFinale', component : FinalPageComponent}
-
-
 ];

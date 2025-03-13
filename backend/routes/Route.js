@@ -177,6 +177,55 @@ router.post("/reset-session", (req, res) => {
   }
 });
 
+
+router.post("/compute-stats", (req,res)=>{
+  console.log("Calcul des stats");details
+  try{
+    let scores = req.body;
+    const details = req.body;
+    let winners = {
+      risk : {avg : 0, perso :""},
+      reward : {avg : 0, perso :""},
+      effort : {avg : 0, perso :""}
+    };
+    for (const perso in scores){
+      for (const categorie in scores[perso]){
+        //Mise à jour du score max par catégorie
+        scores[perso][categorie].score /=count;
+        winners[categorie].avg = max(winners[categorie][avg], scores[perso][categorie].score);
+        if (scores[perso][categorie].score==winners[categorie].avg){
+          winners[categorie].perso=perso;
+        }
+      }
+    }
+    let result = {
+      winners: winners,
+      details:details
+    }
+    return res.status(200).json({stats : result});
+  }catch(error){
+    return res.status(500);
+  }
+})
+
+
+/*
+{
+  "stats": {
+    "winners": [
+      {cat : risk; avg : 10, perso : homme},
+      .,
+      .
+    ],
+    "details": {
+      "homme": [{cat : risk; avg : 10},{cat : effort; avg : 8}...],
+      "femme": [...],
+      "autre": [...]
+    }
+  }
+}
+*/
+
 module.exports = router;
 
 async function getIndividus() {
@@ -203,6 +252,7 @@ async function getIndividus() {
     b: b,
   };
 }
+
 
 function initScore(){
   return {

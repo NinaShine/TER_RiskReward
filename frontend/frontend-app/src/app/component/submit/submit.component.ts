@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { CommonModule } from "@angular/common";
 
 @Component({
@@ -128,7 +128,20 @@ export class SubmitComponent {
   }
 
   goToFinalPage() {
-    this.http
+    const scores = JSON.parse(sessionStorage.getItem("scores")||"");
+    if (scores != ""){
+      this.http.post("http://localhost:3000/compute-stats",scores,{withCredentials:true})
+      .subscribe({
+        next:(response) => {
+          console.log("Stats calculées : ", response);
+        },
+        error: (error)=>{
+          console.error(error);
+        }
+      })
+    }
+
+    /*this.http
       .post(
         "http://localhost:3000/reset-session",
         {},
@@ -142,6 +155,7 @@ export class SubmitComponent {
         error: (error) =>
           console.error("❌ Erreur lors de la réinitialisation :", error),
       });
+    */
   }
 
   
@@ -167,6 +181,8 @@ export class SubmitComponent {
       scores[key2][categorie1].count ++;
       scores[key2][categorie2].score += 10-slider2;
       scores[key2][categorie2].count ++;
+
+      sessionStorage.setItem("scores", JSON.stringify(scores));
     }
   }
 }
