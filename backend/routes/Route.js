@@ -201,3 +201,27 @@ async function getIndividus() {
     b: b,
   };
 }
+
+
+
+/* TO DO 
+Renvoyer sur la page, un objet de cette forme dans sessionStorage
+{
+  "stats": {
+    "winners": [
+      {cat : risk; avg : 10, perso : homme},
+      .,
+      .
+    ],
+    "details": {
+      "homme": [{cat : risk; avg : 10},{cat : effort; avg : 8}...],
+      "femme": [...],
+      "autre": [...]
+    }
+  }
+}
+
+Modifier la route /init pour mettre en place le stockage de chaque réponses pour chaque perso
+Faire une route /stats pour donner les stats et rediriger
+
+*/
