@@ -10,4 +10,5 @@ export const routes: Routes = [
     {path : 'forces', component : ForcesPageComponent},
     {path : 'pageFinale', component : FinalPageComponent}
 
+
 ];

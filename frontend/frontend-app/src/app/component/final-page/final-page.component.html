@@ -1,29 +1,44 @@
-<div class="centering">
-
-    <div class="final-container">
-
-        <h1>🎉 Merci pour votre participation ! 🎉</h1>
+<div class="flex justify-center items-center w-screen mt-8 mb-8">
+    <div class="text-center p-12 rounded-lg mx-auto shadow-2xl bg-gradient-to-br from-blue-400 to-teal-700 text-white">
+      <h1 class="text-4xl mb-6">🎉 Merci pour votre participation ! 🎉</h1>
+  
+      <!-- Winners Section -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div *ngFor="let winner of stats.winners" class="bg-white bg-opacity-20 p-4 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold mb-2">{{ getCategoryTitle(winner.categorie) }}</h2>
+          <div class="text-5xl mb-2">{{ getEmoji(winner.categorie) }}</div>
+          <p class="text-lg">Score: {{ winner.avg }}/10</p>
+          <p class="text-md italic">{{ winner.perso }}</p>
+        </div>
+      </div>
+  
+      <!-- Details Section -->
+      <div class="mb-8">
+        <h2 class="text-2xl mb-4">Statistiques détaillées</h2>
         
-        <p class="message">
-
-            Félicitations, vous êtes arrivé(e) au bout du jeu ! 
-            Un immense merci d'avoir pris le temps de participer à cette expérience.  
-            Votre contribution est précieuse et va nous aider à avancer dans notre projet.
-        </p>
-      
-        <p class="summary">
-            Chaque choix que vous avez fait, chaque réponse que vous avez donnée,  
-            sera soigneusement analysé... et peut-être même utilisé pour dominer le monde.
-            (Enfin, surtout pour améliorer notre étude et notre projet, mais c'est moins drôle à dire ! 😆)
-        </p>
-    
-        <p class="message">
-            Encore merci, et à bientôt pour de nouvelles expériences interactives !
-        </p>
-        
-        <button (click)="quitter()" class="btn btn-secondary">🏠 Retour à l'accueil</button>
-        <button (click)="openDialog()" class="btn btn-secondary">En savoir plus</button>
-
+        <div class="space-y-6 grid grid-row-1 md:grid-cols-2 gap-4">
+          <div *ngFor="let person of getPersons()" class="bg-white bg-opacity-10 p-4 rounded-lg">
+            <h3 class="text-xl mb-2">{{ person }}</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div *ngFor="let stat of stats.details[person]" class="bg-white bg-opacity-10 p-3 rounded">
+                <div class="flex items-center gap-2">
+                  <span>{{ getEmoji(stat.cat) }}</span>
+                  <span>{{ getCategoryTitle(stat.cat) }}</span>
+                </div>
+                <div class="w-full bg-gray-300 bg-opacity-30 rounded-full h-2.5 mt-2">
+                  <div class="bg-pink-500 h-2.5 rounded-full" [style.width]="(stat.avg * 10) + '%'"></div>
+                </div>
+                <p class="text-sm mt-1">{{ stat.avg }}/10</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Buttons -->
+      <div class="mt-6">
+        <button (click)="quitter()" class="py-2 px-5 text-xl text-white bg-indigo-700 hover:bg-indigo-600 rounded transition-colors mx-2">🏠</button>
+        <button (click)="openDialog()" class="py-2 px-5 text-xl text-white bg-indigo-700 hover:bg-indigo-600 rounded transition-colors mx-2">ℹ️</button>
+      </div>
     </div>
-    
-</div>
+  </div>
