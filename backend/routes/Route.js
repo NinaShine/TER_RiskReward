@@ -28,20 +28,18 @@ router.get("/init", async (req, res) => {
         [texts[i], texts[j]] = [texts[j], texts[i]];
       }
       req.session.randomTexts = texts;
-      req.session.turn=1;
-    }else{
+      req.session.turn = 1;
+    } else {
       req.session.turn++;
     }
 
     // Vérifier si la liste est vide (ne pas réinitialiser si c'est le cas)
     // Note : A partir d'ici, rajouter la logique métier de /init pour qu'elle créée un contexte complet
     if (req.session.randomTexts.length === 0) {
-      return res
-        .status(200)
-        .json({ 
-          message: "Toutes les ressources ont été affichées.",
-          allRessourcesDisplayed: true
-         });
+      return res.status(200).json({
+        message: "Toutes les ressources ont été affichées.",
+        allRessourcesDisplayed: true,
+      });
     }
 
     // Extraire et retourner le prochain élément avec shift()
@@ -75,7 +73,7 @@ router.get("/init", async (req, res) => {
 
       res.json({
         scenario: req.session.scenario,
-        turn: req.session.turn
+        turn: req.session.turn,
       });
     });
   } catch (error) {
@@ -85,6 +83,8 @@ router.get("/init", async (req, res) => {
 
 router.post("/submit", async (req, res) => {
   const scenario = req.session.scenario;
+  const sessionId = req.sessionID; // ou req.session.id
+  console.log("Session ID :", sessionId);
   if (!scenario) {
     console.error("Aucune session trouvée !");
     return res.status(400).json({
@@ -125,6 +125,9 @@ router.post("/submit", async (req, res) => {
       valueOneB: sliderValue1.second,
       valueTwoB: sliderValue2.second,
       forceB: forceBObj.value,
+
+      // Enregistrer l'ID de session
+      sessionId: sessionId,
     });
 
     console.log("Réponse enregistrée :", newResponse);
@@ -141,29 +144,36 @@ router.post("/submit", async (req, res) => {
 
 router.post("/reset-session", (req, res) => {
   console.log("🔄 Réinitialisation de la session...");
-  
+
   if (req.session) {
     // Sauvegarder uniquement les informations utilisateur
-    const userData = req.session.user; 
+    const userData = req.session.user;
 
     // Détruire la session
     req.session.regenerate((err) => {
       if (err) {
-        console.error("Erreur lors de la réinitialisation de la session :", err);
-        return res.status(500).json({ message: "Erreur serveur lors de la réinitialisation" });
+        console.error(
+          "Erreur lors de la réinitialisation de la session :",
+          err
+        );
+        return res
+          .status(500)
+          .json({ message: "Erreur serveur lors de la réinitialisation" });
       }
 
       // Restaurer les données utilisateur
       req.session.user = userData;
-      
-      console.log("✅ Session réinitialisée, utilisateur conservé :", req.session.user);
+
+      console.log(
+        "✅ Session réinitialisée, utilisateur conservé :",
+        req.session.user
+      );
       res.status(200).json({ message: "Session réinitialisée" });
     });
   } else {
     res.status(400).json({ message: "Aucune session active" });
   }
 });
-
 
 module.exports = router;
 
