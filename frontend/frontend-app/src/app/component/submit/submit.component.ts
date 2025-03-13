@@ -20,6 +20,16 @@ export class SubmitComponent {
   @Output() refreshRequested = new EventEmitter<void>(); // Event for parent
   @Output() resetSlidersEvent = new EventEmitter<void>();
 
+  private individuMap: { [key: string]: string } = {
+    "Enfant pas genré": "enfant",
+    "Robot": "robot",
+    "Homme grande taille": "hommeGrand",
+    "Homme petite taille": "hommePetit",
+    "Femme grande taille": "femmeGrande",
+    "Femme petite taille": "femmePetite",
+    "Vieux pas genré": "vieux"
+  };
+
   onButtonClick() {
     // Récupère la valeur actuelle ou 0 si elle n'existe pas
     let currentTurn = parseInt(sessionStorage.getItem("turn") || "1");
@@ -56,7 +66,6 @@ export class SubmitComponent {
   submitResponse() {
     console.log("Submit !");
     const forces = JSON.parse(sessionStorage.getItem("list_forces") || "[]");
-
     const body = {
       sliderValue1: {
         first: this.sliderValue1,
@@ -78,7 +87,10 @@ export class SubmitComponent {
           console.log("Réponse serveur : ", response);
           this.refreshScenario();
         },
-        complete: () => console.log("Requête terminée"),
+        complete: () => {
+          console.log("Requête terminée");
+          this.updateScores(this.individu1,this.individu2,this.sliderValue1,this.sliderValue2);
+        },
       });
   }
 
@@ -108,8 +120,6 @@ export class SubmitComponent {
         this.scenario = data.scenario;
         console.log("Nouveau scénario chargé :", this.scenario);
 
-        this.scenario = data.scenario;
-
         // Sauvegarde dans `sessionStorage` pour éviter les appels répétés
         sessionStorage.setItem("scenario", JSON.stringify(data.scenario));
         sessionStorage.setItem("turn", JSON.stringify(data.turn));
@@ -132,5 +142,31 @@ export class SubmitComponent {
         error: (error) =>
           console.error("❌ Erreur lors de la réinitialisation :", error),
       });
+  }
+
+  
+
+  updateScores(individu1 : string | null , individu2 : string | null, slider1 : number, slider2 :number){
+    let scores = JSON.parse(sessionStorage.getItem("scores") || "")
+    if (scores != ""&& individu1 && individu2){
+      const cat = this.scenario.association.toString();
+      const categories = cat.split("-");
+      const categorie1 = categories[0];
+      const categorie2 = categories[1];
+      const key1 = this.individuMap[individu1];
+      const key2 = this.individuMap[individu2];
+
+      //Premier individu
+      scores[key1][categorie1].score += slider1;
+      scores[key1][categorie1].count ++;
+      scores[key1][categorie2].score += slider2;
+      scores[key1][categorie2].count ++;
+
+      //Second individu
+      scores[key2][categorie1].score += 10-slider1;
+      scores[key2][categorie1].count ++;
+      scores[key2][categorie2].score += 10-slider2;
+      scores[key2][categorie2].count ++;
+    }
   }
 }

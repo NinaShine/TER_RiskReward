@@ -29,6 +29,8 @@ router.get("/init", async (req, res) => {
       }
       req.session.randomTexts = texts;
       req.session.turn = 1;
+      req.session.scores = initScore();
+      //Initialisation du tableau des scores
     } else {
       req.session.turn++;
     }
@@ -199,6 +201,93 @@ async function getIndividus() {
   return {
     a: a,
     b: b,
+  };
+}
+
+function initScore(){
+  return {
+    enfant : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+
+    robot : {
+      risk:{
+      score : 0, count : 0
+    },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+
+    hommeGrand : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+
+    hommePetit : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+    
+    femmeGrande : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+
+    femmePetite : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+    vieux : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    }
   };
 }
 
