@@ -1,4 +1,3 @@
-{
   "hash": "28f372da",
   "configHash": "08047352",
   "lockfileHash": "b547d37e",
@@ -13,7 +12,9 @@
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
+
       "fileHash": "b1440fd4",
+
       "needsInterop": false
     },
     "@angular/core": {
