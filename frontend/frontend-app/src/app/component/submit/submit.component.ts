@@ -5,7 +5,7 @@ import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-submit",
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule],
   templateUrl: "./submit.component.html",
   styleUrls: ["./submit.component.css"],
 })
