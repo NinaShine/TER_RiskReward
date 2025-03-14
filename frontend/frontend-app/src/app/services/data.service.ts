@@ -22,26 +22,6 @@ export class DataService {
   ];
 
   constructor(private http: HttpClient) {}
-/*
-  getRandomStick(): { url: string, name: string }[] {
-    const shuffled = this.characters.sort(() => 0.5 - Math.random());
-    return [{ url: shuffled[0].image, name: shuffled[0].name }, { url: shuffled[1].image, name: shuffled[1].name }];
-  }*/
-
-/*
-  getRandomStick(): { url: string, name: string }[] {
-    const indexa = Math.floor(Math.random() * this.characters.length);
-    let indexb = Math.floor(Math.random() * this.characters.length);
-    while (indexb === indexa) {
-        indexb = Math.floor(Math.random() * this.characters.length);
-    }
-
-    return [
-        { url: this.characters[indexa].image, name: this.characters[indexa].name },
-        { url: this.characters[indexb].image, name: this.characters[indexb].name }
-    ];
-}
-    */
 
 private selectedStickmen: { url: string; name: string }[] | null = null;
 
@@ -70,12 +50,6 @@ private selectedStickmen: { url: string; name: string }[] | null = null;
   getData(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
-/*
-  getRandomDoc(): Observable<any> {
-    //return this.http.get(this.apiUrl + '/random-text-clean');
-    //return this.http.get(this.apiUrl + '/random-text');
-    return this.http.get("http://localhost:3000/random-text-clean");
-  }*/
 
   getScenario(): Observable<any> {
     return this.http.get<any>('/api/init', {

@@ -37,9 +37,6 @@ export class SubmitComponent {
 
   constructor(private http: HttpClient) {}
 
-  //La logique métier est pas au bon endroit, faut la déplacer dans un parent, c'est pas à ce bouton de faire ce taff.
-  //Mais sinon c'est la bonne logique.
-
   ngOnInit() {
     this.checkResourcesStatus();
   }
@@ -72,7 +69,7 @@ export class SubmitComponent {
     console.log("Body : ", body);
 
     this.http
-      .post("http://localhost:3000/submit", body, { withCredentials: true })
+      .post("/api/submit", body, { withCredentials: true })
       .subscribe({
         next: (response) => {
           console.log("Réponse serveur : ", response);
@@ -82,22 +79,9 @@ export class SubmitComponent {
       });
   }
 
-  /*
-    refreshScenario() {
-      this.http.get<{ text: string; image: string; individuA: string; individuB: string }>(
-        "http://localhost:3000/init", 
-        { withCredentials: true }
-      ).subscribe(data => {
-        this.scenario = data.text;
-        this.individu1 = data.individuA;
-        this.individu2 = data.individuB;
-        console.log("Nouveau scénario chargé :", this.scenario);
-      });
-    }
-*/
   refreshScenario() {
     this.http
-      .get("http://localhost:3000/init", { withCredentials: true })
+      .get("/api/init", { withCredentials: true })
       .subscribe((data: any) => {
         if (data?.allRessourcesDisplayed) {
           sessionStorage.setItem("allRessourcesDisplayed", "true");
@@ -119,11 +103,7 @@ export class SubmitComponent {
 
   goToFinalPage() {
     this.http
-      .post(
-        "http://localhost:3000/reset-session",
-        {},
-        { withCredentials: true }
-      )
+      .post("/api/reset-session", {}, { withCredentials: true })
       .subscribe({
         next: (response) => {
           console.log("✅ Session réinitialisée :", response);
