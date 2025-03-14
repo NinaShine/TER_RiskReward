@@ -1,61 +1,61 @@
 {
-  "hash": "23bd11de",
-  "configHash": "472dfede",
+  "hash": "82606dff",
+  "configHash": "5221ffac",
   "lockfileHash": "dab95f32",
-  "browserHash": "c4983021",
+  "browserHash": "6e366d4a",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "0addd18d",
+      "fileHash": "0fd2eb2b",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "548c1186",
+      "fileHash": "a38a8270",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "8c451533",
+      "fileHash": "b79700cc",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "e2fff81b",
+      "fileHash": "6f8fe679",
       "needsInterop": false
     },
     "@angular/material/dialog": {
       "src": "../../../../../../node_modules/@angular/material/fesm2022/dialog.mjs",
       "file": "@angular_material_dialog.js",
-      "fileHash": "61193e34",
+      "fileHash": "85eaf80b",
       "needsInterop": false
     },
     "@angular/material/slider": {
       "src": "../../../../../../node_modules/@angular/material/fesm2022/slider.mjs",
       "file": "@angular_material_slider.js",
-      "fileHash": "8b8214ba",
+      "fileHash": "b2478ba1",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "dda1584f",
+      "fileHash": "0277a102",
       "needsInterop": false
     },
     "@angular/platform-browser/animations/async": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/animations/async.mjs",
       "file": "@angular_platform-browser_animations_async.js",
-      "fileHash": "d13d983a",
+      "fileHash": "4152ef0d",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "639135c9",
+      "fileHash": "249577a9",
       "needsInterop": false
     }
   },
@@ -66,11 +66,11 @@
     "chunk-KWEY5MY7": {
       "file": "chunk-KWEY5MY7.js"
     },
-    "chunk-C4HKMOIF": {
-      "file": "chunk-C4HKMOIF.js"
-    },
     "chunk-A36VPJZE": {
       "file": "chunk-A36VPJZE.js"
+    },
+    "chunk-C4HKMOIF": {
+      "file": "chunk-C4HKMOIF.js"
     },
     "chunk-IF4NQIVW": {
       "file": "chunk-IF4NQIVW.js"
