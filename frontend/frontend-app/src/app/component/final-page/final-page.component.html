@@ -1,5 +1,21 @@
 <div class="flex justify-center items-center w-screen mt-8 mb-8">
-    <div class="text-center p-12 rounded-lg mx-auto shadow-2xl bg-gradient-to-br from-blue-400 to-teal-700 text-white">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="text-center p-12">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mx-auto mb-4"></div>
+        <p class="text-xl text-blue-600">Chargement des statistiques...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="!loading && error" class="text-center p-12 rounded-lg mx-auto shadow-lg bg-red-100 text-red-700">
+        <h2 class="text-2xl mb-4">⚠️ Erreur</h2>
+        <p class="mb-4">{{ error }}</p>
+        <button (click)="quitter()" class="py-2 px-5 text-white bg-red-600 hover:bg-red-500 rounded transition-colors">
+            Retour à l'accueil
+        </button>
+    </div>
+
+    <!-- Content -->
+    <div *ngIf="!loading && !error" class="text-center p-12 rounded-lg mx-auto shadow-2xl bg-gradient-to-br from-blue-400 to-teal-700 text-white">
       <h1 class="text-4xl mb-6">🎉 Merci pour votre participation ! 🎉</h1>
   
       <!-- Winners Section -->

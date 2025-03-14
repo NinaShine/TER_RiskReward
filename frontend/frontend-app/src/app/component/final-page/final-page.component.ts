@@ -20,6 +20,8 @@ export class FinalPageComponent {
       effort: {avg: 0, perso: ''}
     }
   };
+  loading: boolean = true;
+  error: string | null = null;
   constructor(private router: Router, private http: HttpClient, private dialogRef: MatDialog) {}
 
   quitter() {
@@ -30,18 +32,33 @@ export class FinalPageComponent {
     this.dialogRef.open(ContexteComponent);
   }
 
-  // Modification du ngOnInit pour utiliser les données de test
   ngOnInit() {
+    this.loading = true;
+    this.error = null;
+    
     try {
       const data = sessionStorage.getItem('data');
-      if (data) {
-        const parsedData = JSON.parse(data);
-        this.stats = parsedData.stats;
+      if (!data) {
+        this.error = 'No stats data found in session storage. Please complete the scenarios first.';
+        console.error(this.error);
+        // Redirect back to home page after 3 seconds if no data is found
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 3000);
       } else {
-        console.error('No stats data found in session storage');
+        const parsedData = JSON.parse(data);
+        if (!parsedData.stats) {
+          this.error = 'Invalid stats data format';
+          console.error(this.error);
+        } else {
+          this.stats = parsedData.stats;
+        }
       }
     } catch (error) {
+      this.error = 'Error loading stats: ' + (error instanceof Error ? error.message : 'Unknown error');
       console.error('Error loading stats:', error);
+    } finally {
+      this.loading = false;
     }
   }
 
@@ -50,6 +67,7 @@ export class FinalPageComponent {
       const data = sessionStorage.getItem('data');
       if (data) {
         const parsedData = JSON.parse(data);
+        console.log('Parsed data:', parsedData);
         this.stats = parsedData.stats || this.stats;
       }
     } catch (error) {

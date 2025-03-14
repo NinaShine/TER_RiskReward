@@ -128,11 +128,15 @@ export class SubmitComponent {
   }
 
   goToFinalPage() {
-    const scores = JSON.parse(sessionStorage.getItem("scores")||"");
-    if (scores != "") {
-      this.http.post("http://localhost:3000/compute-stats", scores, {withCredentials:true})
+  
+    try {
+      this.http.post("http://localhost:3000/compute-stats", {withCredentials:true})
       .subscribe({
         next:(response: any) => {
+          if (!response) {
+            console.error("Empty response from compute-stats");
+            return;
+          }
           console.log("Stats calculées : ", response);
           const data = {
             stats: response
@@ -141,9 +145,11 @@ export class SubmitComponent {
           this.router.navigate(['/final-page']);
         },
         error: (error)=> {
-          console.error(error);
+          console.error("Error computing stats:", error);
         }
-      })
+      });
+    } catch (error) {
+      console.error("Error parsing scores from session storage:", error);
     }
 
     /*this.http
