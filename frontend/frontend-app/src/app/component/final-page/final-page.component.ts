@@ -37,7 +37,7 @@ export class FinalPageComponent {
     this.error = null;
     
     try {
-      const data = JSON.parse(sessionStorage.getItem("stats")||"");
+      const data = sessionStorage.getItem("stats")||"";
 
       if (!data) {
         this.error = 'No stats data found in session storage. Please complete the scenarios first.';
@@ -48,12 +48,13 @@ export class FinalPageComponent {
         }, 3000);
       } else {
         const parsedData = JSON.parse(data);
-        if (!parsedData.stats) {
+        console.log('Parsed data:',parsedData);
+        if (!parsedData) {
           this.error = 'Invalid stats data format';
           console.error(this.error);
         } else {
-          this.stats = parsedData.stats;
-        }
+          this.stats = parsedData;
+        } 
       }
     } catch (error) {
       this.error = 'Error loading stats: ' + (error instanceof Error ? error.message : 'Unknown error');
@@ -78,6 +79,10 @@ export class FinalPageComponent {
 
   getPersons() {
     return Object.keys(this.stats).filter(key => key !== 'winners');
+  }
+
+  getDetailsPersons(): string[] {
+    return Object.keys(this.stats.details || {});
   }
 
   getCategoryTitle(category: string): string {
