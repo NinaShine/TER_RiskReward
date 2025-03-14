@@ -37,7 +37,8 @@ export class FinalPageComponent {
     this.error = null;
     
     try {
-      const data = sessionStorage.getItem('data');
+      const data = JSON.parse(sessionStorage.getItem("stats")||"");
+
       if (!data) {
         this.error = 'No stats data found in session storage. Please complete the scenarios first.';
         console.error(this.error);

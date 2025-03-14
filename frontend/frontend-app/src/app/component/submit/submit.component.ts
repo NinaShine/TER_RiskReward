@@ -128,21 +128,20 @@ export class SubmitComponent {
   }
 
   goToFinalPage() {
-  
+    const scores = JSON.parse(sessionStorage.getItem("scores")||"");
     try {
-      this.http.post("http://localhost:3000/compute-stats", {withCredentials:true})
+      this.http.post("http://localhost:3000/compute-stats", scores ,{withCredentials:true})
       .subscribe({
         next:(response: any) => {
           if (!response) {
             console.error("Empty response from compute-stats");
             return;
           }
-          console.log("Stats calculées : ", response);
-          const data = {
-            stats: response
-          };
-          sessionStorage.setItem('data', JSON.stringify(data));
-          this.router.navigate(['/final-page']);
+          const data = response.stats;
+          sessionStorage.setItem("stats", JSON.stringify(data));
+          console.log("In session :", JSON.parse(sessionStorage.getItem("stats") || ""));
+          console.log("Cote le bouton : ",sessionStorage);
+          this.router.navigate(['pageFinale']);
         },
         error: (error)=> {
           console.error("Error computing stats:", error);
