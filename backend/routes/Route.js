@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Text = require("../models/textModel");
 const Response = require("../models/responseModel");
+const Form = require("../models/formModel"); // ⬅️ Assure-toi d'importer le bon fichier
+
 
 //Rajouter le routing de page d'accueil et surtout la route de la répartition des forces qui sera stocké en session et ne sera pas temporaire.
 
@@ -84,6 +86,42 @@ router.get("/init", async (req, res) => {
     res.status(500).json({ message: "Erreur serveur", error });
   }
 });
+
+// Route qui enregistre le formulaire soumis
+router.post("/submitForm", async (req, res) => {
+  try {
+    const { genre, age, nationalite, niveauEtudes } = req.body;
+
+    // Vérifier que tous les champs sont fournis
+    if (!genre || !age || !nationalite || !niveauEtudes) {
+      return res.status(400).json({ message: "Tous les champs sont obligatoires." });
+    }
+
+    // Générer un sessionId unique
+    const sessionId = req.sessionID; // ou req.session.id
+
+
+    // Création d'un nouvel enregistrement
+    const newForm = await Form.create({
+      genre,
+      age,
+      nationalite,
+      niveauEtudes,
+      sessionId, // Ajout du sessionId généré
+    });
+
+    // Sauvegarde dans MongoDB
+    await newForm.save();
+
+    res.status(201).json({ message: "Formulaire enregistré avec succès", sessionId });
+  } catch (error) {
+    console.error("Erreur lors de l’enregistrement :", error);
+    res.status(500).json({ message: "Erreur serveur", error });
+  }
+});
+
+
+
 
 router.post("/submit", async (req, res) => {
   const scenario = req.session.scenario;
