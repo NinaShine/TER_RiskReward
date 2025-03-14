@@ -4,11 +4,23 @@
   
       <!-- Winners Section -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div *ngFor="let winner of stats.winners" class="bg-white bg-opacity-20 p-4 rounded-lg shadow-md">
-          <h2 class="text-xl font-bold mb-2">{{ getCategoryTitle(winner.categorie) }}</h2>
-          <div class="text-5xl mb-2">{{ getEmoji(winner.categorie) }}</div>
-          <p class="text-lg">Score: {{ winner.avg }}/10</p>
-          <p class="text-md italic">{{ winner.perso }}</p>
+        <div class="bg-white bg-opacity-20 p-4 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold mb-2">{{ getCategoryTitle('risk') }}</h2>
+          <div class="text-5xl mb-2">{{ getEmoji('risk') }}</div>
+          <p class="text-lg">Score: {{ stats.winners.risk.avg }}/10</p>
+          <p class="text-md italic">{{ stats.winners.risk.perso }}</p>
+        </div>
+        <div class="bg-white bg-opacity-20 p-4 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold mb-2">{{ getCategoryTitle('reward') }}</h2>
+          <div class="text-5xl mb-2">{{ getEmoji('reward') }}</div>
+          <p class="text-lg">Score: {{ stats.winners.reward.avg }}/10</p>
+          <p class="text-md italic">{{ stats.winners.reward.perso }}</p>
+        </div>
+        <div class="bg-white bg-opacity-20 p-4 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold mb-2">{{ getCategoryTitle('effort') }}</h2>
+          <div class="text-5xl mb-2">{{ getEmoji('effort') }}</div>
+          <p class="text-lg">Score: {{ stats.winners.effort.avg }}/10</p>
+          <p class="text-md italic">{{ stats.winners.effort.perso }}</p>
         </div>
       </div>
   
@@ -20,15 +32,35 @@
           <div *ngFor="let person of getPersons()" class="bg-white bg-opacity-10 p-4 rounded-lg">
             <h3 class="text-xl mb-2">{{ person }}</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div *ngFor="let stat of stats.details[person]" class="bg-white bg-opacity-10 p-3 rounded">
+              <div class="bg-white bg-opacity-10 p-3 rounded">
                 <div class="flex items-center gap-2">
-                  <span>{{ getEmoji(stat.cat) }}</span>
-                  <span>{{ getCategoryTitle(stat.cat) }}</span>
+                  <span>{{ getEmoji('risk') }}</span>
+                  <span>{{ getCategoryTitle('risk') }}</span>
                 </div>
                 <div class="w-full bg-gray-300 bg-opacity-30 rounded-full h-2.5 mt-2">
-                  <div class="bg-pink-500 h-2.5 rounded-full" [style.width]="(stat.avg * 10) + '%'"></div>
+                  <div class="bg-pink-500 h-2.5 rounded-full" [style.width]="(stats[person].risk.score * 10) + '%'"></div>
                 </div>
-                <p class="text-sm mt-1">{{ stat.avg }}/10</p>
+                <p class="text-sm mt-1">{{ stats[person].risk.score }}/10</p>
+              </div>
+              <div class="bg-white bg-opacity-10 p-3 rounded">
+                <div class="flex items-center gap-2">
+                  <span>{{ getEmoji('reward') }}</span>
+                  <span>{{ getCategoryTitle('reward') }}</span>
+                </div>
+                <div class="w-full bg-gray-300 bg-opacity-30 rounded-full h-2.5 mt-2">
+                  <div class="bg-pink-500 h-2.5 rounded-full" [style.width]="(stats[person].reward.score * 10) + '%'"></div>
+                </div>
+                <p class="text-sm mt-1">{{ stats[person].reward.score }}/10</p>
+              </div>
+              <div class="bg-white bg-opacity-10 p-3 rounded">
+                <div class="flex items-center gap-2">
+                  <span>{{ getEmoji('effort') }}</span>
+                  <span>{{ getCategoryTitle('effort') }}</span>
+                </div>
+                <div class="w-full bg-gray-300 bg-opacity-30 rounded-full h-2.5 mt-2">
+                  <div class="bg-pink-500 h-2.5 rounded-full" [style.width]="(stats[person].effort.score * 10) + '%'"></div>
+                </div>
+                <p class="text-sm mt-1">{{ stats[person].effort.score }}/10</p>
               </div>
             </div>
           </div>

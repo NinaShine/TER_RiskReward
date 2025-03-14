@@ -45,7 +45,7 @@ export class SubmitComponent {
     console.log("Valeur du slider 2 :", this.sliderValue2);
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   //La logique métier est pas au bon endroit, faut la déplacer dans un parent, c'est pas à ce bouton de faire ce taff.
   //Mais sinon c'est la bonne logique.
@@ -129,13 +129,18 @@ export class SubmitComponent {
 
   goToFinalPage() {
     const scores = JSON.parse(sessionStorage.getItem("scores")||"");
-    if (scores != ""){
-      this.http.post("http://localhost:3000/compute-stats",scores,{withCredentials:true})
+    if (scores != "") {
+      this.http.post("http://localhost:3000/compute-stats", scores, {withCredentials:true})
       .subscribe({
-        next:(response) => {
+        next:(response: any) => {
           console.log("Stats calculées : ", response);
+          const data = {
+            stats: response
+          };
+          sessionStorage.setItem('data', JSON.stringify(data));
+          this.router.navigate(['/final-page']);
         },
-        error: (error)=>{
+        error: (error)=> {
           console.error(error);
         }
       })

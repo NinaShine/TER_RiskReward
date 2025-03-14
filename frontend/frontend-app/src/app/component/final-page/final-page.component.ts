@@ -5,49 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ContexteComponent } from '../contexte/contexte.component';
 import { CommonModule } from '@angular/common';
 
-// Fonction pour ajouter les données de test à sessionStorage
-function setupTestData() {
-  const testData = {
-    stats: {
-      winners: [
-        { categorie: 'risk', avg: 8, perso: 'homme' },
-        { categorie: 'reward', avg: 9, perso: 'femme' },
-        { categorie: 'effort', avg: 7, perso: 'vieux' }
-      ],
-      details: {
-        "homme": [
-          { cat: 'risk', avg: 8 },
-          { cat: 'reward', avg: 6 },
-          { cat: 'effort', avg: 7 }
-        ],
-        "femme": [
-          { cat: 'risk', avg: 5 },
-          { cat: 'reward', avg: 9 },
-          { cat: 'effort', avg: 6 }
-        ],
-        "vieux": [
-          { cat: 'risk', avg: 3 },
-          { cat: 'reward', avg: 4 },
-          { cat: 'effort', avg: 7 }
-        ],
-        "enfant": [
-          { cat: 'risk', avg: 6 },
-          { cat: 'reward', avg: 7 },
-          { cat: 'effort', avg: 4 }
-        ],
-        "robot": [
-          { cat: 'risk', avg: 2 },
-          { cat: 'reward', avg: 8 },
-          { cat: 'effort', avg: 9 }
-        ]
-      }
-    }
-  };
-
-  sessionStorage.setItem('data', JSON.stringify(testData));
-  return testData;
-}
-
 @Component({
   selector: 'app-final-page',
   templateUrl: './final-page.component.html',
@@ -57,8 +14,11 @@ function setupTestData() {
 })
 export class FinalPageComponent {
   stats: any = {
-    winners: [],
-    details: {}
+    winners: {
+      risk: {avg: 0, perso: ''},
+      reward: {avg: 0, perso: ''},
+      effort: {avg: 0, perso: ''}
+    }
   };
   constructor(private router: Router, private http: HttpClient, private dialogRef: MatDialog) {}
 
@@ -76,17 +36,12 @@ export class FinalPageComponent {
       const data = sessionStorage.getItem('data');
       if (data) {
         const parsedData = JSON.parse(data);
-        this.stats = parsedData.stats || this.stats;
+        this.stats = parsedData.stats;
       } else {
-        // Aucune donnée trouvée, utiliser les données de test
-        const testData = setupTestData();
-        this.stats = testData.stats;
+        console.error('No stats data found in session storage');
       }
     } catch (error) {
       console.error('Error loading stats:', error);
-      // En cas d'erreur, utiliser les données de test
-      const testData = setupTestData();
-      this.stats = testData.stats;
     }
   }
 
@@ -103,7 +58,7 @@ export class FinalPageComponent {
   }
 
   getPersons() {
-    return Object.keys(this.stats.details || {});
+    return Object.keys(this.stats).filter(key => key !== 'winners');
   }
 
   getCategoryTitle(category: string): string {
