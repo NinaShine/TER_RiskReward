@@ -30,6 +30,7 @@ router.get("/init", async (req, res) => {
       req.session.randomTexts = texts;
       req.session.turn = 1;
       req.session.scores = initScore();
+      console.log("Request.session: ", req.session);
       //Initialisation du tableau des scores
     } else {
       req.session.turn++;
@@ -76,6 +77,7 @@ router.get("/init", async (req, res) => {
       res.json({
         scenario: req.session.scenario,
         turn: req.session.turn,
+        scores: req.session.scores,
       });
     });
   } catch (error) {
@@ -179,29 +181,37 @@ router.post("/reset-session", (req, res) => {
 
 
 router.post("/compute-stats", (req,res)=>{
-  console.log("Calcul des stats");details
+  console.log("Calcul des stats");
   try{
     let scores = req.body;
+    console.log("Scores : ", scores);
     const details = req.body;
     let winners = {
       risk : {avg : 0, perso :""},
       reward : {avg : 0, perso :""},
       effort : {avg : 0, perso :""}
     };
+    console.log("Debut du for");
     for (const perso in scores){
+      console.log("Perso : ", perso);
       for (const categorie in scores[perso]){
+        console.log("Categories :", categorie);
         //Mise à jour du score max par catégorie
-        scores[perso][categorie].score /=count;
-        winners[categorie].avg = max(winners[categorie][avg], scores[perso][categorie].score);
+        console.log("Objet actuel : ", scores[perso][categorie]);
+        scores[perso][categorie].score /= scores[perso][categorie].count;
+        //console.log("Score actuel :", scores[perso][categorie]);
+        winners[categorie].avg = Math.max(winners[categorie].avg, scores[perso][categorie].score);
         if (scores[perso][categorie].score==winners[categorie].avg){
           winners[categorie].perso=perso;
         }
       }
     }
+    console.log("Fin du for");
     let result = {
       winners: winners,
       details:details
     }
+    console.log(result);
     return res.status(200).json({stats : result});
   }catch(error){
     return res.status(500);
@@ -255,6 +265,7 @@ async function getIndividus() {
 
 
 function initScore(){
+  console.log("Init du score");
   return {
     enfant : {
       risk:{

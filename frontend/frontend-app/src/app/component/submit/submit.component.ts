@@ -89,7 +89,7 @@ export class SubmitComponent {
         },
         complete: () => {
           console.log("Requête terminée");
-          this.updateScores(this.individu1,this.individu2,this.sliderValue1,this.sliderValue2);
+          this.updateScores(this.sliderValue1,this.sliderValue2);
         },
       });
   }
@@ -165,15 +165,24 @@ export class SubmitComponent {
 
   
 
-  updateScores(individu1 : string | null , individu2 : string | null, slider1 : number, slider2 :number){
-    let scores = JSON.parse(sessionStorage.getItem("scores") || "")
+  updateScores(slider1 : number, slider2 :number){
+    let scores = JSON.parse(sessionStorage.getItem("scores") || "");
+    const individu1 = this.scenario.individuA;
+    const individu2 = this.scenario.individuB;
+    console.log("Individu 1 : ", individu1, "- Individu 2 : ", individu2, "- slider1 : ",slider1, "- slider2 : ",slider2);
+    
     if (scores != ""&& individu1 && individu2){
       const cat = this.scenario.association.toString();
       const categories = cat.split("-");
       const categorie1 = categories[0];
       const categorie2 = categories[1];
+      console.log("Categories : ", categories);
       const key1 = this.individuMap[individu1];
       const key2 = this.individuMap[individu2];
+      console.log("Premier : ",scores[key1][categorie1]);
+      console.log("Second : ",scores[key1][categorie2]);
+
+
 
       //Premier individu
       scores[key1][categorie1].score += slider1;

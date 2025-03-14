@@ -18,7 +18,7 @@ export class Stickman1Component implements OnInit {
 
   ngOnInit(): void {
     this.item = sessionStorage.getItem("list_forces");
-    console.log("item de session:", this.item);
+    //console.log("item de session:", this.item);
 
     if (this.item != null) {
       let itemsArray = JSON.parse(this.item); // Conversion en tableau d'objets
@@ -66,7 +66,7 @@ export class Stickman1Component implements OnInit {
 
   ngOnChanges(): void {
     this.item = sessionStorage.getItem("list_forces");
-    console.log("item de session:", this.item);
+    //console.log("item de session:", this.item);
 
     if (this.item) {
       let itemsArray = JSON.parse(this.item); // Conversion en tableau d'objets
