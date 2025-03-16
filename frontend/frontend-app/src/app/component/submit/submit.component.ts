@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { RouterLink } from "@angular/router";
+import { RouterLink, Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-submit",
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule],
   templateUrl: "./submit.component.html",
   styleUrls: ["./submit.component.css"],
 })
@@ -19,6 +19,16 @@ export class SubmitComponent {
   @Input() scenario: any;
   @Output() refreshRequested = new EventEmitter<void>(); // Event for parent
   @Output() resetSlidersEvent = new EventEmitter<void>();
+
+  private individuMap: { [key: string]: string } = {
+    "Enfant pas genré": "enfant",
+    "Robot": "robot",
+    "Homme grande taille": "hommeGrand",
+    "Homme petite taille": "hommePetit",
+    "Femme grande taille": "femmeGrande",
+    "Femme petite taille": "femmePetite",
+    "Vieux pas genré": "vieux"
+  };
 
   onButtonClick() {
     // Récupère la valeur actuelle ou 0 si elle n'existe pas
@@ -35,7 +45,7 @@ export class SubmitComponent {
     console.log("Valeur du slider 2 :", this.sliderValue2);
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router:Router) {}
 
   ngOnInit() {
     this.checkResourcesStatus();
@@ -75,7 +85,10 @@ export class SubmitComponent {
           console.log("Réponse serveur : ", response);
           this.refreshScenario();
         },
-        complete: () => console.log("Requête terminée"),
+        complete: () => {
+          console.log("Requête terminée");
+          this.updateScores(this.sliderValue1,this.sliderValue2);
+        } 
       });
   }
 
@@ -102,15 +115,62 @@ export class SubmitComponent {
   }
 
   goToFinalPage() {
-    this.http
-      .post("/api/reset-session", {}, { withCredentials: true })
+    const scores = JSON.parse(sessionStorage.getItem("scores")||"");
+    try {
+      this.http.post("/api/compute-stats", scores ,{withCredentials:true})
       .subscribe({
-        next: (response) => {
-          console.log("✅ Session réinitialisée :", response);
-          sessionStorage.clear(); // Nettoyer toutes les données côté front
+        next:(response: any) => {
+          if (!response) {
+            console.error("Empty response from compute-stats");
+            return;
+          }
+          const data = response.stats;
+          sessionStorage.setItem("stats", JSON.stringify(data));
+          console.log("In session :", JSON.parse(sessionStorage.getItem("stats") || ""));
+          console.log("Cote le bouton : ",sessionStorage);
+          this.router.navigate(['pageFinale']);
         },
-        error: (error) =>
-          console.error("❌ Erreur lors de la réinitialisation :", error),
+        error: (error)=> {
+          console.error("Error computing stats:", error);
+        }
       });
+    } catch (error) {
+      console.error("Error parsing scores from session storage:", error);
+    }
+  }
+
+  updateScores(slider1 : number, slider2 :number){
+    let scores = JSON.parse(sessionStorage.getItem("scores") || "");
+    const individu1 = this.scenario.individuA;
+    const individu2 = this.scenario.individuB;
+    console.log("Individu 1 : ", individu1, "- Individu 2 : ", individu2, "- slider1 : ",slider1, "- slider2 : ",slider2);
+    
+    if (scores != ""&& individu1 && individu2){
+      const cat = this.scenario.association.toString();
+      const categories = cat.split("-");
+      const categorie1 = categories[0];
+      const categorie2 = categories[1];
+      console.log("Categories : ", categories);
+      const key1 = this.individuMap[individu1];
+      const key2 = this.individuMap[individu2];
+      console.log("Premier : ",scores[key1][categorie1]);
+      console.log("Second : ",scores[key1][categorie2]);
+
+
+
+      //Premier individu
+      scores[key1][categorie1].score += slider1;
+      scores[key1][categorie1].count ++;
+      scores[key1][categorie2].score += slider2;
+      scores[key1][categorie2].count ++;
+
+      //Second individu
+      scores[key2][categorie1].score += 10-slider1;
+      scores[key2][categorie1].count ++;
+      scores[key2][categorie2].score += 10-slider2;
+      scores[key2][categorie2].count ++;
+
+      sessionStorage.setItem("scores", JSON.stringify(scores));
+    }
   }
 }

@@ -24,16 +24,6 @@ export class ImgTextComponent implements OnInit {
 
   constructor(private dataService: DataService) {}
 
-  /*
-  ngOnInit(): void {
-    console.log("ImgTextComponent initialized");
-    this.dataService.getRandomDoc().subscribe(data => {
-      this.content = data.content;
-      this.imageUrl = data.imageUrl; //il faut mettre les images dans assets
-      this.associationType = data.associationType;
-      console.log("Voici les données du back", data);
-    });
-  } */
 
   ngOnInit() {
     this.loadScenario(); // 🔥 Empêche le rechargement de scénario après un `F5`
@@ -84,6 +74,8 @@ export class ImgTextComponent implements OnInit {
           // Sauvegarde dans `sessionStorage` pour éviter les appels répétés
           sessionStorage.setItem("scenario", JSON.stringify(data.scenario));
           sessionStorage.setItem("turn", JSON.stringify(data.turn));
+          sessionStorage.setItem("scores",JSON.stringify(data.scores));
+          console.log("Scores : ", data.scores);
         } else {
           console.error("❌ Scenario invalide :", data);
         }

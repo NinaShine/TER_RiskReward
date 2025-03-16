@@ -1,10 +1,27 @@
 {
-    "version": 2,
-    "builds": [
-      { "src": "index.js", "use": "@vercel/node" }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "index.js" }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    { "src": "index.js", "use": "@vercel/node" },
+    { "src": "dist/frontend-app/browser/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "index.js",
+      "methods": ["POST", "GET", "OPTIONS"],
+      "headers": {
+      "Access-Control-Allow-Origin": "https://choices-eta.vercel.app/",
+      "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    }
+  },
+
+    { "src": "/assets/(.*)", "dest": "dist/frontend-app/browser/assets/$1" },
+    { "src": "/(.*\\.js)", "dest": "dist/frontend-app/browser/$1" },
+    { "src": "/(.*\\.css)", "dest": "dist/frontend-app/browser/$1" },
+    { "src": "/(.*\\.ico)", "dest": "dist/frontend-app/browser/$1" },
+    { "src": "/(.*\\.json)", "dest": "dist/frontend-app/browser/$1" },
+    { "src": "/(.*)", "dest": "dist/frontend-app/browser/index.html" }
+  ]
+}

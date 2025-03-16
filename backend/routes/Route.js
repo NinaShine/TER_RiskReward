@@ -2,8 +2,22 @@ const express = require("express");
 const router = express.Router();
 const Text = require("../models/textModel");
 const Response = require("../models/responseModel");
+const Form = require("../models/formModel"); // ⬅️ Assure-toi d'importer le bon fichier
+const crypto = require("crypto");
 
-//Rajouter le routing de page d'accueil et surtout la route de la répartition des forces qui sera stocké en session et ne sera pas temporaire.
+// Générer un ID de session unique pour chaque utilisateur
+router.use((req, res, next) => {
+  if (!req.session.sessionId) {
+    req.session.sessionId = crypto.randomUUID();
+  }
+  next();
+});
+
+
+router.get("/session-id", (req, res) => {
+  res.json({ sessionId: req.session.sessionId });
+});
+
 
 // Route qui retourne un texte et une image aléatoire
 router.get("/init", async (req, res) => {
@@ -28,20 +42,21 @@ router.get("/init", async (req, res) => {
         [texts[i], texts[j]] = [texts[j], texts[i]];
       }
       req.session.randomTexts = texts;
-      req.session.turn=1;
-    }else{
+      req.session.turn = 1;
+      req.session.scores = initScore();
+      console.log("Request.session: ", req.session);
+      //Initialisation du tableau des scores
+    } else {
       req.session.turn++;
     }
 
     // Vérifier si la liste est vide (ne pas réinitialiser si c'est le cas)
     // Note : A partir d'ici, rajouter la logique métier de /init pour qu'elle créée un contexte complet
     if (req.session.randomTexts.length === 0) {
-      return res
-        .status(200)
-        .json({ 
-          message: "Toutes les ressources ont été affichées.",
-          allRessourcesDisplayed: true
-         });
+      return res.status(200).json({
+        message: "Toutes les ressources ont été affichées.",
+        allRessourcesDisplayed: true,
+      });
     }
 
     // Extraire et retourner le prochain élément avec shift()
@@ -65,8 +80,6 @@ router.get("/init", async (req, res) => {
 
     //console.log("✅ Scenario sauvegardé :", req.session.scenario);
 
-    //req.session.randomTexts = [...req.session.randomTexts]; // Forcer l'enregistrement de la liste modifiée
-
     req.session.save((err) => {
       if (err) {
         console.error("❌ Erreur lors de la sauvegarde de la session :", err);
@@ -77,7 +90,8 @@ router.get("/init", async (req, res) => {
 
       res.json({
         scenario: req.session.scenario,
-        turn: req.session.turn
+        turn: req.session.turn,
+        scores: req.session.scores,
       });
     });
   } catch (error) {
@@ -85,8 +99,58 @@ router.get("/init", async (req, res) => {
   }
 });
 
+// Route qui enregistre le formulaire soumis
+router.post("/submitForm", async (req, res) => {
+  try {
+    const { genre, age, nationalite, niveauEtudes } = req.body;
+
+    // Vérifier que tous les champs sont fournis
+    if (!genre || !age || !nationalite || !niveauEtudes) {
+      return res.status(400).json({ message: "Tous les champs sont obligatoires." });
+    }
+
+    // Générer un sessionId unique
+    console.log("🔹 Avant accès à la session :", req.session);
+    const sessionId = req.session.sessionId;
+    console.log("✅ Session ID généré :", sessionId);
+
+
+    // Création d'un nouvel enregistrement
+    const newForm = await Form.create({
+      genre,
+      age,
+      nationalite,
+      niveauEtudes,
+      sessionId, // Ajout du sessionId généré
+    });
+
+    // Sauvegarde dans MongoDB
+    //await newForm.save();
+
+    req.session.save((err) => {
+      if (err) {
+        console.error("❌ Erreur de sauvegarde de session :", err);
+      } else {
+        console.log("✅ Session sauvegardée !");
+      }
+    });
+
+    res.status(201).json({ message: "Formulaire enregistré avec succès", sessionId });
+  } catch (error) {
+    console.error("Erreur lors de l’enregistrement :", error);
+    res.status(500).json({ message: "Erreur serveur", error });
+  }
+});
+
+
+
+
 router.post("/submit", async (req, res) => {
+  console.log("📌 Session au début de /submit :", req.sessionID);
+
   const scenario = req.session.scenario;
+  const sessionId = req.session.sessionId; // ou req.session.id
+  console.log("Session ID :", sessionId);
   if (!scenario) {
     console.error("Aucune session trouvée !");
     return res.status(400).json({
@@ -127,6 +191,9 @@ router.post("/submit", async (req, res) => {
       valueOneB: sliderValue1.second,
       valueTwoB: sliderValue2.second,
       forceB: forceBObj.value,
+
+      // Enregistrer l'ID de session
+      sessionId: sessionId,
     });
 
     console.log("Réponse enregistrée :", newResponse);
@@ -141,24 +208,32 @@ router.post("/submit", async (req, res) => {
   }
 });
 
-router.post("/resset-session", (req, res) => {
+router.post("/reset-session", (req, res) => {
   console.log("🔄 Réinitialisation de la session...");
-  
+
   if (req.session) {
     // Sauvegarder uniquement les informations utilisateur
-    const userData = req.session.user; 
+    const userData = req.session.user;
 
     // Détruire la session
     req.session.regenerate((err) => {
       if (err) {
-        console.error("Erreur lors de la réinitialisation de la session :", err);
-        return res.status(500).json({ message: "Erreur serveur lors de la réinitialisation" });
+        console.error(
+          "Erreur lors de la réinitialisation de la session :",
+          err
+        );
+        return res
+          .status(500)
+          .json({ message: "Erreur serveur lors de la réinitialisation" });
       }
 
       // Restaurer les données utilisateur
       req.session.user = userData;
-      
-      console.log("✅ Session réinitialisée, utilisateur conservé :", req.session.user);
+
+      console.log(
+        "✅ Session réinitialisée, utilisateur conservé :",
+        req.session.user
+      );
       res.status(200).json({ message: "Session réinitialisée" });
     });
   } else {
@@ -166,6 +241,62 @@ router.post("/resset-session", (req, res) => {
   }
 });
 
+
+router.post("/compute-stats", (req,res)=>{
+  console.log("Calcul des stats");
+  try{
+    let scores = req.body;
+    console.log("Scores : ", scores);
+    const details = req.body;
+    let winners = {
+      risk : {avg : 0, perso :""},
+      reward : {avg : 0, perso :""},
+      effort : {avg : 0, perso :""}
+    };
+    console.log("Debut du for");
+    for (const perso in scores){
+      console.log("Perso : ", perso);
+      for (const categorie in scores[perso]){
+        console.log("Categories :", categorie);
+        //Mise à jour du score max par catégorie
+        console.log("Objet actuel : ", scores[perso][categorie]);
+        scores[perso][categorie].score /= scores[perso][categorie].count;
+        //console.log("Score actuel :", scores[perso][categorie]);
+        winners[categorie].avg = Math.max(winners[categorie].avg, scores[perso][categorie].score);
+        if (scores[perso][categorie].score==winners[categorie].avg){
+          winners[categorie].perso=perso;
+        }
+      }
+    }
+    console.log("Fin du for");
+    let result = {
+      winners: winners,
+      details:details
+    }
+    console.log(result);
+    return res.status(200).json({stats : result});
+  }catch(error){
+    return res.status(500);
+  }
+})
+
+
+/*
+{
+  "stats": {
+    "winners": [
+      {cat : risk; avg : 10, perso : homme},
+      .,
+      .
+    ],
+    "details": {
+      "homme": [{cat : risk; avg : 10},{cat : effort; avg : 8}...],
+      "femme": [...],
+      "autre": [...]
+    }
+  }
+}
+*/
 
 module.exports = router;
 
@@ -193,3 +324,116 @@ async function getIndividus() {
     b: b,
   };
 }
+
+
+function initScore(){
+  console.log("Init du score");
+  return {
+    enfant : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+
+    robot : {
+      risk:{
+      score : 0, count : 0
+    },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+
+    hommeGrand : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+
+    hommePetit : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+    
+    femmeGrande : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+
+    femmePetite : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    },
+    vieux : {
+      risk:{
+        score : 0, count : 0
+      },
+      reward:{
+        score : 0, count : 0
+      },
+      effort:{
+        score : 0, count : 0
+      }
+    }
+  };
+}
+
+
+
+/* TO DO 
+Renvoyer sur la page, un objet de cette forme dans sessionStorage
+{
+  "stats": {
+    "winners": [
+      {cat : risk; avg : 10, perso : homme},
+      .,
+      .
+    ],
+    "details": {
+      "homme": [{cat : risk; avg : 10},{cat : effort; avg : 8}...],
+      "femme": [...],
+      "autre": [...]
+    }
+  }
+}
+
+Modifier la route /init pour mettre en place le stockage de chaque réponses pour chaque perso
+Faire une route /stats pour donner les stats et rediriger
+
+*/

@@ -3,46 +3,66 @@ const cors = require("cors");
 const session = require("express-session");
 require("dotenv").config();
 require("./config/db_conn.js");
+const path = require("path"); // Ajoute cette ligne au début du fichier
+const MongoStore = require("connect-mongo"); // Ajout du stockage MongoDB
+
+
 
 const app = express();
 const route = require("./routes/Route");
-/*
-app.use(
-  cors({
-    origin: "http://localhost:4200",
-    credentials: true,
-  })
-);*/
 
-
-const corsOptions = {
-  origin: 'https://choice-risk-reward.vercel.app',
-  optionsSuccessStatus: 200, // Pour les navigateurs anciens
-  credentials: true
-};
-
-app.use(cors(corsOptions));
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // IMPORTANT : faire confiance au proxy pour les cookies sécurisés
 app.set('trust proxy', 1);
+
+app.use(
+  cors({
+    origin: "https://choices-eta.vercel.app/", 
+    credentials: true, 
+  })
+);
 
 app.use(
   session({
     secret: "secret-key", // Clé en attendant pour tester
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI, // 🔥 Stocker les sessions en base MongoDB
+      collectionName: "sessions"
+    }),
     proxy: true,
     cookie: {
       secure: true,
       httpOnly: true, 
       sameSite: "none",
-      domain: "ter-riskreward-tmap.onrender.com", // Spécifiez le domaine
     }, // Passe à true si HTTPS
   })
 );
+
+//app.use(cors());
+
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api", route);
+
+
+// 🔹 Servir les fichiers Angular depuis la racine
+const angularDistPath = path.join(__dirname, "dist", "frontend-app", "browser");
+
+// ✅ Servir les fichiers Angular
+app.use(express.static(angularDistPath));
+
+app.get("*", (req, res, next) => {
+  if (req.url.startsWith("/api/") || req.url.endsWith(".js") || req.url.endsWith(".css") || req.url.endsWith(".ico") || req.url.endsWith(".json")) {
+    return next();
+  }
+  res.sendFile(path.join(angularDistPath, "index.html"));
+});
+
+
 
 app.use((req, res, next) => {
   console.log(
@@ -63,12 +83,14 @@ app.use((err, req, res, next) => {
 
 app.use((req, res, next) => {
   console.log("📝 Cookies reçus :", req.headers.cookie);
+  console.log("🔹 Session ID en cours :", req.sessionID);
   next();
 });
 
-app.use("/", route);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+
+module.exports = app;
+
+
+
