@@ -1,0 +1,18 @@
+<!-- Bouton "Suivant" (s'affiche seulement si toutes les ressources ne sont PAS affichées) -->
+<button
+  class="submit-button"
+  *ngIf="!allRessourcesDisplayed"
+  (click)="submitResponse()"
+  (click)="onButtonClick()"
+>
+  Suivant
+</button>
+
+<!-- Bouton pour aller à la page finale (s'affiche si toutes les ressources sont affichées) -->
+<button
+  class="submit-button"
+  *ngIf="allRessourcesDisplayed"
+  (click)="goToFinalPage()"
+>
+  Terminer le jeu
+</button>

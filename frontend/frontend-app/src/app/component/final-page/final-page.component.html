@@ -1,0 +1,92 @@
+<div class="flex justify-center items-center w-screen mt-8 mb-8">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="text-center p-12">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mx-auto mb-4"></div>
+        <p class="text-xl text-blue-600">Chargement des statistiques...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="!loading && error" class="text-center p-12 rounded-lg mx-auto shadow-lg bg-red-100 text-red-700">
+        <h2 class="text-2xl mb-4">⚠️ Erreur</h2>
+        <p class="mb-4">{{ error }}</p>
+        <button (click)="quitter()" class="py-2 px-5 text-white bg-red-600 hover:bg-red-500 rounded transition-colors">
+            Retour à l'accueil
+        </button>
+    </div>
+
+    <!-- Content -->
+    <div *ngIf="!loading && !error" class="text-center p-12 rounded-lg mx-auto shadow-2xl bg-gradient-to-br from-blue-400 to-teal-700 text-white">
+      <h1 class="text-4xl mb-6">🎉 Merci pour votre participation ! 🎉</h1>
+  
+      <!-- Winners Section -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white bg-opacity-20 p-4 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold mb-2">{{ getCategoryTitle('risk') }}</h2>
+          <div class="text-5xl mb-2">{{ getEmoji('risk') }}</div>
+          <p class="text-lg">Score: {{ stats.winners.risk.avg }}/10</p>
+          <p class="text-md italic">{{ stats.winners.risk.perso }}</p>
+        </div>
+        <div class="bg-white bg-opacity-20 p-4 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold mb-2">{{ getCategoryTitle('reward') }}</h2>
+          <div class="text-5xl mb-2">{{ getEmoji('reward') }}</div>
+          <p class="text-lg">Score: {{ stats.winners.reward.avg }}/10</p>
+          <p class="text-md italic">{{ stats.winners.reward.perso }}</p>
+        </div>
+        <div class="bg-white bg-opacity-20 p-4 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold mb-2">{{ getCategoryTitle('effort') }}</h2>
+          <div class="text-5xl mb-2">{{ getEmoji('effort') }}</div>
+          <p class="text-lg">Score: {{ stats.winners.effort.avg }}/10</p>
+          <p class="text-md italic">{{ stats.winners.effort.perso }}</p>
+        </div>
+      </div>
+  
+      <!-- Details Section -->
+      <div class="mb-8">
+        <h2 class="text-2xl mb-4">Statistiques détaillées</h2>
+        
+        <div class="space-y-6 grid grid-row-1 md:grid-cols-2 gap-4">
+          <div *ngFor="let person of getDetailsPersons()" class="bg-white bg-opacity-10 p-4 rounded-lg">
+            <h3 class="text-xl mb-2">{{ person }}</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="bg-white bg-opacity-10 p-3 rounded">
+                <div class="flex items-center gap-2">
+                  <span>{{ getEmoji('risk') }}</span>
+                  <span>{{ getCategoryTitle('risk') }}</span>
+                </div>
+                <div class="w-full bg-gray-300 bg-opacity-30 rounded-full h-2.5 mt-2">
+                  <div class="bg-pink-500 h-2.5 rounded-full" [style.width]="(stats.details[person].risk.score * 10) + '%'"></div>
+                </div>
+                <p class="text-sm mt-1">{{ stats.details[person].risk.score }}/10</p>
+              </div>
+              <div class="bg-white bg-opacity-10 p-3 rounded">
+                <div class="flex items-center gap-2">
+                  <span>{{ getEmoji('reward') }}</span>
+                  <span>{{ getCategoryTitle('reward') }}</span>
+                </div>
+                <div class="w-full bg-gray-300 bg-opacity-30 rounded-full h-2.5 mt-2">
+                  <div class="bg-pink-500 h-2.5 rounded-full" [style.width]="(stats.details[person].reward.score * 10) + '%'"></div>
+                </div>
+                <p class="text-sm mt-1">{{ stats.details[person].reward.score }}/10</p>
+              </div>
+              <div class="bg-white bg-opacity-10 p-3 rounded">
+                <div class="flex items-center gap-2">
+                  <span>{{ getEmoji('effort') }}</span>
+                  <span>{{ getCategoryTitle('effort') }}</span>
+                </div>
+                <div class="w-full bg-gray-300 bg-opacity-30 rounded-full h-2.5 mt-2">
+                  <div class="bg-pink-500 h-2.5 rounded-full" [style.width]="(stats.details[person].effort.score * 10) + '%'"></div>
+                </div>
+                <p class="text-sm mt-1">{{ stats.details[person].effort.score }}/10</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Buttons -->
+      <div class="mt-6">
+        <button (click)="quitter()" class="py-2 px-5 text-xl text-white bg-indigo-700 hover:bg-indigo-600 rounded transition-colors mx-2">🏠</button>
+        <button (click)="openDialog()" class="py-2 px-5 text-xl text-white bg-indigo-700 hover:bg-indigo-600 rounded transition-colors mx-2">ℹ️</button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,185 @@
+.container {
+    max-width: 600px;
+    flex: 1;
+    padding: 20px;
+    background: linear-gradient(45deg, #5538f8 0%, hsl(14, 78%, 52%) 100%);
+    border-radius: 15px;
+    box-shadow:0px 0px 100px 10px rgba(79, 172, 254, 0.5);
+    margin: 0 auto;
+}
+
+
+/* 📌 Conteneur du titre et de la description */
+.force-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* 🎯 Style du titre */
+.force-header h1 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #ff8c00, #ff0080, #8a2be2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.8), 
+                 0 0 20px rgba(255, 0, 128, 0.8), 
+                 0 0 30px rgba(138, 43, 226, 0.8);
+}
+
+/* ✍️ Style de la description */
+.force-header .force-description {
+    font-size: 1.2em;
+    color: #ddd;
+    max-width: 100%;
+    margin: 0 auto 20px auto;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.force-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #27243b;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    margin: 50px auto;
+    margin-top: 2px;
+}
+
+/* Chaque ligne = 3 colonnes alignées */
+.force-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Colonne 1 : Image + description */
+.force-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 40%;
+}
+
+/* Image */
+.force-info img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #222020;
+    padding: 5px;
+}
+
+/* Description */
+.desc_stick {
+    font-size: 1em;
+    color: white;
+    text-align: left;
+}
+
+/* Colonne 2 : Valeur numérique */
+.force-value {
+    width: 15%;
+    text-align: center;
+    font-size: 1.2em;
+    color: white;
+}
+
+/* Colonne 3 : Slider */
+.force-slider {
+    width: 45%;
+    margin-bottom: 30px;
+}
+
+/* Centrage du bouton */
+.button-submit {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.button-submit button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    color: white;
+    background: #ff5733;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.button-submit button:hover {
+    background: #d44d2e;
+}
+
+/* 📱 Responsive pour mobiles */
+@media (max-width: 600px) {
+
+    .force-header h1 {
+        font-size: 2em;
+    }
+
+    .force-header .container {
+        max-width: 95%;
+    }
+    .force-card {
+        max-width: 95%;
+    }
+
+    .force-row {
+        flex-direction: column; /* Passe en colonne sur mobile */
+        align-items: center;
+    }
+
+    .force-info {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .force-value {
+        width: auto;
+    }
+
+    .force-slider {
+        width: 100%;
+    }
+}
+
+/*
+.button-container {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .button-submit {
+    background-color: #9333ea;
+    color: white;
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    transform: scale(1);
+  }
+  
+  .button-submit:hover {
+    background-color: #7e22ce;
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(147, 51, 234, 0.25);
+  }*/

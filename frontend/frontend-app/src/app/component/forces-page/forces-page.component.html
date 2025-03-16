@@ -1,0 +1,31 @@
+<div class="force-header">
+<h1>Attribution des forces</h1>
+<div class="container">
+  <p class="force-description">
+    C'est le moment de choisir les forces physiques pour chacun des individus ! Vous êtes libres d'attribuer n'importe quelle force en fonction de votre perception des personnages. 
+    Gardez à l'esprit que ces forces influenceront les décisions prises dans les scénarios à venir. Soyez stratégiques ! 💡
+  </p>
+</div>
+</div>
+
+<div class="force-card">
+  <div class="force-row" *ngFor="let force of forces; let i = index">
+    <!-- Colonne 1 : Image + Description -->
+    <div class="force-info">
+      <img [src]="force.image" alt="Image {{ i + 1 }}" />
+      <p class="desc_stick">{{ force.desc }}</p>
+    </div>
+    <!-- Colonne 2 : Valeur -->
+    <div class="force-value">
+      {{ force.value }}
+    </div>
+    <!-- Colonne 3 : Slider -->
+    <div class="force-slider">
+      <app-slider [singleSliderFlag]="true" [(value1)]="force.value"></app-slider>
+    </div>
+  </div>
+
+  <div class="button-submit">
+    <button routerLink="/img-text" (click)="submit()">Commencer</button>
+  </div>
+</div>

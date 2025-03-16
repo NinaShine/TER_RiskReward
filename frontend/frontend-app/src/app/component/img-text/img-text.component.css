@@ -1,0 +1,186 @@
+.image-section {
+  position: relative;
+  margin: 3rem auto; /* Ajoute un espace en haut et centre horizontalement */
+  border-radius: 0.75rem;
+  overflow: hidden;
+  width: 100%;
+  max-width: 80%; /* Augmente la taille tout en restant responsive */
+  text-align: center;
+  padding-bottom: 2rem; /* Ajoute un peu d'espace en bas */
+  margin-left: 5rem;
+}
+
+@media (max-width: 600px) {
+  .image-section {
+    max-width: 100%;
+    margin-left: 0;
+  }
+  .description-box {
+    max-width: 100%;
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+.image-section img {
+  width: 100%; /* L’image s’adapte au conteneur */
+  max-height: 400px; /* Limite la hauteur pour éviter qu’elle prenne tout l’écran */
+  object-fit: contain; /* Assure que toute l’image est visible */
+  transition: transform 0.7s ease-in-out;
+}
+
+.image-section img:hover {
+  transform: scale(1.05);
+}
+
+
+.description-box {
+  background-color: rgba(17, 24, 39, 0.5);
+  border-radius: 0.75rem;
+  height: auto;
+  padding: 1.5rem;
+  border: 1px solid #374151;
+  text-align: center; /* Centre le texte */
+  max-width: 650rem; /* Même largeur que l'image */
+  margin: 1.5rem auto 0 auto; /* Ajoute un espace entre l'image et la description */
+  margin-left: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.description-text {
+  color: #d1d5db;
+  line-height: 1.625;
+}
+
+/* Centrage vertical des stickmans */
+.img-box {
+  display: flex;
+  position: relative; /* Positionner les éléments absolus dans ce conteneur */
+  justify-content: space-between; /* Espacement entre les stickmans à gauche et à droite */
+  align-items: center; /* Centre verticalement les stickmans */
+  width: 100%; /* Prend toute la largeur de l'image */
+}
+
+
+body {
+  background: linear-gradient(to right, #c084fc, #4f46e5); /* Dégradé du fond global */
+  display: flex;
+  justify-content: center; /* Centre la carte horizontalement */
+  align-items: center; /* Centre la carte verticalement */
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.main-card {
+  background-color: rgba(31, 41, 55, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid #374151;
+  width: 50%; /* Augmente la largeur de la carte principale */
+  height: 40%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Optionnel : si tu veux des décorations sur les côtés dans l'espace extérieur */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  background: linear-gradient(to bottom, #c084fc, rgba(31, 41, 55, 0.5)); /* Dégradé violet et sombre */
+  z-index: 0; /* Derrière la carte */
+}
+
+body::before {
+  left: 0; /* Décoration côté gauche */
+}
+
+body::after {
+  right: 0; /* Décoration côté droit */
+}
+
+
+
+.character-label {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+
+.img-container {
+  display: flex;
+  align-items: flex-start; /* Place les éléments vers le haut */
+  gap: 2rem;
+  height: 100%;
+}
+
+.submit-section {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;     /* Centre verticalement */
+  width: 100%;             /* Assure que la section prend toute la largeur */
+}
+
+
+
+.sliders-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center; /* Centre verticalement les éléments */
+  gap: 4rem; /* Espacement entre les éléments */
+}
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  padding: 2.5rem;
+  border-radius: 10px;
+  width: 120px;
+  height: 120px;
+  margin: 0;
+  text-align: center;
+}
+
+.slider-header {
+  width: 280px; /* Augmente la largeur du slider */
+  height: 180px; /* Augmente la hauteur si nécessaire */
+}
+
+
+.top-right-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #ee2c2c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.top-right-button:hover {
+  background-color: #0056b3;
+}

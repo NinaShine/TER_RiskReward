@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px 10px; 
+    background: #2d2e55; 
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.container-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux blocs de passer en colonne sur petit écran */
+    gap: 20px;
+    max-width: 55%;
+    justify-content: center; /* Centre les containers */
+    margin-top: 20px;
+
+}
+.container {
+    /*max-width: 1000px;*/
+    flex: 1;
+    padding: 40px;
+    background: linear-gradient(45deg, #4facfe 0%, hsl(183, 100%, 25%) 100%);
+    border-radius: 15px;
+    box-shadow:0px 0px 100px 10px rgba(79, 172, 254, 0.5);
+}
+h1 {
+    font-size: 3em; /* Taille plus grande */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-family: 'Poppins', sans-serif; /* Une police moderne et élégante */
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    
+    /* Dégradé animé */
+    /*background: linear-gradient(90deg, #ff8c00, #ff0080, #8a2be2);*/
+    background: linear-gradient(90deg, #0099ff, #00fff2, #2be253);
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientAnimation 5s infinite linear;
+
+    /* Effet néon */
+    text-shadow: 0 0 10px rgba(0, 17, 255, 0.8), 
+                 0 0 20px rgba(0, 255, 234, 0.8), 
+                 0 0 30px rgba(85, 238, 123, 0.89);
+
+    /* Effet de soulignement stylisé */
+    border-bottom: 5px solid rgba(244, 238, 248, 0.7);
+    padding-bottom: 2px;
+}
+
+/* Animation de dégradé fluide */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-family: Apple Chancery;
+}
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    text-align: justify; /* Amélioration de la lecture sur mobile */
+
+}
+a {
+    color: #ffeb3b;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    color: white;
+    background: #f07c59;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn:hover {
+    background: #c05a3b;
+}
+
+
+
+/* 📱 Media Query pour mobiles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5em;
+        letter-spacing: 2px;
+        padding: 8px 15px;    }
+
+    .container-wrapper {
+        display: flex;
+        flex-wrap: wrap; /* Permet aux blocs de passer en colonne sur petit écran */
+        gap: 20px;
+        max-width: 100%;
+        justify-content: center; /* Centre les containers */
+        margin-top: 20px;
+    
+    }
+
+    .container {
+        width: 100vw; /* Prend toute la largeur de l'écran */
+        max-width: 100%; /* Assure qu'il ne soit pas limité */
+        box-sizing: border-box; /* Empêche les bordures/marges de dépasser */
+        padding: 20px; /* Ajuste le padding pour ne pas trop compresser le contenu */
+    }
+
+    p {
+        font-size: 1em; /* Réduction de la taille des textes */
+        text-align: left; /* Alignement à gauche */
+    }
+
+    .btn{
+        font-size: 1em;
+    }
+}
