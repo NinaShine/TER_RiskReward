@@ -25,7 +25,17 @@ export class FinalPageComponent {
   constructor(private router: Router, private http: HttpClient, private dialogRef: MatDialog) {}
 
   quitter() {
-    this.router.navigate(['/']);
+    this.http.post("http://localhost:3000/reset-session", {}, { withCredentials: true }).subscribe({
+      next: () => {
+        console.log("✅ Session réinitialisée");
+        sessionStorage.clear(); // Nettoyer toutes les données côté front
+        this.router.navigate(['/']); // Rediriger vers la page d'accueil
+      },
+      error: (error) => {
+        console.error("❌ Erreur lors de la réinitialisation :", error);
+        this.router.navigate(['/']); // Rediriger quand même en cas d'erreur
+      }
+    });
   }
 
   openDialog() {
