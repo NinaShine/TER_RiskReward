@@ -68,12 +68,12 @@ export class SubmitComponent {
     const forces = JSON.parse(sessionStorage.getItem("list_forces") || "[]");
     const body = {
       sliderValue1: {
-        first: this.sliderValue1,
-        second: 10 - this.sliderValue1,
+        first: 10 - this.sliderValue1,
+        second: this.sliderValue1,
       },
       sliderValue2: {
-        first: this.sliderValue2,
-        second: 10 - this.sliderValue2,
+        first: 10 - this.sliderValue2,
+        second: this.sliderValue2,
       },
       forces: forces,
     };

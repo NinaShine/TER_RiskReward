@@ -15,7 +15,7 @@
 <div class="sliders-section">
   <!-- Slider 1 -->
   <div class="slider-container">
-    <div class="slider-value-left">{{ value1 }}</div>
+    <div class="slider-value-left">{{ 10 - value1 }}</div>
     <div class="slider-header">
       <label for="slider1" class="slider-label">
         {{label1}} 
@@ -32,13 +32,13 @@
     />
   </div>
 
-  <div class="slider-value-right"> {{ 10 - value1 }} </div> <!-- Ajout côté droit -->
+  <div class="slider-value-right"> {{ value1 }} </div> <!-- Ajout côté droit -->
 </div>
 
 
   <!-- Slider 2 -->
   <div class="slider-container">
-    <div class="slider-value-left">{{ value2 }}</div>
+    <div class="slider-value-left">{{ 10 - value2 }}</div>
 
     <div class="slider-header">
       <label for="slider2" class="slider-label">
@@ -54,7 +54,7 @@
       (ngModelChange)="onValue2Change($event)"
     />
   </div>
-  <div class="slider-value-right"> {{ 10 - value2 }} </div> <!-- Ajout côté droit -->
+  <div class="slider-value-right"> {{ value2 }} </div> <!-- Ajout côté droit -->
   </div>
 </div>
 }
