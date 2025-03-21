@@ -51,7 +51,6 @@ export class SubmitComponent {
   //Mais sinon c'est la bonne logique.
 
   ngOnInit() {
-    this.refreshScenario();
     this.checkResourcesStatus();
   }
 
@@ -87,7 +86,7 @@ export class SubmitComponent {
       .subscribe({
         next: (response) => {
           console.log("Réponse serveur : ", response);
-          this.refreshScenario();
+          //this.refreshScenario();
         },
         complete: () => {
           console.log("Requête terminée");
