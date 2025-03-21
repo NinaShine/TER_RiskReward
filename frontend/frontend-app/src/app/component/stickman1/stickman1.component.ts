@@ -29,7 +29,6 @@ export class Stickman1Component implements OnInit {
         this.url1 = selectedItem.image;
         this.name1 = selectedItem.desc;
         this.force1 = selectedItem.value;
-        console.log("S1 url1:", this.url1);
       }else{
         console.log("Aucun objet trouvé avec la description:", this.individuA);
       }
@@ -70,9 +69,6 @@ export class Stickman1Component implements OnInit {
 
     if (this.item) {
       let itemsArray = JSON.parse(this.item); // Conversion en tableau d'objets
-
-      console.log("S2 itemsArray", itemsArray);
-      console.log("S1 individu A:", this.individuA)
       let selectedItem = itemsArray.find((obj: { desc: string; }) => obj.desc === this.individuA);
 
       if (selectedItem){

@@ -38,7 +38,7 @@ export class SliderComponent implements OnChanges {
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes["image"]) {
-      console.log("Image changée :", this.image);
+      //console.log("Image changée :", this.image);
       this.setLabels();
     }
   }

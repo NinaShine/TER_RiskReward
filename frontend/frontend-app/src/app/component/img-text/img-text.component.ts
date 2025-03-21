@@ -45,7 +45,6 @@ export class ImgTextComponent implements OnInit {
   loadScenario() {
     this.currentTurn = parseInt(sessionStorage.getItem("turn") || "2", 10);
     const storedScenario = sessionStorage.getItem("scenario");
-    console.log(sessionStorage.length);
     if (storedScenario) {
       try {
         this.scenario = JSON.parse(storedScenario);
@@ -79,13 +78,13 @@ export class ImgTextComponent implements OnInit {
           // Vérifie si les données sont valides
           this.scenario = data.scenario;
           console.log("✅ Scenario reçu :", this.scenario);
-          console.log("Data : ", data);
+          //console.log("Data : ", data);
 
           // Sauvegarde dans `sessionStorage` pour éviter les appels répétés
           sessionStorage.setItem("scenario", JSON.stringify(data.scenario));
           sessionStorage.setItem("turn", JSON.stringify(data.turn));
           sessionStorage.setItem("scores",JSON.stringify(data.scores));
-          console.log("Scores : ", data.scores);
+          //console.log("Scores : ", data.scores);
         } else {
           console.error("❌ Scenario invalide :", data);
         }

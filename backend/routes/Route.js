@@ -32,7 +32,7 @@ router.get("/init", async (req, res) => {
       req.session.randomTexts = texts;
       req.session.turn = 1;
       req.session.scores = initScore();
-      console.log("Request.session: ", req.session);
+      //console.log("Request.session: ", req.session);
       //Initialisation du tableau des scores
     } else {
       req.session.turn++;
@@ -50,7 +50,7 @@ router.get("/init", async (req, res) => {
     // Extraire et retourner le prochain élément avec shift()
     const individus = await getIndividus();
     console.log(
-      "📋 Liste des textes restants :",
+      "Nombre de textes restants :",
       req.session.randomTexts.length
     );
 
@@ -125,8 +125,8 @@ router.post("/submitForm", async (req, res) => {
 
 router.post("/submit", async (req, res) => {
   const scenario = req.session.scenario;
-  const sessionId = req.sessionID; // ou req.session.id
-  console.log("Session ID :", sessionId);
+  const sessionId = req.sessionID;
+  console.log("Accés à submit");
   if (!scenario) {
     console.error("Aucune session trouvée !");
     return res.status(400).json({

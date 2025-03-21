@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  console.log(`📡 Requête reçue : ${req.method} ${req.url}`);
+  //console.log(`📡 Requête reçue : ${req.method} ${req.url}`);
   next();
 });
 
@@ -44,7 +44,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  console.log("📝 Cookies reçus :", req.headers.cookie);
+  //console.log("📝 Cookies reçus :", req.headers.cookie);
   next();
 });
 
