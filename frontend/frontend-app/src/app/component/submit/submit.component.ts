@@ -51,6 +51,7 @@ export class SubmitComponent {
   //Mais sinon c'est la bonne logique.
 
   ngOnInit() {
+    this.refreshScenario();
     this.checkResourcesStatus();
   }
 
@@ -61,6 +62,7 @@ export class SubmitComponent {
   checkResourcesStatus() {
     this.allRessourcesDisplayed =
       sessionStorage.getItem("allRessourcesDisplayed") === "true";
+      //console.log("Attribut scénario du bouton : ",this.scenario);
   }
 
   submitResponse() {
