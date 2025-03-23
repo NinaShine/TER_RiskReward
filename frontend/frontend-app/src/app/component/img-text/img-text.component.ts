@@ -3,10 +3,11 @@ import { DataService } from "../../services/data.service";
 import { SliderComponent } from "../slider/slider.component";
 import { Stickman1Component } from "../stickman1/stickman1.component";
 import { SubmitComponent } from "../submit/submit.component";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-img-text",
-  imports: [SliderComponent, Stickman1Component, SubmitComponent],
+  imports: [SliderComponent, Stickman1Component, SubmitComponent, CommonModule],
   templateUrl: "./img-text.component.html",
   styleUrls: ["./img-text.component.css"],
 })
@@ -22,29 +23,27 @@ export class ImgTextComponent implements OnInit {
   sliderValue1: number = 5;
   sliderValue2: number = 5;
 
+  allDisplayed: boolean = false;
+
+
   constructor(private dataService: DataService) {}
 
-  /*
-  ngOnInit(): void {
-    console.log("ImgTextComponent initialized");
-    this.dataService.getRandomDoc().subscribe(data => {
-      this.content = data.content;
-      this.imageUrl = data.imageUrl; //il faut mettre les images dans assets
-      this.associationType = data.associationType;
-      console.log("Voici les données du back", data);
-    });
-  } */
-
   ngOnInit() {
-    this.loadScenario(); // 🔥 Empêche le rechargement de scénario après un `F5`
+    this.loadScenario(); 
   }
 
   /**
    * Charge le scénario depuis `sessionStorage` ou appelle l'API une seule fois
    */
   loadScenario() {
-    this.currentTurn = parseInt(sessionStorage.getItem("turn") || "2", 10);
     const storedScenario = sessionStorage.getItem("scenario");
+    const storedTurn = sessionStorage.getItem("turn");
+
+    //this.currentTurn = parseInt(sessionStorage.getItem("turn") || "1", 10);
+    if (storedTurn) {
+      this.currentTurn = parseInt(storedTurn, 10);
+    }
+
     console.log(sessionStorage.length);
     if (storedScenario) {
       try {
@@ -67,11 +66,12 @@ export class ImgTextComponent implements OnInit {
    */
   fetchScenario() {
     console.log("🔄 Fetching new scenario...");
-    this.dataService.getScenario().subscribe(
+    this.dataService.getInitScenario().subscribe(
       (data) => {
         if (data?.allRessourcesDisplayed) {
           // Stocke cette info dans sessionStorage
           sessionStorage.setItem("allRessourcesDisplayed", "true");
+          this.allDisplayed = true;
         } else {
           sessionStorage.removeItem("allRessourcesDisplayed");
         }
@@ -100,4 +100,9 @@ export class ImgTextComponent implements OnInit {
     this.sliderValue1 = 5;
     this.sliderValue2 = 5;
   }
+
+onRessourcesEpuisees(etat: boolean) {
+  this.allDisplayed = etat;
+}
+
 }
