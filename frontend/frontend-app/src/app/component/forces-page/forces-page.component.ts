@@ -19,8 +19,8 @@ interface Force {
 })
 export class ForcesPageComponent {
   forces: Force[] = [
-    { image: "assets/vieux.png", desc: "Vieux pas genré", value: 1 },
-    { image: "assets/garcons.png", desc: "Enfant pas genré", value: 1 },
+    { image: "assets/vieux.png", desc: "Personne âgée", value: 1 },
+    { image: "assets/garcons.png", desc: "Enfant", value: 1 },
     { image: "assets/robot.png", desc: "Robot", value: 1 },
     { image: "assets/homme_petit.png", desc: "Homme petite taille", value: 1 },
     { image: "assets/femme_petite.png", desc: "Femme petite taille", value: 1 },

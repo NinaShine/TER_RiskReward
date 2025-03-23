@@ -99,6 +99,55 @@ router.get("/init", async (req, res) => {
   }
 });
 
+router.get("/next", async (req, res) => {
+  try {
+    if (!req.session.randomTexts || !req.session.scenario) {
+      return res.status(400).json({ message: "Session non initialisée" });
+    }
+
+    if (req.session.randomTexts.length === 1) {
+      return res.status(200).json({
+        message: "Toutes les ressources ont été affichées.",
+        allRessourcesDisplayed: true,
+      });
+    }
+
+    const individus = await getIndividus();
+    console.log(
+      "📋 Liste des textes restants :",
+      req.session.randomTexts.length
+    );
+    const randomText = req.session.randomTexts.shift();
+    console.log(" Texte sélectionné :", randomText);
+
+    req.session.turn++;
+
+    req.session.scenario = {
+      textId: randomText._id,
+      text: randomText.content,
+      image: randomText.imageUrl,
+      association: randomText.associationType,
+      individuA: individus.a,
+      individuB: individus.b,
+    };
+
+    req.session.save((err) => {
+      if (err) {
+        return res.status(500).json({ error: "Erreur de sauvegarde de la session." });
+      }
+      res.json({
+        scenario: req.session.scenario,
+        turn: req.session.turn,
+        scores: req.session.scores,
+      });
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur serveur", error });
+  }
+});
+
+
 // Route qui enregistre le formulaire soumis
 router.post("/submitForm", async (req, res) => {
   try {
@@ -303,8 +352,8 @@ module.exports = router;
 async function getIndividus() {
   //Modifier tab pour en faire un objet permettant de stocker l'url de l'img de l'individu
   const tab = [
-    "Vieux pas genré",
-    "Enfant pas genré",
+    "Personne âgée",
+    "Enfant",
     "Robot",
     "Homme petite taille",
     "Femme petite taille",

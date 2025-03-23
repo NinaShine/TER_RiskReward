@@ -21,7 +21,7 @@
       class="bg-[rgba(17,24,39,0.5)] rounded-lg p-4 border border-[#374151] text-center mt-4 mb-6"
     >
       <p class="text-gray-300 leading-relaxed">
-        Scénario n°{{ currentTurn - 1 }} / 18
+        Scénario n°{{ allDisplayed ? 18 : currentTurn }} / 18
       </p>
       <br />
       <p class="text-gray-300 leading-relaxed">
@@ -31,9 +31,9 @@
 
     <!-- Ligne du slider avec stickmans de part et d'autre -->
     <div class="flex flex-col items-center mt-4">
-      <div class="flex items-center justify-center gap-4 w-full">
+      <div class="flex items-center justify-center gap-4 w-full" *ngIf="scenario.individuA && scenario.individuB">
         <!-- Stickman gauche -->
-        <app-stickman1 [individuA]="scenario.individuA"></app-stickman1>
+        <app-stickman1 [individu]="scenario.individuA"></app-stickman1>
 
         <!-- Slider centré -->
         <div class="w-[300px] h-[180px]">
@@ -46,7 +46,7 @@
         </div>
 
         <!-- Stickman droit -->
-        <app-stickman1 [individuA]="scenario.individuB"></app-stickman1>
+        <app-stickman1 [individu]="scenario.individuB"></app-stickman1>
       </div>
 
       <!-- Section des boutons en dessous du slider -->
@@ -54,8 +54,11 @@
         <app-submit
           (refreshRequested)="loadScenario()"
           (resetSlidersEvent)="resetSliders()"
+          (ressourcesEpuisees)="onRessourcesEpuisees($event)"
           [sliderValue1]="sliderValue1"
           [sliderValue2]="sliderValue2"
+          [allRessourcesDisplayed]="allDisplayed"
+          [scenario]="scenario"
         ></app-submit>
       </div>
     </div>
