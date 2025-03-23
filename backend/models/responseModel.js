@@ -15,8 +15,8 @@ const responseSchema = new mongoose.Schema({
   personAType: {
     type: String,
     enum: [
-      "Vieux pas genré",
-      "Enfant pas genré",
+      "Personne âgée",
+      "Enfant",
       "Robot",
       "Homme petite taille",
       "Femme petite taille",
@@ -41,8 +41,8 @@ const responseSchema = new mongoose.Schema({
   personBType: {
     type: String,
     enum: [
-      "Vieux pas genré",
-      "Enfant pas genré",
+      "Personne âgée",
+      "Enfant",
       "Robot",
       "Homme petite taille",
       "Femme petite taille",
