@@ -2,8 +2,7 @@
 <button
   class="submit-button"
   *ngIf="!allRessourcesDisplayed"
-  (click)="submitResponse()"
-  (click)="onButtonClick()"
+  (click)="handleSubmitClick()"
 >
   Suivant
 </button>
@@ -12,7 +11,7 @@
 <button
   class="submit-button"
   *ngIf="allRessourcesDisplayed"
-  (click)="goToFinalPage()"
+  (click)="handleSubmitClickFinal()"
 >
   Terminer le jeu
 </button>
