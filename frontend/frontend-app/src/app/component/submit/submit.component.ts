@@ -13,13 +13,13 @@ export class SubmitComponent {
   individu1: string | null = null;
   individu2: string | null = null;
 
-  @Input() sliderValue1: number = 0; // Reçoit la valeur du slider 1
-  @Input() sliderValue2: number = 0; // Reçoit la valeur du slider 2
+  @Input() sliderValue1: number = 0; 
+  @Input() sliderValue2: number = 0; 
   @Input() scenario: any;
   @Input() allRessourcesDisplayed: boolean = false;
 
 
-  @Output() refreshRequested = new EventEmitter<void>(); // Event for parent
+  @Output() refreshRequested = new EventEmitter<void>(); 
   @Output() resetSlidersEvent = new EventEmitter<void>();
   @Output() ressourcesEpuisees = new EventEmitter<boolean>();
 
@@ -72,12 +72,11 @@ export class SubmitComponent {
   }
 
   onButtonClick() {
-    // Récupère la valeur actuelle ou 0 si elle n'existe pas
     let currentTurn = parseInt(sessionStorage.getItem("turn") || "1");
     currentTurn += 1;
     sessionStorage.setItem("turn", currentTurn.toString());
 
-    this.refreshRequested.emit(); // Émet l'événement vers le parent
+    this.refreshRequested.emit(); 
     this.resetSlidersEvent.emit();
   }
 
@@ -87,19 +86,7 @@ export class SubmitComponent {
   }
 
   constructor(private http: HttpClient, private router: Router) {}
-/*
-  ngOnInit() {
-    this.checkResourcesStatus();
-  }
 
-  ngOnChanges() {
-    this.checkResourcesStatus();
-  }
-
-  checkResourcesStatus() {
-    this.allRessourcesDisplayed =
-      sessionStorage.getItem("allRessourcesDisplayed") === "true";
-  }*/
 
   submitResponse() {
     console.log("Submit !");    
@@ -138,7 +125,7 @@ export class SubmitComponent {
       .subscribe((data: any) => {
         if (data?.allRessourcesDisplayed) {
           sessionStorage.setItem("allRessourcesDisplayed", "true");
-          this.ressourcesEpuisees.emit(true); // on notif au parent qu'on est arrivé à la fin de la liste
+          this.ressourcesEpuisees.emit(true); 
         } else {
           sessionStorage.removeItem("allRessourcesDisplayed");
           this.ressourcesEpuisees.emit(false);
@@ -146,7 +133,6 @@ export class SubmitComponent {
 
         // this.scenario = data.scenario;
 
-        // Sauvegarde dans `sessionStorage` pour éviter les appels répétés
         sessionStorage.setItem("scenario", JSON.stringify(data.scenario));
         sessionStorage.setItem("turn", JSON.stringify(data.turn));
         //this.checkResourcesStatus();
@@ -227,55 +213,5 @@ export class SubmitComponent {
       sessionStorage.setItem("scores", JSON.stringify(scores));
     }
   }
-/*
-
-SOLUTION CHATGPT (qui marche pas non plus mais peut servir d'insipiration)
-
-  updateScores(slider1: number, slider2: number) {
-    if (!this.scenario || !this.scenario.individuA || !this.scenario.individuB) {
-      console.warn("⚠️ Scénario invalide, score non mis à jour.");
-      return;
-    }
-  
-    let scores = JSON.parse(sessionStorage.getItem("scores") || "{}");
-    const individu1 = this.scenario.individuA;
-    const individu2 = this.scenario.individuB;
-    console.log("Individu 1 : ", individu1, "- Individu 2 : ", individu2, "- slider1 : ",slider1, "- slider2 : ",slider2);
-    console.log("Objet scenario : ", this.scenario);
-
-    const [categorie1, categorie2] = this.scenario.association.split("-");
-    console.log("Catégories : ", categorie1, categorie2);
-  
-    const key1 = this.individuMap[individu1];
-    const key2 = this.individuMap[individu2];
-    console.log("Premier : ",scores[key1][categorie1]);
-    console.log("Second : ",scores[key1][categorie2]);
-  
-    // Initialisation si elle n'existe pas
-    for (const key of [key1, key2]) {
-      if (!scores[key]) scores[key] = {};
-      for (const cat of [categorie1, categorie2]) {
-        if (!scores[key][cat]) {
-          scores[key][cat] = { score: 0, count: 0 };
-        }
-      }
-    }
-  
-    //Premier individu
-    scores[key1][categorie1].score += slider1;
-    scores[key1][categorie1].count++;
-    scores[key1][categorie2].score += slider2;
-    scores[key1][categorie2].count++;
-  
-    //Second individu
-    scores[key2][categorie1].score += 10 - slider1;
-    scores[key2][categorie1].count++;
-    scores[key2][categorie2].score += 10 - slider2;
-    scores[key2][categorie2].count++;
-  
-    sessionStorage.setItem("scores", JSON.stringify(scores));
-    console.log("Scores mis à jour :", scores);
-  }
-  */
     
 }

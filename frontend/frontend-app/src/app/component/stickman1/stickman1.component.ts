@@ -14,34 +14,11 @@ export class Stickman1Component implements OnChanges {
   @Input() individu: string='';
 
   constructor(private dataService: DataService) {}
-/*
-  ngOnInit(): void {
-    this.item = sessionStorage.getItem("list_forces");
-    //console.log("item de session:", this.item);
-
-    if (this.item != null) {
-      let itemsArray = JSON.parse(this.item); // Conversion en tableau d'objets
-
-      let selectedItem = itemsArray.find((obj: { desc: string; }) => obj.desc === this.individuA);
-
-      if (selectedItem){
-        this.url1 = selectedItem.image;
-        this.name1 = selectedItem.desc;
-        this.force1 = selectedItem.value;
-        console.log("S1 url1:", this.url1);
-      }else{
-        console.log("Aucun objet trouvé avec la description:", this.individuA);
-      }
-    } else {
-      console.log("erreur, var de session incorrecte");
-    }
-    }
-*/
   ngOnChanges(): void {
     this.item = sessionStorage.getItem("list_forces");
 
     if (this.item) {
-      let itemsArray = JSON.parse(this.item); // Conversion en tableau d'objets
+      let itemsArray = JSON.parse(this.item); 
 
       console.log("S2 itemsArray", itemsArray);
       console.log("S1 individu A:", this.individu)

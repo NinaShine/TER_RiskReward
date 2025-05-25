@@ -15,17 +15,17 @@ import { FormsModule } from "@angular/forms";
   styleUrl: "./slider.component.css",
 })
 export class SliderComponent implements OnChanges {
-  @Input() value1: number = 5; // Déclaré comme @Input()
-  @Input() value2: number = 5; // Valeur par défaut
+  @Input() value1: number = 5; 
+  @Input() value2: number = 5;
   @Input() associationType!: string; 
   @Input() singleSliderFlag = false;
   @Input() image: string = "";
 
-  label1: string = "Mesure A"; // Label par défaut
-  label2: string = "Mesure B"; // Label par défaut
+  label1: string = "Mesure A"; 
+  label2: string = "Mesure B"; 
 
-  @Output() value1Change = new EventEmitter<number>(); //emitter for value1
-  @Output() value2Change = new EventEmitter<number>(); //emitter for value2
+  @Output() value1Change = new EventEmitter<number>(); 
+  @Output() value2Change = new EventEmitter<number>(); 
 
   onValue1Change(newValue: number) {
     this.value1 = newValue;

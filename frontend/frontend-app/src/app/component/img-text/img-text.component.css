@@ -23,9 +23,9 @@
 }
 
 .image-section img {
-  width: 100%; /* L’image s’adapte au conteneur */
-  max-height: 400px; /* Limite la hauteur pour éviter qu’elle prenne tout l’écran */
-  object-fit: contain; /* Assure que toute l’image est visible */
+  width: 100%; 
+  max-height: 400px; 
+  object-fit: contain; 
   transition: transform 0.7s ease-in-out;
 }
 
@@ -40,9 +40,9 @@
   height: auto;
   padding: 1.5rem;
   border: 1px solid #374151;
-  text-align: center; /* Centre le texte */
-  max-width: 650rem; /* Même largeur que l'image */
-  margin: 1.5rem auto 0 auto; /* Ajoute un espace entre l'image et la description */
+  text-align: center;
+  max-width: 650rem; 
+  margin: 1.5rem auto 0 auto;
   margin-left: 2.5rem;
   margin-bottom: 2.5rem;
 }
@@ -52,21 +52,20 @@
   line-height: 1.625;
 }
 
-/* Centrage vertical des stickmans */
 .img-box {
   display: flex;
-  position: relative; /* Positionner les éléments absolus dans ce conteneur */
-  justify-content: space-between; /* Espacement entre les stickmans à gauche et à droite */
-  align-items: center; /* Centre verticalement les stickmans */
-  width: 100%; /* Prend toute la largeur de l'image */
+  position: relative; 
+  justify-content: space-between; 
+  align-items: center; 
+  width: 100%; 
 }
 
 
 body {
-  background: linear-gradient(to right, #c084fc, #4f46e5); /* Dégradé du fond global */
+  background: linear-gradient(to right, #c084fc, #4f46e5); 
   display: flex;
-  justify-content: center; /* Centre la carte horizontalement */
-  align-items: center; /* Centre la carte verticalement */
+  justify-content: center; 
+  align-items: center; 
   height: 100vh;
   margin: 0;
 }
@@ -86,13 +85,12 @@ body {
   padding: 2rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   border: 1px solid #374151;
-  width: 50%; /* Augmente la largeur de la carte principale */
+  width: 50%; 
   height: 40%;
   position: relative;
   z-index: 1;
 }
 
-/* Optionnel : si tu veux des décorations sur les côtés dans l'espace extérieur */
 body::before,
 body::after {
   content: "";
@@ -101,15 +99,15 @@ body::after {
   bottom: 0;
   width: 15%;
   background: linear-gradient(to bottom, #c084fc, rgba(31, 41, 55, 0.5)); /* Dégradé violet et sombre */
-  z-index: 0; /* Derrière la carte */
+  z-index: 0; 
 }
 
 body::before {
-  left: 0; /* Décoration côté gauche */
+  left: 0; 
 }
 
 body::after {
-  right: 0; /* Décoration côté droit */
+  right: 0; 
 }
 
 
@@ -122,16 +120,16 @@ body::after {
 
 .img-container {
   display: flex;
-  align-items: flex-start; /* Place les éléments vers le haut */
+  align-items: flex-start; 
   gap: 2rem;
   height: 100%;
 }
 
 .submit-section {
   display: flex;
-  justify-content: center; /* Centre horizontalement */
-  align-items: center;     /* Centre verticalement */
-  width: 100%;             /* Assure que la section prend toute la largeur */
+  justify-content: center; 
+  align-items: center;    
+  width: 100%;            
 }
 
 
@@ -145,8 +143,8 @@ body::after {
 
 .slider-container {
   display: flex;
-  align-items: center; /* Centre verticalement les éléments */
-  gap: 4rem; /* Espacement entre les éléments */
+  align-items: center; 
+  gap: 4rem; 
 }
 
 .left, .right {
@@ -164,8 +162,8 @@ body::after {
 }
 
 .slider-header {
-  width: 280px; /* Augmente la largeur du slider */
-  height: 180px; /* Augmente la hauteur si nécessaire */
+  width: 280px;
+  height: 180px; 
 }
 
 

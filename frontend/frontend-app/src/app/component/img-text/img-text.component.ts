@@ -19,7 +19,6 @@ export class ImgTextComponent implements OnInit {
   currentTurn: number = 1;
   maxTurn: number = 1;
 
-  // maintenant on a les valeurs des sliders ici
   sliderValue1: number = 5;
   sliderValue2: number = 5;
 
@@ -32,9 +31,7 @@ export class ImgTextComponent implements OnInit {
     this.loadScenario(); 
   }
 
-  /**
-   * Charge le scénario depuis `sessionStorage` ou appelle l'API une seule fois
-   */
+
   loadScenario() {
     const storedScenario = sessionStorage.getItem("scenario");
     const storedTurn = sessionStorage.getItem("turn");
@@ -49,49 +46,44 @@ export class ImgTextComponent implements OnInit {
       try {
         this.scenario = JSON.parse(storedScenario);
         console.log(
-          "✅ Scenario chargé depuis sessionStorage :",
+          "Scenario chargé depuis sessionStorage :",
           this.scenario
         );
       } catch (error) {
-        console.error("❌ Erreur de parsing JSON :", error);
-        this.fetchScenario(); // Si JSON invalide, recharger un scénario
+        console.error("Erreur de parsing JSON :", error);
+        this.fetchScenario(); 
       }
     } else {
-      this.fetchScenario(); // Aucun scénario en mémoire, premier appel à l'API
+      this.fetchScenario(); 
     }
   }
 
-  /**
-   * Récupère un nouveau scénario depuis l'API et le stocke dans `sessionStorage`
-   */
+
   fetchScenario() {
     console.log("🔄 Fetching new scenario...");
     this.dataService.getInitScenario().subscribe(
       (data) => {
         if (data?.allRessourcesDisplayed) {
-          // Stocke cette info dans sessionStorage
           sessionStorage.setItem("allRessourcesDisplayed", "true");
           this.allDisplayed = true;
         } else {
           sessionStorage.removeItem("allRessourcesDisplayed");
         }
         if (data && data.scenario.textId) {
-          // Vérifie si les données sont valides
           this.scenario = data.scenario;
-          console.log("✅ Scenario reçu :", this.scenario);
+          console.log("Scenario reçu :", this.scenario);
           console.log("Data : ", data);
 
-          // Sauvegarde dans `sessionStorage` pour éviter les appels répétés
           sessionStorage.setItem("scenario", JSON.stringify(data.scenario));
           sessionStorage.setItem("turn", JSON.stringify(data.turn));
           sessionStorage.setItem("scores",JSON.stringify(data.scores));
           console.log("Scores : ", data.scores);
         } else {
-          console.error("❌ Scenario invalide :", data);
+          console.error("Scenario invalide :", data);
         }
       },
       (error) => {
-        console.error("❌ Erreur API :", error);
+        console.error("Erreur API :", error);
       }
     );
   }
