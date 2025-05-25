@@ -4,18 +4,15 @@ const Text = require("../models/textModel");
 const Response = require("../models/responseModel");
 const Form = require("../models/formModel"); // ⬅️ Assure-toi d'importer le bon fichier
 
-// Route qui retourne un texte et une image aléatoire
 router.get("/init", async (req, res) => {
   console.log("requête init");
   try {
-    // Initialiser la liste une seule fois par utilisateur
     if (!req.session.randomTexts) {
       const allTexts = await Text.find();
       if (!allTexts.length) {
         return res.status(404).json({ message: "Aucun texte trouvé" });
       }
 
-      // Dupliquer chaque texte
       let texts = [];
       allTexts.forEach((text) => {
         texts.push(text, text);
@@ -63,7 +60,6 @@ router.get("/init", async (req, res) => {
       individuB: individus.b,
     };
 
-    //console.log("✅ Scenario sauvegardé :", req.session.scenario);
 
     req.session.save((err) => {
       if (err) {
@@ -305,7 +301,6 @@ router.post("/compute-stats", (req,res)=>{
 module.exports = router;
 
 async function getIndividus() {
-  //Modifier tab pour en faire un objet permettant de stocker l'url de l'img de l'individu
   const tab = [
     "Personne âgée",
     "Enfant",
