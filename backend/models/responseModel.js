@@ -63,10 +63,9 @@ const responseSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  // Ajoute simplement cette ligne
   sessionId: {
     type: String,
-    required: true, // ou true, selon tes besoins
+    required: true, 
   },
   createdAt: {
     type: Date,
