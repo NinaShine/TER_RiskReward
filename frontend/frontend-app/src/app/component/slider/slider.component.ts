@@ -6,18 +6,18 @@ import {
   OnChanges,
   SimpleChanges,
 } from "@angular/core";
-import { FormsModule } from "@angular/forms"; // Import FormsModule
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-slider",
-  imports: [FormsModule], // Add FormsModule to the imports array
+  imports: [FormsModule], 
   templateUrl: "./slider.component.html",
   styleUrl: "./slider.component.css",
 })
 export class SliderComponent implements OnChanges {
   @Input() value1: number = 5; // Déclaré comme @Input()
   @Input() value2: number = 5; // Valeur par défaut
-  @Input() associationType!: string; // Ajout de l'input pour associationType
+  @Input() associationType!: string; 
   @Input() singleSliderFlag = false;
   @Input() image: string = "";
 
@@ -29,12 +29,12 @@ export class SliderComponent implements OnChanges {
 
   onValue1Change(newValue: number) {
     this.value1 = newValue;
-    this.value1Change.emit(newValue); // Émet la nouvelle valeur du slider 1
+    this.value1Change.emit(newValue); 
   }
 
   onValue2Change(newValue: number) {
     this.value2 = newValue;
-    this.value2Change.emit(newValue); // Émet la nouvelle valeur du slider 2
+    this.value2Change.emit(newValue); 
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes["image"]) {
