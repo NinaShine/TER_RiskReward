@@ -6,7 +6,8 @@ const textSchema = new mongoose.Schema({
     required: true,
   },
   imageUrl: {
-    type: String, // URL de l'image
+    type: String, 
+    
     required: true,
   },
   associationType: {
