@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-final-page',
   templateUrl: './final-page.component.html',
   styleUrl: './final-page.component.css',
-  imports: [CommonModule]  // Add this line
+  imports: [CommonModule]  
 
 })
 export class FinalPageComponent {
@@ -27,13 +27,13 @@ export class FinalPageComponent {
   quitter() {
     this.http.post("http://localhost:3000/reset-session", {}, { withCredentials: true }).subscribe({
       next: () => {
-        console.log("✅ Session réinitialisée");
-        sessionStorage.clear(); // Nettoyer toutes les données côté front
-        this.router.navigate(['/']); // Rediriger vers la page d'accueil
+        console.log("Session réinitialisée");
+        sessionStorage.clear(); 
+        this.router.navigate(['/']); 
       },
       error: (error) => {
-        console.error("❌ Erreur lors de la réinitialisation :", error);
-        this.router.navigate(['/']); // Rediriger quand même en cas d'erreur
+        console.error("Erreur lors de la réinitialisation :", error);
+        this.router.navigate(['/']); 
       }
     });
   }
@@ -52,7 +52,6 @@ export class FinalPageComponent {
       if (!data) {
         this.error = 'No stats data found in session storage. Please complete the scenarios first.';
         console.error(this.error);
-        // Redirect back to home page after 3 seconds if no data is found
         setTimeout(() => {
           this.router.navigate(['/']);
         }, 3000);

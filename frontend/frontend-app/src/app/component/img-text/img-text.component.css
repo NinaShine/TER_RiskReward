@@ -1,12 +1,12 @@
 .image-section {
   position: relative;
-  margin: 3rem auto; /* Ajoute un espace en haut et centre horizontalement */
+  margin: 3rem auto; 
   border-radius: 0.75rem;
   overflow: hidden;
   width: 100%;
-  max-width: 80%; /* Augmente la taille tout en restant responsive */
+  max-width: 80%; 
   text-align: center;
-  padding-bottom: 2rem; /* Ajoute un peu d'espace en bas */
+  padding-bottom: 2rem; 
   margin-left: 5rem;
 }
 

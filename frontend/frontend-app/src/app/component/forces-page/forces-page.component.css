@@ -9,13 +9,11 @@
 }
 
 
-/* 📌 Conteneur du titre et de la description */
 .force-header {
     text-align: center;
     margin-bottom: 30px;
 }
 
-/* 🎯 Style du titre */
 .force-header h1 {
     margin-top: 30px;
     margin-bottom: 20px;
@@ -31,7 +29,6 @@
                  0 0 30px rgba(138, 43, 226, 0.8);
 }
 
-/* ✍️ Style de la description */
 .force-header .force-description {
     font-size: 1.2em;
     color: #ddd;
@@ -55,7 +52,6 @@
     margin-top: 2px;
 }
 
-/* Chaque ligne = 3 colonnes alignées */
 .force-row {
     display: flex;
     align-items: center;
@@ -65,7 +61,6 @@
     width: 100%;
 }
 
-/* Colonne 1 : Image + description */
 .force-info {
     display: flex;
     align-items: center;
@@ -73,7 +68,6 @@
     width: 40%;
 }
 
-/* Image */
 .force-info img {
     width: 50px;
     height: 50px;
@@ -83,14 +77,12 @@
     padding: 5px;
 }
 
-/* Description */
 .desc_stick {
     font-size: 1em;
     color: white;
     text-align: left;
 }
 
-/* Colonne 2 : Valeur numérique */
 .force-value {
     width: 15%;
     text-align: center;
@@ -98,13 +90,11 @@
     color: white;
 }
 
-/* Colonne 3 : Slider */
 .force-slider {
     width: 45%;
     margin-bottom: 30px;
 }
 
-/* Centrage du bouton */
 .button-submit {
     display: flex;
     justify-content: center;
@@ -127,7 +117,6 @@
     background: #d44d2e;
 }
 
-/* 📱 Responsive pour mobiles */
 @media (max-width: 600px) {
 
     .force-header h1 {
@@ -142,7 +131,7 @@
     }
 
     .force-row {
-        flex-direction: column; /* Passe en colonne sur mobile */
+        flex-direction: column; 
         align-items: center;
     }
 
@@ -159,27 +148,3 @@
         width: 100%;
     }
 }
-
-/*
-.button-container {
-    margin-top: 2rem;
-    text-align: center;
-  }
-  
-  .button-submit {
-    background-color: #9333ea;
-    color: white;
-    font-weight: 700;
-    padding: 0.75rem 2rem;
-    border-radius: 9999px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-    transform: scale(1);
-  }
-  
-  .button-submit:hover {
-    background-color: #7e22ce;
-    transform: scale(1.05);
-    box-shadow: 0 10px 15px -3px rgba(147, 51, 234, 0.25);
-  }*/

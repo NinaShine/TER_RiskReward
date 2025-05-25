@@ -23,13 +23,11 @@ export class FormulaireComponent {
   onSubmit() {
     console.log('Données du formulaire :', this.formData);
 
-    // Vérifier si tous les champs sont remplis
     if (!this.formData.genre || !this.formData.age || !this.formData.nationalite || !this.formData.niveauEtudes) {
       console.error('Tous les champs sont obligatoires.');
       return;
     }
 
-    // Préparer l'objet à envoyer
     const body = {
       genre: this.formData.genre,
       age: this.formData.age,
@@ -39,13 +37,11 @@ export class FormulaireComponent {
 
     console.log('Envoi des données...', body);
 
-    // Envoi de la requête POST vers l'API
     this.http
       .post('http://localhost:3000/submitForm', body, { withCredentials: true })
       .subscribe({
         next: (response) => {
           console.log('Réponse serveur :', response);
-          // Redirection après validation
           this.router.navigate(['/forces']);
         },
         error: (err) => {
