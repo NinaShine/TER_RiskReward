@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Text = require("../models/textModel");
 const Response = require("../models/responseModel");
-const Form = require("../models/formModel"); // ⬅️ Assure-toi d'importer le bon fichier
+const Form = require("../models/formModel"); 
 
 router.get("/init", async (req, res) => {
   console.log("requête init");
@@ -18,7 +18,6 @@ router.get("/init", async (req, res) => {
         texts.push(text, text);
       });
 
-      // Mélanger le tableau (algorithme de Fisher-Yates)
       for (let i = texts.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [texts[i], texts[j]] = [texts[j], texts[i]];
@@ -27,13 +26,10 @@ router.get("/init", async (req, res) => {
       req.session.turn = 1;
       req.session.scores = initScore();
       console.log("Request.session: ", req.session);
-      //Initialisation du tableau des scores
     } else {
       req.session.turn++;
     }
 
-    // Vérifier si la liste est vide (ne pas réinitialiser si c'est le cas)
-    // Note : A partir d'ici, rajouter la logique métier de /init pour qu'elle créée un contexte complet
     if (req.session.randomTexts.length === 0) {
       return res.status(200).json({
         message: "Toutes les ressources ont été affichées.",
@@ -41,10 +37,9 @@ router.get("/init", async (req, res) => {
       });
     }
 
-    // Extraire et retourner le prochain élément avec shift()
     const individus = await getIndividus();
     console.log(
-      "📋 Liste des textes restants :",
+      " Liste des textes restants :",
       req.session.randomTexts.length
     );
 
@@ -63,7 +58,7 @@ router.get("/init", async (req, res) => {
 
     req.session.save((err) => {
       if (err) {
-        console.error("❌ Erreur lors de la sauvegarde de la session :", err);
+        console.error(" Erreur lors de la sauvegarde de la session :", err);
         return res
           .status(500)
           .json({ error: "Erreur de sauvegarde de la session." });
@@ -95,7 +90,7 @@ router.get("/next", async (req, res) => {
 
     const individus = await getIndividus();
     console.log(
-      "📋 Liste des textes restants :",
+      "Liste des textes restants :",
       req.session.randomTexts.length
     );
     const randomText = req.session.randomTexts.shift();
@@ -129,30 +124,25 @@ router.get("/next", async (req, res) => {
 });
 
 
-// Route qui enregistre le formulaire soumis
 router.post("/submitForm", async (req, res) => {
   try {
     const { genre, age, nationalite, niveauEtudes } = req.body;
 
-    // Vérifier que tous les champs sont fournis
     if (!genre || !age || !nationalite || !niveauEtudes) {
       return res.status(400).json({ message: "Tous les champs sont obligatoires." });
     }
 
-    // Générer un sessionId unique
-    const sessionId = req.sessionID; // ou req.session.id
+    const sessionId = req.sessionID; 
 
 
-    // Création d'un nouvel enregistrement
     const newForm = await Form.create({
       genre,
       age,
       nationalite,
       niveauEtudes,
-      sessionId, // Ajout du sessionId généré
+      sessionId, 
     });
 
-    // Sauvegarde dans MongoDB
     await newForm.save();
 
     res.status(201).json({ message: "Formulaire enregistré avec succès", sessionId });
@@ -167,7 +157,7 @@ router.post("/submitForm", async (req, res) => {
 
 router.post("/submit", async (req, res) => {
   const scenario = req.session.scenario;
-  const sessionId = req.sessionID; // ou req.session.id
+  const sessionId = req.sessionID; 
   console.log("Session ID :", sessionId);
   if (!scenario) {
     console.error("Aucune session trouvée !");
@@ -185,7 +175,6 @@ router.post("/submit", async (req, res) => {
         .json({ message: "Forces manquantes dans le body" });
     }
 
-    // Rechercher dans forces les valeurs correspondant aux individus
     const forceAObj = forces.find((f) => f.desc === scenario.individuA);
     const forceBObj = forces.find((f) => f.desc === scenario.individuB);
 
@@ -195,7 +184,6 @@ router.post("/submit", async (req, res) => {
         .json({ message: "Force non trouvée pour l'un des individus" });
     }
 
-    // Créer un document unique regroupant toutes les infos
     const newResponse = await Response.create({
       textId: scenario.textId,
       associationType: scenario.association,
@@ -210,7 +198,7 @@ router.post("/submit", async (req, res) => {
       valueTwoB: sliderValue2.second,
       forceB: forceBObj.value,
 
-      // Enregistrer l'ID de session
+
       sessionId: sessionId,
     });
 
@@ -227,13 +215,11 @@ router.post("/submit", async (req, res) => {
 });
 
 router.post("/reset-session", (req, res) => {
-  console.log("🔄 Réinitialisation de la session...");
+  console.log("Réinitialisation de la session...");
 
   if (req.session) {
-    // Sauvegarder uniquement les informations utilisateur
     const userData = req.session.user;
 
-    // Détruire la session
     req.session.regenerate((err) => {
       if (err) {
         console.error(
@@ -245,11 +231,10 @@ router.post("/reset-session", (req, res) => {
           .json({ message: "Erreur serveur lors de la réinitialisation" });
       }
 
-      // Restaurer les données utilisateur
       req.session.user = userData;
 
       console.log(
-        "✅ Session réinitialisée, utilisateur conservé :",
+        " Session réinitialisée, utilisateur conservé :",
         req.session.user
       );
       res.status(200).json({ message: "Session réinitialisée" });
