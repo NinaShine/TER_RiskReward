@@ -28,23 +28,23 @@ app.use(
 
 app.use((req, res, next) => {
   console.log(
-    `📡 [${new Date().toISOString()}] Requête reçue : ${req.method} ${req.url}`
+    ` [${new Date().toISOString()}] Requête reçue : ${req.method} ${req.url}`
   );
   next();
 });
 
 app.use((req, res, next) => {
-  console.log(`📡 Requête reçue : ${req.method} ${req.url}`);
+  console.log(` Requête reçue : ${req.method} ${req.url}`);
   next();
 });
 
 app.use((err, req, res, next) => {
-  console.error("🔥 Erreur serveur détectée :", err);
+  console.error("Erreur serveur détectée :", err);
   res.status(500).json({ error: "Erreur serveur", details: err.message });
 });
 
 app.use((req, res, next) => {
-  console.log("📝 Cookies reçus :", req.headers.cookie);
+  console.log("Cookies reçus :", req.headers.cookie);
   next();
 });
 
